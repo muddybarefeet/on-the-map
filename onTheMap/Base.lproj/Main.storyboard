@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="0UF-hc-7z7" kind="relationship" relationship="rootViewController" id="OJQ-Oe-Lfi"/>
+                        <segue destination="rPJ-Qq-aiF" kind="relationship" relationship="rootViewController" id="WTH-FT-AHA"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ctw-14-wgw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -24,38 +24,37 @@
             <point key="canvasLocation" x="89" y="104"/>
         </scene>
         <!--On the Map-->
-        <scene sceneID="iTb-EQ-haI">
+        <scene sceneID="OfM-jg-4iK">
             <objects>
-                <viewController id="0UF-hc-7z7" customClass="MapViewController" customModule="onTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="rPJ-Qq-aiF" customClass="MapViewController" customModule="onTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Zmm-hn-SJe"/>
-                        <viewControllerLayoutGuide type="bottom" id="z5Y-cc-7OV"/>
+                        <viewControllerLayoutGuide type="top" id="dyH-bt-JVg"/>
+                        <viewControllerLayoutGuide type="bottom" id="hcR-Hw-FUz"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="uMi-x1-F4J">
+                    <view key="view" contentMode="scaleToFill" id="Wwm-2L-9Bq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="8zX-uS-OYt">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gLF-yz-pVe">
                                 <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="z5Y-cc-7OV" firstAttribute="top" secondItem="8zX-uS-OYt" secondAttribute="bottom" id="KQL-Nh-WZg"/>
-                            <constraint firstItem="8zX-uS-OYt" firstAttribute="top" secondItem="Zmm-hn-SJe" secondAttribute="bottom" id="ZDA-4q-GcC"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="8zX-uS-OYt" secondAttribute="trailing" constant="-20" id="prb-hH-x64"/>
-                            <constraint firstItem="8zX-uS-OYt" firstAttribute="leading" secondItem="uMi-x1-F4J" secondAttribute="leadingMargin" constant="-20" id="wKP-4K-R5j"/>
+                            <constraint firstItem="hcR-Hw-FUz" firstAttribute="top" secondItem="gLF-yz-pVe" secondAttribute="bottom" id="7iV-w6-5aj"/>
+                            <constraint firstItem="gLF-yz-pVe" firstAttribute="leading" secondItem="Wwm-2L-9Bq" secondAttribute="leadingMargin" constant="-20" id="83X-wD-sbJ"/>
+                            <constraint firstItem="gLF-yz-pVe" firstAttribute="top" secondItem="dyH-bt-JVg" secondAttribute="bottom" id="SJs-4V-46s"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gLF-yz-pVe" secondAttribute="trailing" constant="-20" id="WJU-fC-hC2"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" image="Map" id="Ypc-er-t5w"/>
-                    <navigationItem key="navigationItem" title="On the Map" id="Or0-1K-Zvl"/>
+                    <navigationItem key="navigationItem" title="On the Map" id="quc-x6-m8A"/>
                     <connections>
-                        <outlet property="mapView" destination="8zX-uS-OYt" id="Wqn-do-Ql5"/>
+                        <outlet property="mapView" destination="gLF-yz-pVe" id="j2B-oS-APm"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sKS-yU-TZo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kyH-JP-e5F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="655" y="104"/>
+            <point key="canvasLocation" x="601" y="104"/>
         </scene>
         <!--List-->
         <scene sceneID="UjA-ml-pIp">
