@@ -29,22 +29,21 @@ class MapViewController: UIViewController {
         
         for dictionary in locations {
             
-            // Notice that the float values are being used to create CLLocationDegree values.
-            // This is a version of the Double type.
-            let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
-            let long = CLLocationDegrees(dictionary["longitude"] as! Double)
+            let studentLocation = StudentLocationStruct(
+                lat: CLLocationDegrees((dictionary["latitude"] as? Double)!),
+                long: CLLocationDegrees((dictionary["longitude"] as? Double)!),
+                first: dictionary["firstName"] as! String,
+                last: dictionary["lastName"] as! String,
+                mediaURL: dictionary["mediaURL"] as? String
+            )
             
             // The lat and long are used to create a CLLocationCoordinates2D instance.
-            let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-            
-            let first = dictionary["firstName"] as! String
-            let last = dictionary["lastName"] as! String
-            let mediaURL = dictionary["mediaURL"] as! String
+            let coordinate = CLLocationCoordinate2D(latitude: studentLocation.lat, longitude: studentLocation.long)
             
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
-            annotation.title = "\(first) \(last)"
-            annotation.subtitle = mediaURL
+            annotation.title = studentLocation.first + " " + studentLocation.last
+            annotation.subtitle = studentLocation.mediaURL
             
             // Finally we place the annotation in an array of annotations.
             annotations.append(annotation)

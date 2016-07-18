@@ -15,6 +15,7 @@
 		959DAE7D1D3C5FD60017015D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959DAE7C1D3C5FD60017015D /* MapViewController.swift */; };
 		959DAE7F1D3C60140017015D /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959DAE7E1D3C60140017015D /* TableViewController.swift */; };
 		959DAE811D3D0DF60017015D /* MapViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959DAE801D3D0DF60017015D /* MapViewDelegate.swift */; };
+		959DAE841D3D15420017015D /* StudentLocationStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959DAE831D3D15420017015D /* StudentLocationStruct.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		959DAE7C1D3C5FD60017015D /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		959DAE7E1D3C60140017015D /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		959DAE801D3D0DF60017015D /* MapViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewDelegate.swift; sourceTree = "<group>"; };
+		959DAE831D3D15420017015D /* StudentLocationStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLocationStruct.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 		959DAE791D3C5C5D0017015D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				959DAE831D3D15420017015D /* StudentLocationStruct.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 				959DAE7D1D3C5FD60017015D /* MapViewController.swift in Sources */,
 				959DAE681D3C5C310017015D /* AppDelegate.swift in Sources */,
 				959DAE7F1D3C60140017015D /* TableViewController.swift in Sources */,
+				959DAE841D3D15420017015D /* StudentLocationStruct.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
