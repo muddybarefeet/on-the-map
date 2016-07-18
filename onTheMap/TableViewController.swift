@@ -9,7 +9,11 @@
 import Foundation
 import UIKit
 
-class TableViewController: UIViewController {
+class TableViewController: UITableViewController {
+    
+//    cell reuse identifier = infoCell
+    
+    
     
     
     
