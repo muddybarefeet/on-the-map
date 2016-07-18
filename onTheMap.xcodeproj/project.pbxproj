@@ -14,6 +14,7 @@
 		959DAE721D3C5C310017015D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 959DAE701D3C5C310017015D /* LaunchScreen.storyboard */; };
 		959DAE7D1D3C5FD60017015D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959DAE7C1D3C5FD60017015D /* MapViewController.swift */; };
 		959DAE7F1D3C60140017015D /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959DAE7E1D3C60140017015D /* TableViewController.swift */; };
+		959DAE811D3D0DF60017015D /* MapViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959DAE801D3D0DF60017015D /* MapViewDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		959DAE731D3C5C310017015D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		959DAE7C1D3C5FD60017015D /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		959DAE7E1D3C60140017015D /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		959DAE801D3D0DF60017015D /* MapViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 		959DAE661D3C5C310017015D /* onTheMap */ = {
 			isa = PBXGroup;
 			children = (
+				959DAE821D3D0F2A0017015D /* Client */,
 				959DAE7B1D3C5C6B0017015D /* View */,
 				959DAE7A1D3C5C640017015D /* Controller */,
 				959DAE791D3C5C5D0017015D /* Model */,
@@ -83,6 +86,7 @@
 			children = (
 				959DAE7C1D3C5FD60017015D /* MapViewController.swift */,
 				959DAE7E1D3C60140017015D /* TableViewController.swift */,
+				959DAE801D3D0DF60017015D /* MapViewDelegate.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -92,6 +96,13 @@
 			children = (
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		959DAE821D3D0F2A0017015D /* Client */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Client;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,6 +178,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				959DAE6A1D3C5C310017015D /* ViewController.swift in Sources */,
+				959DAE811D3D0DF60017015D /* MapViewDelegate.swift in Sources */,
 				959DAE7D1D3C5FD60017015D /* MapViewController.swift in Sources */,
 				959DAE681D3C5C310017015D /* AppDelegate.swift in Sources */,
 				959DAE7F1D3C60140017015D /* TableViewController.swift in Sources */,
