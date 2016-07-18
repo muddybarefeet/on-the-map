@@ -12,6 +12,8 @@
 		959DAE6D1D3C5C310017015D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 959DAE6B1D3C5C310017015D /* Main.storyboard */; };
 		959DAE6F1D3C5C310017015D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 959DAE6E1D3C5C310017015D /* Assets.xcassets */; };
 		959DAE721D3C5C310017015D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 959DAE701D3C5C310017015D /* LaunchScreen.storyboard */; };
+		959DAE7D1D3C5FD60017015D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959DAE7C1D3C5FD60017015D /* MapViewController.swift */; };
+		959DAE7F1D3C60140017015D /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959DAE7E1D3C60140017015D /* TableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		959DAE6E1D3C5C310017015D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		959DAE711D3C5C310017015D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		959DAE731D3C5C310017015D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		959DAE7C1D3C5FD60017015D /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		959DAE7E1D3C60140017015D /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,9 @@
 		959DAE661D3C5C310017015D /* onTheMap */ = {
 			isa = PBXGroup;
 			children = (
+				959DAE7B1D3C5C6B0017015D /* View */,
+				959DAE7A1D3C5C640017015D /* Controller */,
+				959DAE791D3C5C5D0017015D /* Model */,
 				959DAE671D3C5C310017015D /* AppDelegate.swift */,
 				959DAE691D3C5C310017015D /* ViewController.swift */,
 				959DAE6B1D3C5C310017015D /* Main.storyboard */,
@@ -62,6 +69,29 @@
 				959DAE731D3C5C310017015D /* Info.plist */,
 			);
 			path = onTheMap;
+			sourceTree = "<group>";
+		};
+		959DAE791D3C5C5D0017015D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		959DAE7A1D3C5C640017015D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				959DAE7C1D3C5FD60017015D /* MapViewController.swift */,
+				959DAE7E1D3C60140017015D /* TableViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		959DAE7B1D3C5C6B0017015D /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +167,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				959DAE6A1D3C5C310017015D /* ViewController.swift in Sources */,
+				959DAE7D1D3C5FD60017015D /* MapViewController.swift in Sources */,
 				959DAE681D3C5C310017015D /* AppDelegate.swift in Sources */,
+				959DAE7F1D3C60140017015D /* TableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,6 +284,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = onTheMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "udacity-course.onTheMap";
@@ -263,6 +296,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = onTheMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "udacity-course.onTheMap";
