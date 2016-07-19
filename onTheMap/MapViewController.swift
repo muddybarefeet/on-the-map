@@ -17,6 +17,8 @@ class MapViewController: UIViewController {
     
     let MapDelegate = MapViewDelegate()
     
+    //TODO: make the map refresh??
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

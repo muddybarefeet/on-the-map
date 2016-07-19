@@ -100,8 +100,6 @@ class LocationEditorViewController: UIViewController {
         dropPin.title = self.answerText.text
         self.locationView.addAnnotation(dropPin)
 //        TODO SAVE THE coords and once have a link send both to API to store
-        
-        
         //update the text in the button to confirm View
         submitButton.setTitle("Confirm Location", forState: .Normal)
         
