@@ -21,6 +21,7 @@ class MapViewController: UIViewController {
     //TODO: make the map refresh??
     
     override func viewWillAppear(animated: Bool) {
+        
         super.viewWillAppear(animated)
         
         //here we will call the method to query the Parse API for the data for the map
@@ -96,9 +97,7 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         mapView.delegate = MapDelegate
-        
     }
     
     func makeAnnotationsArray () {
