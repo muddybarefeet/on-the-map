@@ -12,6 +12,8 @@ import MapKit
 class MapViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var refreshBtn: UIBarButtonItem!
+    @IBOutlet weak var pinBtn: UIBarButtonItem!
     
     let MapDelegate = MapViewDelegate()
     
@@ -21,42 +23,7 @@ class MapViewController: UIViewController {
         mapView.delegate = MapDelegate
         
         //an array of dictionary details to put onto the map (data from parse)
-        let locations = hardCodedLocationData()
-        
-        // We will create an MKPointAnnotation for each dictionary in "locations". The
-        // point annotations will be stored in this array, and then provided to the map view.
-        var annotations = [MKPointAnnotation]()
-        
-        for dictionary in locations {
-            
-            let studentLocation = StudentLocationStruct(
-                lat: CLLocationDegrees((dictionary["latitude"] as? Double)!),
-                long: CLLocationDegrees((dictionary["longitude"] as? Double)!),
-                first: dictionary["firstName"] as! String,
-                last: dictionary["lastName"] as! String,
-                mediaURL: dictionary["mediaURL"] as? String
-            )
-            
-            // The lat and long are used to create a CLLocationCoordinates2D instance.
-            let coordinate = CLLocationCoordinate2D(latitude: studentLocation.lat, longitude: studentLocation.long)
-            
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = coordinate
-            annotation.title = studentLocation.first + " " + studentLocation.last
-            annotation.subtitle = studentLocation.mediaURL
-            
-            // Finally we place the annotation in an array of annotations.
-            annotations.append(annotation)
-        }
-        
-        //once the annotations array has been filled then add to the map view
-        self.mapView.addAnnotations(annotations)
-        
-    }
-    
-    // Some sample data. for the loactions array [TEMPORARY]
-    func hardCodedLocationData() -> [[String : AnyObject]] {
-        return  [
+        let locations = [
             [
                 "createdAt" : "2015-02-24T22:27:14.456Z",
                 "firstName" : "Jessica",
@@ -103,6 +70,49 @@ class MapViewController: UIViewController {
                 "updatedAt" : "2015-03-13T03:37:58.389Z"
             ]
         ]
+
+        
+        // We will create an MKPointAnnotation for each dictionary in "locations". The
+        // point annotations will be stored in this array, and then provided to the map view.
+        var annotations = [MKPointAnnotation]()
+        
+        for dictionary in locations {
+            
+            let studentLocation = StudentLocationStruct(
+                lat: CLLocationDegrees((dictionary["latitude"] as? Double)!),
+                long: CLLocationDegrees((dictionary["longitude"] as? Double)!),
+                first: dictionary["firstName"] as! String,
+                last: dictionary["lastName"] as! String,
+                mediaURL: dictionary["mediaURL"] as? String
+            )
+            
+            // The lat and long are used to create a CLLocationCoordinates2D instance.
+            let coordinate = CLLocationCoordinate2D(latitude: studentLocation.lat, longitude: studentLocation.long)
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            annotation.title = studentLocation.first + " " + studentLocation.last
+            annotation.subtitle = studentLocation.mediaURL
+            
+            // Finally we place the annotation in an array of annotations.
+            annotations.append(annotation)
+        }
+        
+        //once the annotations array has been filled then add to the map view
+        self.mapView.addAnnotations(annotations)
+        
+    }
+    
+    @IBAction func addLocation(sender: AnyObject) {
+        
+        //TODO LATER: add a check to see if the logged in user is already in the data from parse
+        
+        //function to add the loaction of the user to the locations array
+        
+        //1. on click show a modal view
+        //2. in view have a text field to add a location and a label to ask the question and button "Find on the Map"
+        //3. on click of find on the map then go to new view
+        
     }
     
 }

@@ -47,14 +47,80 @@
                             <constraint firstAttribute="trailingMargin" secondItem="gLF-yz-pVe" secondAttribute="trailing" constant="-20" id="WJU-fC-hC2"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="On the Map" id="quc-x6-m8A"/>
+                    <navigationItem key="navigationItem" title="On the Map" id="quc-x6-m8A">
+                        <barButtonItem key="leftBarButtonItem" image="Pin" id="YDP-3J-syK">
+                            <connections>
+                                <action selector="addLocation:" destination="rPJ-Qq-aiF" id="exW-2t-cTU"/>
+                                <segue destination="QdW-Vg-SLc" kind="modal" id="0cm-sZ-BGX"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="XRm-dg-h94"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="gLF-yz-pVe" id="j2B-oS-APm"/>
+                        <outlet property="pinBtn" destination="YDP-3J-syK" id="CT6-ho-nbt"/>
+                        <outlet property="refreshBtn" destination="XRm-dg-h94" id="d7b-kF-Npo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kyH-JP-e5F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="601" y="104"/>
+        </scene>
+        <!--Location Editor View Controller-->
+        <scene sceneID="BDX-Gh-iss">
+            <objects>
+                <viewController id="QdW-Vg-SLc" customClass="LocationEditorViewController" customModule="onTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Lfh-YH-WqQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="qKi-yF-o5V"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bev-AL-UGh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where are you from?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y98-CV-HJU">
+                                <rect key="frame" x="-4" y="20" width="328" height="150"/>
+                                <color key="backgroundColor" red="0.14921095749623961" green="0.76621809549999997" blue="0.72552637879695403" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="328" id="Pda-3a-U5E"/>
+                                    <constraint firstAttribute="height" constant="150" id="cAu-xo-LXL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tbN-0x-q4Q">
+                                <rect key="frame" x="105" y="434" width="111" height="30"/>
+                                <state key="normal" title="Find on the Map"/>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0at-zJ-BgD">
+                                <rect key="frame" x="-4" y="170" width="328" height="60"/>
+                                <color key="backgroundColor" red="1" green="0.94302138069999997" blue="0.6224071471" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="NQN-bE-6B1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="0at-zJ-BgD" secondAttribute="trailing" constant="-20" id="Gox-6C-wkp"/>
+                            <constraint firstItem="0at-zJ-BgD" firstAttribute="top" secondItem="Y98-CV-HJU" secondAttribute="bottom" id="Osq-7K-jWI"/>
+                            <constraint firstItem="Y98-CV-HJU" firstAttribute="top" secondItem="Lfh-YH-WqQ" secondAttribute="bottom" id="RW9-F2-RpJ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Y98-CV-HJU" secondAttribute="trailing" constant="-24" id="YZG-Gg-VS2"/>
+                            <constraint firstItem="Y98-CV-HJU" firstAttribute="leading" secondItem="bev-AL-UGh" secondAttribute="leadingMargin" constant="-20" id="fbB-X3-qWh"/>
+                            <constraint firstItem="0at-zJ-BgD" firstAttribute="leading" secondItem="bev-AL-UGh" secondAttribute="leadingMargin" constant="-20" id="vWr-il-mjE"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="answerText" destination="0at-zJ-BgD" id="YkD-Q4-zVR"/>
+                        <outlet property="questionLabel" destination="Y98-CV-HJU" id="t6O-oh-n2z"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IoD-56-q73" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1133" y="104"/>
         </scene>
         <!--List-->
         <scene sceneID="UjA-ml-pIp">
@@ -124,5 +190,6 @@
     <resources>
         <image name="List" width="32" height="32"/>
         <image name="Map" width="32" height="32"/>
+        <image name="Pin" width="32" height="32"/>
     </resources>
 </document>
