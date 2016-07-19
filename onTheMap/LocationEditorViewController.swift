@@ -54,8 +54,6 @@ class LocationEditorViewController: UIViewController {
     
     
     @IBAction func selectLocation(sender: AnyObject) {
-        print("select location", submitButton.titleLabel?.text)
-        
         if submitButton.titleLabel?.text == "Plot" {
             self.getLocation(answerText.text!)
         } else if submitButton.titleLabel?.text == "Confirm Location" {

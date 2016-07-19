@@ -17,6 +17,7 @@ class MapViewController: UIViewController {
     
     let MapDelegate = MapViewDelegate()
     
+    var locations = [[String:AnyObject]]()
     //TODO: make the map refresh??
     
     override func viewWillAppear(animated: Bool) {
@@ -25,14 +26,72 @@ class MapViewController: UIViewController {
         //here we will call the method to query the Parse API for the data for the map
         // 1.set parameters
         let parameters = [
-            
+           Constants.ParseParameterKeys.Order: Constants.ParseParameterValues.UpdatedAt
         ]
         // 2.build URL and Configure request
-        // 3. Make request
-            //parse data
-            //use data
-        // 4. start request
+        let request = NSMutableURLRequest(URL: tmdbURLFromParameters(parameters))
+        print("url", request)
+        request.addValue(Constants.ParseParameterValues.ApplicationID, forHTTPHeaderField: Constants.ParseParameterKeys.ApplicationID)
+        request.addValue(Constants.ParseParameterValues.ApiKey, forHTTPHeaderField: Constants.ParseParameterKeys.ApplicationKey)
         
+        // 3. Make request
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, response, error) in
+            
+            guard error == nil else {
+                print("There was an error in the request")
+                return
+            }
+            
+            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+                print("There was a status code other than 2xx returned!")
+                return
+            }
+            
+            guard let data = data else {
+                print("Undable to read the data returned")
+                return
+            }
+            
+            var parsedResult: AnyObject?
+            do {
+                parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
+            } catch {
+                print("Could not parse the data")
+                return
+            }
+            
+            //returned data is an array of objects
+            guard let results = parsedResult!["results"] as? [[String: AnyObject]] else {
+                print("no results key in data")
+                return
+            }
+            
+            //check values in results
+            if results.count > 0 {
+                for result in results {
+                    self.locations.append(result)
+                }
+                self.makeAnnotationsArray()
+            }
+            
+        }
+        // 4. start request
+        task.resume()
+        
+    }
+    
+//    function to create the URL
+    func tmdbURLFromParameters(parameters: [String:AnyObject], withPathExtension: String? = nil) -> NSURL {
+        let components = NSURLComponents()
+        components.scheme = Constants.Parse.ApiScheme
+        components.host = Constants.Parse.ApiHost
+        components.path = Constants.Parse.ApiPath + (withPathExtension ?? "")
+        components.queryItems = [NSURLQueryItem]()
+        for (key, value) in parameters {
+            let queryItem = NSURLQueryItem(name: key, value: "\(value)")
+            components.queryItems!.append(queryItem)
+        }
+        return components.URL!
     }
     
     override func viewDidLoad() {
@@ -40,58 +99,10 @@ class MapViewController: UIViewController {
         
         mapView.delegate = MapDelegate
         
-        //an array of dictionary details to put onto the map (data from parse)
-        let locations = [
-            [
-                "createdAt" : "2015-02-24T22:27:14.456Z",
-                "firstName" : "Jessica",
-                "lastName" : "Uelmen",
-                "latitude" : 28.1461248,
-                "longitude" : -82.75676799999999,
-                "mapString" : "Tarpon Springs, FL",
-                "mediaURL" : "www.linkedin.com/in/jessicauelmen/en",
-                "objectId" : "kj18GEaWD8",
-                "uniqueKey" : 872458750,
-                "updatedAt" : "2015-03-09T22:07:09.593Z"
-            ], [
-                "createdAt" : "2015-02-24T22:35:30.639Z",
-                "firstName" : "Gabrielle",
-                "lastName" : "Miller-Messner",
-                "latitude" : 35.1740471,
-                "longitude" : -79.3922539,
-                "mapString" : "Southern Pines, NC",
-                "mediaURL" : "http://www.linkedin.com/pub/gabrielle-miller-messner/11/557/60/en",
-                "objectId" : "8ZEuHF5uX8",
-                "uniqueKey" : 2256298598,
-                "updatedAt" : "2015-03-11T03:23:49.582Z"
-            ], [
-                "createdAt" : "2015-02-24T22:30:54.442Z",
-                "firstName" : "Jason",
-                "lastName" : "Schatz",
-                "latitude" : 37.7617,
-                "longitude" : -122.4216,
-                "mapString" : "18th and Valencia, San Francisco, CA",
-                "mediaURL" : "http://en.wikipedia.org/wiki/Swift_%28programming_language%29",
-                "objectId" : "hiz0vOTmrL",
-                "uniqueKey" : 2362758535,
-                "updatedAt" : "2015-03-10T17:20:31.828Z"
-            ], [
-                "createdAt" : "2015-03-11T02:48:18.321Z",
-                "firstName" : "Jarrod",
-                "lastName" : "Parkes",
-                "latitude" : 34.73037,
-                "longitude" : -86.58611000000001,
-                "mapString" : "Huntsville, Alabama",
-                "mediaURL" : "https://linkedin.com/in/jarrodparkes",
-                "objectId" : "CDHfAy8sdp",
-                "uniqueKey" : 996618664,
-                "updatedAt" : "2015-03-13T03:37:58.389Z"
-            ]
-        ]
-
+    }
+    
+    func makeAnnotationsArray () {
         
-        // We will create an MKPointAnnotation for each dictionary in "locations". The
-        // point annotations will be stored in this array, and then provided to the map view.
         var annotations = [MKPointAnnotation]()
         
         for dictionary in locations {
@@ -117,7 +128,10 @@ class MapViewController: UIViewController {
         }
         
         //once the annotations array has been filled then add to the map view
-        self.mapView.addAnnotations(annotations)
+        dispatch_async(dispatch_get_main_queue()) {
+            self.mapView.addAnnotations(annotations)
+        }
+        
         
     }
     

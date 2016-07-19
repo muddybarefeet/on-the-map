@@ -16,8 +16,6 @@ class MapViewDelegate: NSObject, MKMapViewDelegate {
         
         let reuseId = "pin"
         
-        print("annotation", annotation)
-        
         var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
         
         if pinView == nil {
