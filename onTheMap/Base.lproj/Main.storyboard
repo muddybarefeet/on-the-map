@@ -93,15 +93,12 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="EPe-qj-1vD">
-                                <rect key="frame" x="-4" y="307" width="328" height="261"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="261" id="Bdt-uU-4MT"/>
-                                </constraints>
-                            </mapView>
-                            <button opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qqZ-mi-Jwr">
-                                <rect key="frame" x="136" y="251" width="48" height="30"/>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qqZ-mi-Jwr">
+                                <rect key="frame" x="86" y="251" width="149" height="30"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="149" id="12K-SU-ZTF"/>
+                                </constraints>
                                 <state key="normal" title="Plot">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -109,6 +106,12 @@
                                     <action selector="selectLocation:" destination="QdW-Vg-SLc" eventType="touchUpInside" id="ZKU-oc-bB8"/>
                                 </connections>
                             </button>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="EPe-qj-1vD">
+                                <rect key="frame" x="-4" y="307" width="328" height="261"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="261" id="Bdt-uU-4MT"/>
+                                </constraints>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" red="0.14921095749999999" green="0.76621809549999997" blue="0.72552637880000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>

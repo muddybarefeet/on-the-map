@@ -28,9 +28,45 @@ class LocationEditorViewController: UIViewController {
         submitButton.titleEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        subscribeToKeyboardNotifications()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        unsubscribeFromKeyboardNotifications()
+    }
+    
+    func subscribeToKeyboardNotifications () {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LocationEditorViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    func unsubscribeFromKeyboardNotifications() {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:
+            UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        submitButton.enabled = true
+    }
+    
+    
+    
     @IBAction func selectLocation(sender: AnyObject) {
-        print("select location")
-        getLocation(answerText.text!)
+        print("select location", submitButton.titleLabel?.text)
+        
+        if submitButton.titleLabel?.text == "Plot" {
+            self.getLocation(answerText.text!)
+        } else if submitButton.titleLabel?.text == "Confirm Location" {
+            //change the question
+            answerText.text = ""
+            questionLabel.text = "Enter a link to share:"
+            submitButton.setTitle("Submit", forState: .Normal)
+        } else if submitButton.titleLabel?.text == "Submit" {
+            //save the link and return to the main screen
+            dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     
     //want these to be moved back to the view controller at some point
@@ -63,9 +99,12 @@ class LocationEditorViewController: UIViewController {
         dropPin.coordinate = coords
         dropPin.title = self.answerText.text
         self.locationView.addAnnotation(dropPin)
+//        TODO SAVE THE coords and once have a link send both to API to store
+        
+        
         //update the text in the button to confirm View
         submitButton.setTitle("Confirm Location", forState: .Normal)
-        submitButton.sizeToFit()
+        
     }
     
     
