@@ -19,6 +19,22 @@ class MapViewController: UIViewController {
     
     //TODO: make the map refresh??
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //here we will call the method to query the Parse API for the data for the map
+        // 1.set parameters
+        let parameters = [
+            
+        ]
+        // 2.build URL and Configure request
+        // 3. Make request
+            //parse data
+            //use data
+        // 4. start request
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

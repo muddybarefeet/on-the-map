@@ -19,6 +19,7 @@
 		959DAE881D3DCEA10017015D /* LocationEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959DAE871D3DCEA10017015D /* LocationEditorViewController.swift */; };
 		959DAE8E1D3E5C3C0017015D /* TextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959DAE8D1D3E5C3C0017015D /* TextFieldDelegate.swift */; };
 		959DAE921D3E74B80017015D /* RequestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959DAE911D3E74B80017015D /* RequestClient.swift */; };
+		959DAE941D3EB17B0017015D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959DAE931D3EB17B0017015D /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		959DAE871D3DCEA10017015D /* LocationEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationEditorViewController.swift; sourceTree = "<group>"; };
 		959DAE8D1D3E5C3C0017015D /* TextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldDelegate.swift; sourceTree = "<group>"; };
 		959DAE911D3E74B80017015D /* RequestClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestClient.swift; sourceTree = "<group>"; };
+		959DAE931D3EB17B0017015D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 				959DAE6E1D3C5C310017015D /* Assets.xcassets */,
 				959DAE701D3C5C310017015D /* LaunchScreen.storyboard */,
 				959DAE731D3C5C310017015D /* Info.plist */,
+				959DAE931D3EB17B0017015D /* Constants.swift */,
 			);
 			path = onTheMap;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 				959DAE8E1D3E5C3C0017015D /* TextFieldDelegate.swift in Sources */,
 				959DAE7D1D3C5FD60017015D /* MapViewController.swift in Sources */,
 				959DAE681D3C5C310017015D /* AppDelegate.swift in Sources */,
+				959DAE941D3EB17B0017015D /* Constants.swift in Sources */,
 				959DAE921D3E74B80017015D /* RequestClient.swift in Sources */,
 				959DAE7F1D3C60140017015D /* TableViewController.swift in Sources */,
 				959DAE881D3DCEA10017015D /* LocationEditorViewController.swift in Sources */,
