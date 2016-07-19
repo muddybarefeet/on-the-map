@@ -78,44 +78,58 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where are you from?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y98-CV-HJU">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Log-VR-MR2">
+                                <rect key="frame" x="20" y="194" width="280" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Where are you from?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y98-CV-HJU">
                                 <rect key="frame" x="-4" y="20" width="328" height="150"/>
-                                <color key="backgroundColor" red="0.14921095749623961" green="0.76621809549999997" blue="0.72552637879695403" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.94302138069999997" blue="0.6224071471" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="328" id="Pda-3a-U5E"/>
-                                    <constraint firstAttribute="height" constant="150" id="cAu-xo-LXL"/>
+                                    <constraint firstAttribute="height" constant="150" id="OQH-0t-O6J"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tbN-0x-q4Q">
-                                <rect key="frame" x="105" y="434" width="111" height="30"/>
-                                <state key="normal" title="Find on the Map"/>
-                            </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0at-zJ-BgD">
-                                <rect key="frame" x="-4" y="170" width="328" height="60"/>
-                                <color key="backgroundColor" red="1" green="0.94302138069999997" blue="0.6224071471" alpha="1" colorSpace="calibratedRGB"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="EPe-qj-1vD">
+                                <rect key="frame" x="-4" y="307" width="328" height="261"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="NQN-bE-6B1"/>
+                                    <constraint firstAttribute="height" constant="261" id="Bdt-uU-4MT"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qqZ-mi-Jwr">
+                                <rect key="frame" x="136" y="251" width="48" height="30"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                <state key="normal" title="Plot">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="selectLocation:" destination="QdW-Vg-SLc" eventType="touchUpInside" id="ZKU-oc-bB8"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.14921095749999999" green="0.76621809549999997" blue="0.72552637880000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="0at-zJ-BgD" secondAttribute="trailing" constant="-20" id="Gox-6C-wkp"/>
-                            <constraint firstItem="0at-zJ-BgD" firstAttribute="top" secondItem="Y98-CV-HJU" secondAttribute="bottom" id="Osq-7K-jWI"/>
-                            <constraint firstItem="Y98-CV-HJU" firstAttribute="top" secondItem="Lfh-YH-WqQ" secondAttribute="bottom" id="RW9-F2-RpJ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Y98-CV-HJU" secondAttribute="trailing" constant="-24" id="YZG-Gg-VS2"/>
-                            <constraint firstItem="Y98-CV-HJU" firstAttribute="leading" secondItem="bev-AL-UGh" secondAttribute="leadingMargin" constant="-20" id="fbB-X3-qWh"/>
-                            <constraint firstItem="0at-zJ-BgD" firstAttribute="leading" secondItem="bev-AL-UGh" secondAttribute="leadingMargin" constant="-20" id="vWr-il-mjE"/>
+                            <constraint firstItem="qqZ-mi-Jwr" firstAttribute="centerX" secondItem="bev-AL-UGh" secondAttribute="centerX" id="4Dn-Lx-kVg"/>
+                            <constraint firstItem="qKi-yF-o5V" firstAttribute="top" secondItem="EPe-qj-1vD" secondAttribute="bottom" id="DHy-QI-y3Q"/>
+                            <constraint firstItem="Log-VR-MR2" firstAttribute="top" secondItem="Y98-CV-HJU" secondAttribute="bottom" constant="24" id="Klu-Mm-w2F"/>
+                            <constraint firstItem="Y98-CV-HJU" firstAttribute="top" secondItem="Lfh-YH-WqQ" secondAttribute="bottom" id="QU5-2G-yNX"/>
+                            <constraint firstItem="Y98-CV-HJU" firstAttribute="leading" secondItem="bev-AL-UGh" secondAttribute="leadingMargin" constant="-24" id="cYX-U9-AOO"/>
+                            <constraint firstItem="Log-VR-MR2" firstAttribute="trailing" secondItem="bev-AL-UGh" secondAttribute="trailingMargin" id="chP-1y-3Ip"/>
+                            <constraint firstItem="EPe-qj-1vD" firstAttribute="leading" secondItem="bev-AL-UGh" secondAttribute="leadingMargin" constant="-20" id="dbF-Xv-sCe"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="EPe-qj-1vD" secondAttribute="trailing" constant="-20" id="eR3-Ub-cOi"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Y98-CV-HJU" secondAttribute="trailing" constant="-24" id="fcw-2a-bfk"/>
+                            <constraint firstItem="Log-VR-MR2" firstAttribute="leading" secondItem="bev-AL-UGh" secondAttribute="leadingMargin" id="qGH-hd-CIu"/>
+                            <constraint firstItem="qqZ-mi-Jwr" firstAttribute="top" secondItem="Log-VR-MR2" secondAttribute="bottom" constant="27" id="uag-xA-tSu"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="answerText" destination="0at-zJ-BgD" id="YkD-Q4-zVR"/>
+                        <outlet property="answerText" destination="Log-VR-MR2" id="mzk-t5-vvV"/>
+                        <outlet property="locationView" destination="EPe-qj-1vD" id="Rqw-JS-OP7"/>
                         <outlet property="questionLabel" destination="Y98-CV-HJU" id="t6O-oh-n2z"/>
+                        <outlet property="submitButton" destination="qqZ-mi-Jwr" id="NYg-Tf-eKD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IoD-56-q73" userLabel="First Responder" sceneMemberID="firstResponder"/>
