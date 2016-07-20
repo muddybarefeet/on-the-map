@@ -20,6 +20,9 @@
 		959DAE8E1D3E5C3C0017015D /* TextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959DAE8D1D3E5C3C0017015D /* TextFieldDelegate.swift */; };
 		959DAE921D3E74B80017015D /* RequestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959DAE911D3E74B80017015D /* RequestClient.swift */; };
 		959DAE941D3EB17B0017015D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959DAE931D3EB17B0017015D /* Constants.swift */; };
+		959DAE981D3EEB050017015D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959DAE971D3EEB050017015D /* LoginViewController.swift */; };
+		959DAE9A1D3EF6630017015D /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959DAE991D3EF6630017015D /* UdacityClient.swift */; };
+		959DAE9C1D3EF66F0017015D /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959DAE9B1D3EF66F0017015D /* ParseClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +41,9 @@
 		959DAE8D1D3E5C3C0017015D /* TextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldDelegate.swift; sourceTree = "<group>"; };
 		959DAE911D3E74B80017015D /* RequestClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestClient.swift; sourceTree = "<group>"; };
 		959DAE931D3EB17B0017015D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		959DAE971D3EEB050017015D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		959DAE991D3EF6630017015D /* UdacityClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
+		959DAE9B1D3EF66F0017015D /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +107,7 @@
 				959DAE801D3D0DF60017015D /* MapViewDelegate.swift */,
 				959DAE871D3DCEA10017015D /* LocationEditorViewController.swift */,
 				959DAE8D1D3E5C3C0017015D /* TextFieldDelegate.swift */,
+				959DAE971D3EEB050017015D /* LoginViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -116,6 +123,8 @@
 			isa = PBXGroup;
 			children = (
 				959DAE911D3E74B80017015D /* RequestClient.swift */,
+				959DAE991D3EF6630017015D /* UdacityClient.swift */,
+				959DAE9B1D3EF66F0017015D /* ParseClient.swift */,
 			);
 			name = Client;
 			sourceTree = "<group>";
@@ -200,8 +209,11 @@
 				959DAE941D3EB17B0017015D /* Constants.swift in Sources */,
 				959DAE921D3E74B80017015D /* RequestClient.swift in Sources */,
 				959DAE7F1D3C60140017015D /* TableViewController.swift in Sources */,
+				959DAE9A1D3EF6630017015D /* UdacityClient.swift in Sources */,
 				959DAE881D3DCEA10017015D /* LocationEditorViewController.swift in Sources */,
 				959DAE841D3D15420017015D /* StudentLocationStruct.swift in Sources */,
+				959DAE981D3EEB050017015D /* LoginViewController.swift in Sources */,
+				959DAE9C1D3EF66F0017015D /* ParseClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +367,7 @@
 				959DAE781D3C5C310017015D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
