@@ -80,6 +80,24 @@ class ParseClient {
                 completionHandlerForGetAllLocations(data: nil, error: "Unable to get all student loactions.")
             }
         }
+    }
+    
+    func postUserLocation (completionHandlerForPostStudentLocation: (data:AnyObject?, error: String?) -> Void) {
+        
+        let URL = Constants.Parse.baseURL + Constants.Parse.StudentLocation
+        let headers = [
+            Constants.ParseParameterValues.ApplicationID: Constants.ParseParameterKeys.ApplicationID,
+            Constants.ParseParameterValues.ApiKey: Constants.ParseParameterKeys.ApplicationKey
+        ]
+        let jsonBody = "{\"uniqueKey\": \"\(UdacityClient.sharedInstance().userID)\", \"firstName\": \"\(self.userData["firstName"])\", \"lastName\": \"\(self.userData["lastName"])\",\"mapString\": \"\(self.userData["mapString"])\", \"mediaURL\": \"\(self.userData["mediaURL"])\",\"latitude\": \(self.userData["latitude"]), \"longitude\": \(self.userData["latitude"])}"
+        
+        request.post(jsonBody,baseURL: URL,headers: headers,isUdacity: false) { (data, response, error) in
+            if error == nil {
+                print("data returned", data)
+            } else {
+                print("error returned", error)
+            }
+        }
         
     }
     

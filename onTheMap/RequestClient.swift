@@ -25,13 +25,20 @@ class RequestClient {
         sendRequest(request, isUdacity: isUdacity, completionHandlerForRequest: completionHandlerForGet)
     }
     
-    func post(jsonBody: String, baseURL: String, isUdacity: Bool, completionHandlerForPost: (data: AnyObject?, response: NSHTTPURLResponse?, errorString: String?) -> Void) {
+    func post(jsonBody: String, baseURL: String, headers: [String:String], isUdacity: Bool, completionHandlerForPost: (data: AnyObject?, response: NSHTTPURLResponse?, errorString: String?) -> Void) {
         
         let request = NSMutableURLRequest(URL: NSURL(string: baseURL)!)
         
         request.HTTPMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        if headers.count > 0 {
+            print("adding headers")
+            for (key, value) in headers {
+                request.addValue(key, forHTTPHeaderField: value)
+            }
+        }
         
         request.HTTPBody = jsonBody.dataUsingEncoding(NSUTF8StringEncoding)
         
