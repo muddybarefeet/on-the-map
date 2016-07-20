@@ -79,13 +79,40 @@ class MapViewController: UIViewController {
     @IBAction func addLocation(sender: AnyObject) {
         
         //TODO LATER: add a check to see if the logged in user is already in the data from parse
-//        Parse.getStudentLocation()
+        Parse.getStudentLocation() { (data, error) in
+            if error == nil {
+                print("There was data returned")
+                if let data = data {
+                    if data.count > 0 {
+                        //show the ALERT to see if the user wants to edit the location already posted
+                        let alertController = UIAlertController(title: "You already have a location set", message: "Do you want to update this?", preferredStyle: UIAlertControllerStyle.Alert)
+                        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in
+                            print("you have pressed the Cancel button");
+                            //TODO
+                        }
+                        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+                            print("you have pressed OK button");
+                            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("LocationEditorView")
+                            NSOperationQueue.mainQueue().addOperationWithBlock {
+                                self.presentViewController(controller, animated: true, completion: nil)
+                            }
+                        }
+                        alertController.addAction(cancelAction)
+                        alertController.addAction(OKAction)
+                        self.presentViewController(alertController, animated: true, completion:nil)
+                    } else {
+                        //segue to the editor controller
+                        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("LocationEditorView") 
+                        NSOperationQueue.mainQueue().addOperationWithBlock {
+                            self.presentViewController(controller, animated: true, completion: nil)
+                        }
+                    }
+                }
+            } else {
+                print("error", error)
+            }
+        }
         
-        //function to add the loaction of the user to the locations array
-        
-        //1. on click show a modal view
-        //2. in view have a text field to add a location and a label to ask the question and button "Find on the Map"
-        //3. on click of find on the map then go to new view
         
     }
     

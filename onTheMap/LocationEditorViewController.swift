@@ -17,6 +17,8 @@ class LocationEditorViewController: UIViewController {
     @IBOutlet weak var locationView: MKMapView!
     @IBOutlet weak var submitButton: UIButton!
     
+    var Parse = ParseClient.sharedInstance()
+    
     let TextDelegate = TextFieldDelegate()
 //    let MapDelegate = MapViewDelegate()
     
@@ -63,7 +65,15 @@ class LocationEditorViewController: UIViewController {
             submitButton.setTitle("Submit", forState: .Normal)
         } else if submitButton.titleLabel?.text == "Submit" {
             //save the link and return to the main screen
-            dismissViewControllerAnimated(true, completion: nil)
+            //make sure there is text in the media URL
+            if (questionLabel.text != "") {
+                Parse.userData["mediaURL"] = answerText.text
+                dismissViewControllerAnimated(true, completion: nil)
+                print("user",Parse.userData)
+            } else {
+                //TODO make this an error make the button disabled?
+                print("There was no site address entered. Please add a site URL")
+            }
         }
     }
     
@@ -76,6 +86,8 @@ class LocationEditorViewController: UIViewController {
             }
             if let placemark = placemarks?.first {
                 let coordinates:CLLocationCoordinate2D = placemark.location!.coordinate
+                //save the addressString
+                self.Parse.userData["mapString"] = address
                 self.plotLocation(coordinates)
             }
         })
@@ -97,8 +109,10 @@ class LocationEditorViewController: UIViewController {
         dropPin.coordinate = coords
         dropPin.title = self.answerText.text
         self.locationView.addAnnotation(dropPin)
-//        TODO SAVE THE coords and once have a link send both to API to store
-        //update the text in the button to confirm View
+        //SAVE THE coords
+        Parse.userData["latitude"] = coords.latitude
+        Parse.userData["longitude"] = coords.longitude
+        
         submitButton.setTitle("Confirm Location", forState: .Normal)
         
     }

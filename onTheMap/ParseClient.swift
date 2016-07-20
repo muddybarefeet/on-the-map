@@ -25,18 +25,38 @@ class ParseClient {
     
     var locations = [[String:AnyObject]]()
     
-//    func getStudentLocation () {
-//        let parameters = [
-//            Constants.ParseParameterKeys.Where: "{\"uniqueKey\":\"\(UdacityClient.sharedInstance().userID)\"}"
-//        ]
-////        let URL = createURL(parameters, withPathExtension: Constants.Parse.StudentLocation)
-//    }
+    func getStudentLocation (completionHandlerForCurrentLocation: (data: AnyObject?, error: String?) -> Void) {
+        
+        let baseURL = Constants.Parse.baseURL + Constants.Parse.StudentLocation
+        let parameterString = "{\"uniqueKey\":\"\(UdacityClient.sharedInstance().userID)\"}"
+        let customAllowedSet =  NSCharacterSet(charactersInString:"=\"#%/<>:?@\\^`{|}").invertedSet
+        let escapedString = parameterString.stringByAddingPercentEncodingWithAllowedCharacters(customAllowedSet)
+        let URL = baseURL + "?" + Constants.ParseParameterKeys.Where + "=" + escapedString!
+        
+        let headers = [
+            Constants.ParseParameterValues.ApplicationID: Constants.ParseParameterKeys.ApplicationID,
+            Constants.ParseParameterValues.ApiKey: Constants.ParseParameterKeys.ApplicationKey
+        ]
+        
+        request.get(URL, headers: headers, isUdacity: false) { (data, response, error) in
+            if error == nil {
+                guard let results = data!["results"] else {
+                    completionHandlerForCurrentLocation(data: nil, error: "There was no results key in the response")
+                    return
+                }
+                completionHandlerForCurrentLocation(data: results, error: nil)
+            } else {
+                print("error :(", error)
+                completionHandlerForCurrentLocation(data: nil, error: "There was an error in the request")
+            }
+        }
+        
+    }
     
     func getAllStudentLocations (completionHandlerForGetAllLocations: (data: AnyObject?, error: String?) -> Void) {
         
         let baseURL = Constants.Parse.baseURL + Constants.Parse.StudentLocation
         let parameters = "?" + Constants.ParseParameterKeys.Order + "=" + Constants.ParseParameterValues.UpdatedAt
-//        let URL = createURL(parameters, withPathExtension: Constants.Parse.StudentLocation)
         let headers = [
             Constants.ParseParameterValues.ApplicationID: Constants.ParseParameterKeys.ApplicationID,
             Constants.ParseParameterValues.ApiKey: Constants.ParseParameterKeys.ApplicationKey
@@ -62,25 +82,6 @@ class ParseClient {
         }
         
     }
-    
-    
-    // create a URL from parameters
-    func createURL(parameters: [String:AnyObject], withPathExtension: String? = nil) -> NSURL {
-        
-        let components = NSURLComponents()
-        components.scheme = Constants.Parse.ApiScheme
-        components.host = Constants.Parse.ApiHost
-        components.path = Constants.Parse.ApiPath + (withPathExtension ?? "")
-        components.queryItems = [NSURLQueryItem]()
-        
-        for (key, value) in parameters {
-            let queryItem = NSURLQueryItem(name: key, value: "\(value)")
-            components.queryItems!.append(queryItem)
-        }
-        
-        return components.URL!
-    }
-    
     
     class func sharedInstance() -> ParseClient {
         struct Singleton {

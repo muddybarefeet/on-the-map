@@ -12,6 +12,7 @@ import UIKit
 class UdacityClient {
     
     var request = RequestClient.sharedInstance()
+    var Parse = ParseClient.sharedInstance()
     
     var userID: String = ""
     var sessionID: String = ""
@@ -62,16 +63,21 @@ class UdacityClient {
     }
     
     private func getUserData() {
-        print("get user data")
         let baseURL = Constants.Udacity.baseURL + Constants.Udacity.Users + userID
 
         request.get(baseURL, headers: [:], isUdacity: true) { (data, response, error) in
-            if (error != nil) {
-                print("Error getting the user data")
-                //throw an error message to the user?
+            if error == nil {
+                guard let userKey = data!["user"] as? [String: String] else {
+                    print("No user key on return data")
+                    return
+                }
+                //save the user info ready to post data to parse
+                self.Parse.userData["firstName"] = userKey["firstName"]
+                self.Parse.userData["lastName"] = userKey["lastName"]
+                
             } else {
-                print("Got the user data")
-               //add the data to somewhere ..
+                print("error getting user data")
+               //throw alert
             }
         }
         
