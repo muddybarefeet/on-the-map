@@ -15,7 +15,14 @@ class RequestClient {
         let request = NSMutableURLRequest(URL: NSURL(string: baseURL)!)
         
         //add any headers?
-        
+        if headers.count > 0 {
+            print("adding headers")
+            //TODO make a fucntion to loop through the headers and add them zxto the request
+            for (key, value) in headers {
+                request.addValue(key, forHTTPHeaderField: value)
+            }
+
+        }
         sendRequest(request, isUdacity: isUdacity, completionHandlerForRequest: completionHandlerForGet)
     }
     
@@ -39,6 +46,7 @@ class RequestClient {
                 completionHandlerForRequest(data: nil, response: nil, errorString: "There was an error in the reqest sent!")
                 return
             }
+            
             guard let data = data else {
                 completionHandlerForRequest(data: nil, response: nil, errorString: "There was no data in the response")
                 return

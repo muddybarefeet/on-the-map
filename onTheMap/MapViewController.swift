@@ -16,17 +16,23 @@ class MapViewController: UIViewController {
     @IBOutlet weak var pinBtn: UIBarButtonItem!
     
     let MapDelegate = MapViewDelegate()
-//    var Parse = ParseClient.sharedInstance()
+    var Parse = ParseClient.sharedInstance()
     
-    var locations = [[String:AnyObject]]()
-    //TODO: make the map refresh??
     
     override func viewWillAppear(animated: Bool) {
         print("IN map")
         super.viewWillAppear(animated)
         
         //get the user locations
-        ParseClient.sharedInstance().getAllStudentLocations()
+        Parse.getAllStudentLocations() { (data, error) in
+            if error == nil {
+                //then the data came back successfully
+                self.makeAnnotationsArray()
+            } else {
+                //error from request
+                print("THERE WAS AN ERROR GETTING LOCATION DATA FOR ALL")
+            }
+        }
         
         
     }
@@ -40,7 +46,7 @@ class MapViewController: UIViewController {
         
         var annotations = [MKPointAnnotation]()
         
-        for dictionary in locations {
+        for dictionary in Parse.locations {
             
             let studentLocation = StudentLocationStruct(
                 lat: CLLocationDegrees((dictionary["latitude"] as? Double)!),
