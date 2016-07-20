@@ -16,83 +16,19 @@ class MapViewController: UIViewController {
     @IBOutlet weak var pinBtn: UIBarButtonItem!
     
     let MapDelegate = MapViewDelegate()
+//    var Parse = ParseClient.sharedInstance()
     
     var locations = [[String:AnyObject]]()
     //TODO: make the map refresh??
     
     override func viewWillAppear(animated: Bool) {
-        
+        print("IN map")
         super.viewWillAppear(animated)
         
-        //here we will call the method to query the Parse API for the data for the map
-        // 1.set parameters
-        let parameters = [
-           Constants.ParseParameterKeys.Order: Constants.ParseParameterValues.UpdatedAt
-        ]
-        // 2.build URL and Configure request
-        let request = NSMutableURLRequest(URL: tmdbURLFromParameters(parameters))
-        print("url", request)
-        request.addValue(Constants.ParseParameterValues.ApplicationID, forHTTPHeaderField: Constants.ParseParameterKeys.ApplicationID)
-        request.addValue(Constants.ParseParameterValues.ApiKey, forHTTPHeaderField: Constants.ParseParameterKeys.ApplicationKey)
+        //get the user locations
+        ParseClient.sharedInstance().getAllStudentLocations()
         
-        // 3. Make request
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, response, error) in
-            
-            guard error == nil else {
-                print("There was an error in the request")
-                return
-            }
-            
-            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-                print("There was a status code other than 2xx returned!")
-                return
-            }
-            
-            guard let data = data else {
-                print("Undable to read the data returned")
-                return
-            }
-            
-            var parsedResult: AnyObject?
-            do {
-                parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
-            } catch {
-                print("Could not parse the data")
-                return
-            }
-            
-            //returned data is an array of objects
-            guard let results = parsedResult!["results"] as? [[String: AnyObject]] else {
-                print("no results key in data")
-                return
-            }
-            
-            //check values in results
-            if results.count > 0 {
-                for result in results {
-                    self.locations.append(result)
-                }
-                self.makeAnnotationsArray()
-            }
-            
-        }
-        // 4. start request
-        task.resume()
         
-    }
-    
-//    function to create the URL
-    func tmdbURLFromParameters(parameters: [String:AnyObject], withPathExtension: String? = nil) -> NSURL {
-        let components = NSURLComponents()
-        components.scheme = Constants.Parse.ApiScheme
-        components.host = Constants.Parse.ApiHost
-        components.path = Constants.Parse.ApiPath + (withPathExtension ?? "")
-        components.queryItems = [NSURLQueryItem]()
-        for (key, value) in parameters {
-            let queryItem = NSURLQueryItem(name: key, value: "\(value)")
-            components.queryItems!.append(queryItem)
-        }
-        return components.URL!
     }
     
     override func viewDidLoad() {
@@ -137,6 +73,7 @@ class MapViewController: UIViewController {
     @IBAction func addLocation(sender: AnyObject) {
         
         //TODO LATER: add a check to see if the logged in user is already in the data from parse
+//        Parse.getStudentLocation()
         
         //function to add the loaction of the user to the locations array
         

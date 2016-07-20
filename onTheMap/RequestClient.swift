@@ -11,9 +11,11 @@ import UIKit
 
 class RequestClient {
     
-    func get (baseURL: String, isUdacity: Bool, completionHandlerForGet: (data: AnyObject?, response: NSHTTPURLResponse?, errorString: String?) -> Void) {
+    func get (baseURL: String, headers: [String:String], isUdacity: Bool, completionHandlerForGet: (data: AnyObject?, response: NSHTTPURLResponse?, errorString: String?) -> Void) {
         let request = NSMutableURLRequest(URL: NSURL(string: baseURL)!)
+        
         //add any headers?
+        
         sendRequest(request, isUdacity: isUdacity, completionHandlerForRequest: completionHandlerForGet)
     }
     

@@ -65,7 +65,7 @@ class UdacityClient {
         print("get user data")
         let baseURL = Constants.Udacity.baseURL + Constants.Udacity.Users + userID
 
-        request.get(baseURL, isUdacity: true) { (data, response, error) in
+        request.get(baseURL, headers: [:], isUdacity: true) { (data, response, error) in
             if (error != nil) {
                 print("Error getting the user data")
                 //throw an error message to the user?
@@ -76,21 +76,6 @@ class UdacityClient {
         }
         
     }
-    
-//    // create a URL from parameters
-//    func createURLFromParameters(parameters: [String:AnyObject], withPathExtension: String? = nil) -> NSURL {
-//        let components = NSURLComponents()
-//        components.scheme = Constants.Udacity.ApiScheme
-//        components.host = Constants.Udacity.ApiHost
-//        components.path = Constants.Udacity.ApiPath + (withPathExtension ?? "")
-//        //section to make the parse URL
-//        components.queryItems = [NSURLQueryItem]()
-//        for (key, value) in parameters {
-//            let queryItem = NSURLQueryItem(name: key, value: "\(value)")
-//            components.queryItems!.append(queryItem)
-//        }
-//        return components.URL!
-//    }
     
     //make the class a singleton
     class func sharedInstance() -> UdacityClient {
