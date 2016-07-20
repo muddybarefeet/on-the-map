@@ -80,6 +80,8 @@ class LoginViewController: UIViewController {
         
         //get the user data at https://www.udacity.com/api/users/USERID
         //call this method and then storee the firstName and LastName
+        let controller = storyboard!.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
+        presentViewController(controller, animated: true, completion: nil)
         
         getUserData()
         
@@ -117,6 +119,8 @@ class LoginViewController: UIViewController {
             
         }
         task.resume()
+        
+        //then we want to move to the next view if any error then we stay on the same view
     
     }
     

@@ -16,8 +16,8 @@ class UdacityClient {
     var sessionExp: String = ""
     
     var user: [String:String] = [
-        "firstName": nil,
-        "lastName": nil
+        "firstName": "",
+        "lastName": ""
     ]
     
     class func sharedInstance() -> UdacityClient {
