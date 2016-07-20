@@ -29,7 +29,7 @@ class LoginViewController: UIViewController {
         //login into the app
         //authenticate the user and then segue to the next view
         
-        Udacity.login(/**/) { (data, error) in
+        Udacity.login("2muddybarefeet@gmail.com", password: "wc8GoT7WG") { (data, error) in
                 if error == nil {
                 //complete the login to show the user the app
                     let controller = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
@@ -43,43 +43,6 @@ class LoginViewController: UIViewController {
                 }
             }
         }
-    
-//    func getUserData () {
-//        print("get data called")
-//        
-//        //TODO remove hard coded userID
-//        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/users/8539194464")!)
-//        
-//        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, response, error) in
-//            if error != nil {
-//                print("There was an error in the request")
-//                return
-//            }
-//            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
-//
-//            var parsedResult: AnyObject?
-//            do {
-//                parsedResult = try NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments)
-//            } catch {
-//                print("Could not parse the data as JSON: '\(data)'")
-//                return
-//            }
-//            print("data", parsedResult)
-//            
-//            guard let user = parsedResult!["user"] as? NSDictionary else {
-//                print("There was no user key")
-//                return
-//            }
-//            
-//            self.Udacity.user["firstName"] = user["first_name"] as? String
-//            self.Udacity.user["lastName"] = user["last_name"] as? String
-//            
-//        }
-//        task.resume()
-//        
-//        //then we want to move to the next view if any error then we stay on the same view
-//    
-//    }
     
 }
 

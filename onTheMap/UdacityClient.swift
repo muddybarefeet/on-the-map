@@ -11,6 +11,8 @@ import UIKit
 
 class UdacityClient {
     
+    var request = RequestClient.sharedInstance()
+    
     var userID: String = ""
     var sessionID: String = ""
     var sessionExp: String = ""
@@ -28,7 +30,7 @@ class UdacityClient {
         print("base url: ", baseURL)
         print("body",body)
         
-        RequestClient.sharedInstance().post(body, baseURL: baseURL, isUdacity: true) { (data, response, error) in
+        request.post(body, baseURL: baseURL, isUdacity: true) { (data, response, error) in
             if (error != nil) {
                 //call completion handler to return to function above
                 completionHandlerForAuth(data:nil, error: error?.debugDescription)
@@ -51,7 +53,25 @@ class UdacityClient {
                 self.sessionID = decodeJsonSession["id"] as! String
                 
                 //call error on completion handler
+                
                 completionHandlerForAuth(data: data, error: nil)
+                self.getUserData()
+            }
+        }
+        
+    }
+    
+    private func getUserData() {
+        print("get user data")
+        let baseURL = Constants.Udacity.baseURL + Constants.Udacity.Users + userID
+
+        request.get(baseURL, isUdacity: true) { (data, response, error) in
+            if (error != nil) {
+                print("Error getting the user data")
+                //throw an error message to the user?
+            } else {
+                print("Got the user data")
+               //add the data to somewhere ..
             }
         }
         

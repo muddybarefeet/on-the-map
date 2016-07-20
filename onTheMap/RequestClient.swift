@@ -11,12 +11,11 @@ import UIKit
 
 class RequestClient {
     
-    let Udacity = UdacityClient.sharedInstance()
-    
-    
-//    func get (parameters: parmeters, query: query, base: base, completionHandler: ()) {
-//        
-//    }
+    func get (baseURL: String, isUdacity: Bool, completionHandlerForGet: (data: AnyObject?, response: NSHTTPURLResponse?, errorString: String?) -> Void) {
+        let request = NSMutableURLRequest(URL: NSURL(string: baseURL)!)
+        //add any headers?
+        sendRequest(request, isUdacity: isUdacity, completionHandlerForRequest: completionHandlerForGet)
+    }
     
     func post(jsonBody: String, baseURL: String, isUdacity: Bool, completionHandlerForPost: (data: AnyObject?, response: NSHTTPURLResponse?, errorString: String?) -> Void) {
         
