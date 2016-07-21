@@ -68,7 +68,8 @@ class LocationEditorViewController: UIViewController {
             //make sure there is text in the media URL
             if (questionLabel.text != "") {
                 Parse.userData["mediaURL"] = answerText.text
-                //SAVE THE DATA TO PARSE!!
+                
+                //SAVE THE USER Location DATA TO PARSE!!
                 Parse.postUserLocation() { (data, error) in
                     if error == nil {
                         print("Posted student location", data)

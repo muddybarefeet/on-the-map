@@ -94,8 +94,10 @@ class ParseClient {
         request.post(jsonBody,baseURL: URL,headers: headers,isUdacity: false) { (data, response, error) in
             if error == nil {
                 print("data returned", data)
+                completionHandlerForPostStudentLocation(data: data, error: nil)
             } else {
                 print("error returned", error)
+                completionHandlerForPostStudentLocation(data: nil, error: "There was an error")
             }
         }
         
