@@ -71,14 +71,18 @@ class LocationEditorViewController: UIViewController {
                 Parse.userData["mediaURL"] = answerText.text
                 
                 //SAVE THE USER Location DATA TO PARSE!!
-                Parse.postUserLocation() { (data, error) in
-                    if error == nil {
-                        print("Posted student location", data)
+                Parse.postUserLocation() { (success, error) in
+                    if (success != nil) {
+                        print("Posted student location", success)
+                        NSOperationQueue.mainQueue().addOperationWithBlock {
+                            self.dismissViewControllerAnimated(true, completion: nil)
+                        }
                     } else {
                         print("Error", error)
+                        //ALERT ERROR TO THE USER maybe dismiss too? ....
                     }
                 }
-                dismissViewControllerAnimated(true, completion: nil)
+                
                 print("user",Parse.userData)
             } else {
                 //TODO make this an error make the button disabled?

@@ -56,12 +56,11 @@ class RequestClient {
             if error != nil {
                 completionHandlerForRequest(data: nil, response: nil, errorString: "There was an error in the reqest sent!")
                 return
+            }            
+            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+                completionHandlerForRequest(data: nil, response: nil, errorString: "The status code returned was not a 2xx")
+                return
             }
-            
-//            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-//                completionHandlerForRequest(data: nil, response: nil, errorString: "The status code returned was not a 2xx")
-//                return
-//            }
             guard let data = data else {
                 completionHandlerForRequest(data: nil, response: nil, errorString: "There was no data in the response")
                 return

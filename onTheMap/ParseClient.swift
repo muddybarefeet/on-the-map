@@ -66,7 +66,7 @@ class ParseClient {
         request.get(URL, headers: headers, isUdacity: false) { (data, response, error) in
             if error == nil {
                 guard let results = data!["results"] as? [[String: AnyObject]] else {
-                    completionHandlerForGetAllLocations(data: nil, error: "No results key n the return data")
+                    completionHandlerForGetAllLocations(data: nil, error: "No results key in the return data")
                     return
                 }
                 self.locations = results
@@ -78,7 +78,7 @@ class ParseClient {
         }
     }
     
-    func postUserLocation (completionHandlerForPostStudentLocation: (data:AnyObject?, error: String?) -> Void) {
+    func postUserLocation (completionHandlerForPostStudentLocation: (success: Bool?, error: String?) -> Void) {
         
         let URL = Constants.Parse.baseURL + Constants.Parse.StudentLocation
         let headers = [
@@ -91,11 +91,15 @@ class ParseClient {
         
         request.post(body,baseURL: URL,headers: headers,isUdacity: false) { (data, response, error) in
             if error == nil {
-                print("data returned", data)
-                completionHandlerForPostStudentLocation(data: data, error: nil)
+                print("data",data)
+                guard let createdAt = data!["createdAt"] as? String else {
+                    completionHandlerForPostStudentLocation(success: nil, error: "No createdAt key in the return data")
+                    return
+                }
+                completionHandlerForPostStudentLocation(success: true, error: nil)
             } else {
                 print("error returned", error)
-                completionHandlerForPostStudentLocation(data: nil, error: "There was an error")
+                completionHandlerForPostStudentLocation(success: nil, error: "There was an error")
             }
         }
         
