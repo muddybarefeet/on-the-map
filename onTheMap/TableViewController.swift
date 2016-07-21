@@ -13,13 +13,23 @@ import MapKit
 class TableViewController: UITableViewController {
     
 //    cell reuse identifier = infoCell
-    var annotations = [MKPointAnnotation]()
+    var Udacity = UdacityClient.sharedInstance()
     
     override func viewWillAppear(animated: Bool) {
         print("IN table")
 //        tableView!.reloadData()
     }
     
+    @IBAction func logout(sender: AnyObject) {
+        Udacity.logout() { (success, error) in
+            if (success != nil) {
+                let controller = self.storyboard!.instantiateViewControllerWithIdentifier("LoginViewController")
+                self.presentViewController(controller, animated: true, completion: nil)
+            } else {
+                print("Error in logout",error)
+            }
+        }
+    }
     
     //    fuction to return the number of cells to make
 //    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

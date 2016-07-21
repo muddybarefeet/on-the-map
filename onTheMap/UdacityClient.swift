@@ -94,6 +94,19 @@ class UdacityClient {
         
     }
     
+    func logout (completionHandlerForLogout: (success: Bool?, error: String?) -> Void) {
+        let url = Constants.Udacity.baseURL + Constants.Udacity.Session
+        request.delete(url) { (data, request, error) in
+            if error == nil {
+                print("Logout good", data)
+                completionHandlerForLogout(success: true, error: nil)
+            } else {
+                completionHandlerForLogout(success: nil, error: "Logout unsuccessful")
+            }
+        }
+        
+    }
+    
     //make the class a singleton
     class func sharedInstance() -> UdacityClient {
         struct Singleton {

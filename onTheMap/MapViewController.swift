@@ -17,6 +17,7 @@ class MapViewController: UIViewController {
     
     let MapDelegate = MapViewDelegate()
     var Parse = ParseClient.sharedInstance()
+    var Udacity = UdacityClient.sharedInstance()
     
     
     override func viewWillAppear(animated: Bool) {
@@ -118,4 +119,14 @@ class MapViewController: UIViewController {
         
     }
     
+    @IBAction func logout(sender: AnyObject) {
+        Udacity.logout() { (success, error) in
+            if (success != nil) {
+                let controller = self.storyboard!.instantiateViewControllerWithIdentifier("LoginViewController")
+                self.presentViewController(controller, animated: true, completion: nil)
+            } else {
+                print("error in logout", error)
+            }
+        }
+    }
 }

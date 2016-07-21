@@ -11,7 +11,7 @@
         <scene sceneID="0Qg-Xb-MVx">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xip-UI-1kc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="z3E-rl-wQn" customClass="LoginViewController" customModule="onTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="z3E-rl-wQn" customClass="LoginViewController" customModule="onTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uSq-jl-zTM"/>
                         <viewControllerLayoutGuide type="bottom" id="z4b-HC-1to"/>
@@ -35,9 +35,6 @@
                                     <action selector="login:" destination="z3E-rl-wQn" eventType="touchUpInside" id="uJl-JG-HaD"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" misplaced="YES" image="UdacityLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Pz9-uq-JUj">
-                                <rect key="frame" x="33" y="68" width="256" height="156"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login to Udacity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S6C-Y6-DOK">
                                 <rect key="frame" x="98" y="244" width="125" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -75,6 +72,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="UdacityLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Pz9-uq-JUj">
+                                <rect key="frame" x="32" y="68" width="256" height="156"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.14921095749999999" green="0.76621809549999997" blue="0.72552637880000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -207,7 +207,11 @@
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem title="Logout" id="U8j-PT-xDW"/>
+                            <barButtonItem title="Logout" id="U8j-PT-xDW">
+                                <connections>
+                                    <action selector="logout:" destination="rPJ-Qq-aiF" id="0mY-6y-6RT"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem systemItem="refresh" id="XRm-dg-h94"/>
                         </rightBarButtonItems>
                     </navigationItem>
@@ -329,7 +333,7 @@
         <!--On the Map-->
         <scene sceneID="DZB-KU-UuM">
             <objects>
-                <tableViewController id="pMc-fu-H5s" sceneMemberID="viewController">
+                <tableViewController id="pMc-fu-H5s" customClass="TableViewController" customModule="onTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Cpk-Kz-hMt">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -350,7 +354,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="On the Map" id="0zK-6F-fbV">
-                        <barButtonItem key="rightBarButtonItem" title="Logout" id="cVs-OG-c0z"/>
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="cVs-OG-c0z">
+                            <connections>
+                                <action selector="logout:" destination="pMc-fu-H5s" id="wZI-5u-jd9"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y6T-eF-Vx7" userLabel="First Responder" sceneMemberID="firstResponder"/>

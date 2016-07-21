@@ -67,6 +67,20 @@ class RequestClient {
         sendRequest(request, isUdacity: false, completionHandlerForRequest: completionHandlerForPut)
     }
     
+    func delete(url: String, completionHandlerForDelete: (data: AnyObject?, response: NSHTTPURLResponse?, error: String?) -> Void) {
+        let request = NSMutableURLRequest(URL: NSURL(string: url)!)
+        request.HTTPMethod = "DELETE"
+        var xsrfCookie: NSHTTPCookie? = nil
+        let sharedCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        sendRequest(request, isUdacity: true, completionHandlerForRequest: completionHandlerForDelete)
+    }
+    
     func sendRequest (request: NSURLRequest, isUdacity: Bool, completionHandlerForRequest: (data: AnyObject?, response: NSHTTPURLResponse?, errorString: String?) -> Void) {
         
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
@@ -74,10 +88,10 @@ class RequestClient {
                 completionHandlerForRequest(data: nil, response: nil, errorString: "There was an error in the reqest sent!")
                 return
             }            
-//            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-//                completionHandlerForRequest(data: nil, response: nil, errorString: "The status code returned was not a 2xx")
-//                return
-//            }
+            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+                completionHandlerForRequest(data: nil, response: nil, errorString: "The status code returned was not a 2xx")
+                return
+            }
             guard let data = data else {
                 completionHandlerForRequest(data: nil, response: nil, errorString: "There was no data in the response")
                 return
