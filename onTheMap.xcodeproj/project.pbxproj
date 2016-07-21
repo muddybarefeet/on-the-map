@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		953D145F1D407445009D1B56 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953D145E1D407445009D1B56 /* SignUpViewController.swift */; };
 		959DAE681D3C5C310017015D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959DAE671D3C5C310017015D /* AppDelegate.swift */; };
 		959DAE6A1D3C5C310017015D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959DAE691D3C5C310017015D /* ViewController.swift */; };
 		959DAE6D1D3C5C310017015D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 959DAE6B1D3C5C310017015D /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		953D145E1D407445009D1B56 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		959DAE641D3C5C310017015D /* onTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = onTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		959DAE671D3C5C310017015D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		959DAE691D3C5C310017015D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				959DAE871D3DCEA10017015D /* LocationEditorViewController.swift */,
 				959DAE8D1D3E5C3C0017015D /* TextFieldDelegate.swift */,
 				959DAE971D3EEB050017015D /* LoginViewController.swift */,
+				953D145E1D407445009D1B56 /* SignUpViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 				959DAE941D3EB17B0017015D /* Constants.swift in Sources */,
 				959DAE921D3E74B80017015D /* RequestClient.swift in Sources */,
 				959DAE7F1D3C60140017015D /* TableViewController.swift in Sources */,
+				953D145F1D407445009D1B56 /* SignUpViewController.swift in Sources */,
 				959DAE9A1D3EF6630017015D /* UdacityClient.swift in Sources */,
 				959DAE881D3DCEA10017015D /* LocationEditorViewController.swift in Sources */,
 				959DAE841D3D15420017015D /* StudentLocationStruct.swift in Sources */,

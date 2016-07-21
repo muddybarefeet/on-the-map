@@ -16,6 +16,7 @@ class LocationEditorViewController: UIViewController {
     @IBOutlet weak var answerText: UITextField!
     @IBOutlet weak var locationView: MKMapView!
     @IBOutlet weak var submitButton: UIButton!
+
     
     var Parse = ParseClient.sharedInstance()
     
@@ -126,5 +127,8 @@ class LocationEditorViewController: UIViewController {
         
     }
     
+    @IBAction func cancel(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     
 }

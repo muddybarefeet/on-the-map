@@ -4,11 +4,13 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
         <scene sceneID="0Qg-Xb-MVx">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xip-UI-1kc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="z3E-rl-wQn" customClass="LoginViewController" customModule="onTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uSq-jl-zTM"/>
@@ -54,6 +56,9 @@
                                     <constraint firstAttribute="height" constant="30" id="YqH-R8-nWe"/>
                                 </constraints>
                                 <state key="normal" title="Sign Up"/>
+                                <connections>
+                                    <segue destination="Gsc-KP-lBf" kind="modal" id="830-CA-lBN"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iC3-GY-t2A">
                                 <rect key="frame" x="32" y="518" width="256" height="30"/>
@@ -82,17 +87,17 @@
                             <constraint firstItem="5bc-28-zOa" firstAttribute="centerX" secondItem="sWZ-3l-MgA" secondAttribute="centerX" id="QTN-N5-33T"/>
                             <constraint firstItem="CUq-VO-LPv" firstAttribute="centerX" secondItem="sWZ-3l-MgA" secondAttribute="centerX" id="TcG-ZF-TXk"/>
                             <constraint firstItem="GjI-GX-noY" firstAttribute="top" secondItem="S6C-Y6-DOK" secondAttribute="bottom" constant="16" id="TyG-A2-4tT"/>
-                            <constraint firstItem="z4b-HC-1to" firstAttribute="top" secondItem="iC3-GY-t2A" secondAttribute="bottom" constant="20" id="XiG-HS-JiF"/>
                             <constraint firstItem="5bc-28-zOa" firstAttribute="top" secondItem="CUq-VO-LPv" secondAttribute="bottom" constant="13" id="azs-Kt-Bqc"/>
                             <constraint firstItem="GjI-GX-noY" firstAttribute="leading" secondItem="sWZ-3l-MgA" secondAttribute="leadingMargin" constant="19" id="bUx-67-ZUQ"/>
                             <constraint firstItem="Pz9-uq-JUj" firstAttribute="centerX" secondItem="sWZ-3l-MgA" secondAttribute="centerX" id="e1a-5b-Wmy"/>
                             <constraint firstItem="uKM-cJ-DEE" firstAttribute="leading" secondItem="sWZ-3l-MgA" secondAttribute="leadingMargin" constant="21" id="eZ1-XY-YDc"/>
                             <constraint firstItem="Lr5-hN-x8F" firstAttribute="leading" secondItem="uKM-cJ-DEE" secondAttribute="trailing" constant="15" id="elF-LI-twJ"/>
-                            <constraint firstItem="Pz9-uq-JUj" firstAttribute="top" secondItem="uSq-jl-zTM" secondAttribute="bottom" constant="48" id="hMz-2R-IHL"/>
                             <constraint firstItem="S6C-Y6-DOK" firstAttribute="top" secondItem="Pz9-uq-JUj" secondAttribute="bottom" constant="20" id="iBF-6U-Ovv"/>
                             <constraint firstItem="uKM-cJ-DEE" firstAttribute="top" secondItem="5bc-28-zOa" secondAttribute="bottom" constant="13" id="iOt-Me-3Hb"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Lr5-hN-x8F" secondAttribute="trailing" constant="27" id="rBO-Fb-Mva"/>
                             <constraint firstAttribute="bottom" secondItem="Lr5-hN-x8F" secondAttribute="bottom" constant="139" id="rG5-xa-9mb"/>
+                            <constraint firstItem="Pz9-uq-JUj" firstAttribute="top" secondItem="uSq-jl-zTM" secondAttribute="bottom" constant="48" id="uOK-55-QGq"/>
+                            <constraint firstItem="z4b-HC-1to" firstAttribute="top" secondItem="iC3-GY-t2A" secondAttribute="bottom" constant="20" id="ulu-h2-VWy"/>
                             <constraint firstItem="Lr5-hN-x8F" firstAttribute="centerY" secondItem="uKM-cJ-DEE" secondAttribute="centerY" id="vfV-14-vrv"/>
                             <constraint firstItem="GjI-GX-noY" firstAttribute="top" secondItem="S6C-Y6-DOK" secondAttribute="bottom" constant="16" id="zAh-wX-FhT"/>
                         </constraints>
@@ -103,9 +108,56 @@
                         <outlet property="passwordInput" destination="CUq-VO-LPv" id="P1j-ia-zQD"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Xip-UI-1kc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1032" y="449"/>
+        </scene>
+        <!--Sign Up View Controller-->
+        <scene sceneID="YFd-g0-h5Y">
+            <objects>
+                <viewController id="Gsc-KP-lBf" customClass="SignUpViewController" customModule="onTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3G5-3I-k8r"/>
+                        <viewControllerLayoutGuide type="bottom" id="OGr-Y1-mFU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KnQ-wp-Lao">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="UdacityLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Hdc-Aw-xeE">
+                                <rect key="frame" x="40" y="62" width="240" height="186"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3P6-Nl-tDy">
+                                <rect key="frame" x="51" y="300" width="219" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Ib-Y3-Xic">
+                                <rect key="frame" x="51" y="338" width="219" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Make an Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PwK-AG-y8c">
+                                <rect key="frame" x="94" y="256" width="132" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Qt-P4-1KZ">
+                                <rect key="frame" x="133" y="401" width="55" height="30"/>
+                                <state key="normal" title="Sign Up"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.14921095749999999" green="0.76621809549999997" blue="0.72552637880000004" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <connections>
+                        <outlet property="emailField" destination="3P6-Nl-tDy" id="G49-Jf-dRm"/>
+                        <outlet property="passwordField" destination="0Ib-Y3-Xic" id="hlt-mD-eau"/>
+                        <outlet property="signUpButton" destination="8Qt-P4-1KZ" id="4lS-aG-hgb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9ov-On-hr4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-810" y="1197"/>
         </scene>
         <!--Map-->
         <scene sceneID="ObH-hl-z40">
@@ -154,7 +206,10 @@
                                 <action selector="addLocation:" destination="rPJ-Qq-aiF" id="exW-2t-cTU"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="XRm-dg-h94"/>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Logout" id="U8j-PT-xDW"/>
+                            <barButtonItem systemItem="refresh" id="XRm-dg-h94"/>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="gLF-yz-pVe" id="j2B-oS-APm"/>
@@ -212,13 +267,27 @@
                                     <constraint firstAttribute="height" constant="261" id="Bdt-uU-4MT"/>
                                 </constraints>
                             </mapView>
+                            <navigationBar contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4UR-qy-EJk">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <items>
+                                    <navigationItem title="On the Map" id="AHx-sK-w26">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="tT3-je-QEZ">
+                                            <connections>
+                                                <action selector="cancel:" destination="QdW-Vg-SLc" id="zDk-TS-gTW"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="0.14921095749999999" green="0.76621809549999997" blue="0.72552637880000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="4UR-qy-EJk" secondAttribute="trailing" constant="-20" id="1eD-Y5-C81"/>
                             <constraint firstItem="qqZ-mi-Jwr" firstAttribute="centerX" secondItem="bev-AL-UGh" secondAttribute="centerX" id="4Dn-Lx-kVg"/>
                             <constraint firstItem="qKi-yF-o5V" firstAttribute="top" secondItem="EPe-qj-1vD" secondAttribute="bottom" id="DHy-QI-y3Q"/>
                             <constraint firstItem="Log-VR-MR2" firstAttribute="top" secondItem="Y98-CV-HJU" secondAttribute="bottom" constant="24" id="Klu-Mm-w2F"/>
                             <constraint firstItem="Y98-CV-HJU" firstAttribute="top" secondItem="Lfh-YH-WqQ" secondAttribute="bottom" id="QU5-2G-yNX"/>
+                            <constraint firstItem="4UR-qy-EJk" firstAttribute="leading" secondItem="bev-AL-UGh" secondAttribute="leadingMargin" constant="-20" id="XMW-tq-iQB"/>
                             <constraint firstItem="Y98-CV-HJU" firstAttribute="leading" secondItem="bev-AL-UGh" secondAttribute="leadingMargin" constant="-24" id="cYX-U9-AOO"/>
                             <constraint firstItem="Log-VR-MR2" firstAttribute="trailing" secondItem="bev-AL-UGh" secondAttribute="trailingMargin" id="chP-1y-3Ip"/>
                             <constraint firstItem="EPe-qj-1vD" firstAttribute="leading" secondItem="bev-AL-UGh" secondAttribute="leadingMargin" constant="-20" id="dbF-Xv-sCe"/>
@@ -226,6 +295,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Y98-CV-HJU" secondAttribute="trailing" constant="-24" id="fcw-2a-bfk"/>
                             <constraint firstItem="Log-VR-MR2" firstAttribute="leading" secondItem="bev-AL-UGh" secondAttribute="leadingMargin" id="qGH-hd-CIu"/>
                             <constraint firstItem="qqZ-mi-Jwr" firstAttribute="top" secondItem="Log-VR-MR2" secondAttribute="bottom" constant="27" id="uag-xA-tSu"/>
+                            <constraint firstItem="4UR-qy-EJk" firstAttribute="top" secondItem="Lfh-YH-WqQ" secondAttribute="bottom" id="ytI-hR-9XC"/>
                         </constraints>
                     </view>
                     <connections>
@@ -279,7 +349,9 @@
                             <outlet property="delegate" destination="pMc-fu-H5s" id="phA-7x-xa7"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="On the Map" id="0zK-6F-fbV"/>
+                    <navigationItem key="navigationItem" title="On the Map" id="0zK-6F-fbV">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="cVs-OG-c0z"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y6T-eF-Vx7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

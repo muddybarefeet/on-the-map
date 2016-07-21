@@ -65,10 +65,6 @@ class ParseClient {
         let URL = baseURL + parameters
         request.get(URL, headers: headers, isUdacity: false) { (data, response, error) in
             if error == nil {
-                guard let statusCode = response?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-                    completionHandlerForGetAllLocations(data: nil, error: "There was a response code other than 2xx returned!")
-                    return
-                }
                 guard let results = data!["results"] as? [[String: AnyObject]] else {
                     completionHandlerForGetAllLocations(data: nil, error: "No results key n the return data")
                     return

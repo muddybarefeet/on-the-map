@@ -72,13 +72,15 @@ class UdacityClient {
 
         request.get(baseURL, headers: [:], isUdacity: true) { (data, response, error) in
             if error == nil {
-                guard let userKey = data!["user"] as? [String: String] else {
+                // MAKE SURE THAT THE VALUE OF THE OBJECT IS AnyObject and NOT String else weird things happen!
+                guard let userKey = data!["user"] as? [String: AnyObject] else {
                     print("No user key on return data")
                     return
                 }
+                
                 //save the user info ready to post data to parse
-                self.Parse.userData["firstName"] = userKey["firstName"]
-                self.Parse.userData["lastName"] = userKey["lastName"]
+                self.Parse.userData["firstName"] = userKey["first_name"] as! String
+                self.Parse.userData["lastName"] = userKey["last_name"] as! String
                 
             } else {
                 print("error getting user data")
