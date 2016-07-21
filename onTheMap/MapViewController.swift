@@ -78,10 +78,8 @@ class MapViewController: UIViewController {
     
     @IBAction func addLocation(sender: AnyObject) {
         
-        //TODO LATER: add a check to see if the logged in user is already in the data from parse
         Parse.getStudentLocation() { (data, error) in
             if error == nil {
-                print("There was data returned")
                 if let data = data {
                     if data.count > 0 {
                         //show the ALERT to see if the user wants to edit the location already posted
@@ -94,6 +92,7 @@ class MapViewController: UIViewController {
                             print("you have pressed OK button");
                             let controller = self.storyboard!.instantiateViewControllerWithIdentifier("LocationEditorView")
                             NSOperationQueue.mainQueue().addOperationWithBlock {
+                                self.Parse.upsertMethod = "PUT"
                                 self.presentViewController(controller, animated: true, completion: nil)
                             }
                         }
@@ -106,6 +105,7 @@ class MapViewController: UIViewController {
                         //segue to the editor controller
                         let controller = self.storyboard!.instantiateViewControllerWithIdentifier("LocationEditorView") 
                         NSOperationQueue.mainQueue().addOperationWithBlock {
+                             self.Parse.upsertMethod = "POST"
                             self.presentViewController(controller, animated: true, completion: nil)
                         }
                     }

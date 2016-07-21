@@ -71,9 +71,9 @@ class LocationEditorViewController: UIViewController {
                 Parse.userData["mediaURL"] = answerText.text
                 
                 //SAVE THE USER Location DATA TO PARSE!!
-                Parse.postUserLocation() { (success, error) in
+                Parse.upsertUserLocation() { (success, error) in
                     if (success != nil) {
-                        print("Posted student location", success)
+                        print("Upseted student location", success)
                         NSOperationQueue.mainQueue().addOperationWithBlock {
                             self.dismissViewControllerAnimated(true, completion: nil)
                         }

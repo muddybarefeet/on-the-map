@@ -40,7 +40,7 @@ class UdacityClient {
         
         print("base url: ", baseURL)
         
-        request.post(body, baseURL: baseURL, headers: headers,isUdacity: true) { (data, response, error) in
+        request.post(body, url: baseURL, headers: headers,isUdacity: true) { (data, response, error) in
             if (error != nil) {
                 //call completion handler to return to function above
                 completionHandlerForAuth(data:nil, error: error?.debugDescription)

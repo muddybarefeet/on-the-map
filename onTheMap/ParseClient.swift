@@ -23,6 +23,9 @@ class ParseClient {
         "mediaURL": ""
     ]
     
+    var objectId: String = ""
+    var upsertMethod: String = ""
+    
     var locations = [[String:AnyObject]]()
     
     func getStudentLocation (completionHandlerForCurrentLocation: (data: AnyObject?, error: String?) -> Void) {
@@ -40,11 +43,12 @@ class ParseClient {
         
         request.get(URL, headers: headers, isUdacity: false) { (data, response, error) in
             if error == nil {
-                guard let results = data!["results"] else {
+                guard let result = data!["results"]!![0] as? [String: AnyObject] else {
                     completionHandlerForCurrentLocation(data: nil, error: "There was no results key in the response")
                     return
                 }
-                completionHandlerForCurrentLocation(data: results, error: nil)
+                self.objectId = result["objectId"]! as! String
+                completionHandlerForCurrentLocation(data: result, error: nil)
             } else {
                 print("error :(", error)
                 completionHandlerForCurrentLocation(data: nil, error: "There was an error in the request")
@@ -78,7 +82,7 @@ class ParseClient {
         }
     }
     
-    func postUserLocation (completionHandlerForPostStudentLocation: (success: Bool?, error: String?) -> Void) {
+    func upsertUserLocation (completionHandlerForUpsertStudentLocation: (success: Bool?, error: String?) -> Void) {
         
         let URL = Constants.Parse.baseURL + Constants.Parse.StudentLocation
         let headers = [
@@ -89,19 +93,33 @@ class ParseClient {
         var body = userData
         body["uniqueKey"] = UdacityClient.sharedInstance().userID
         
-        request.post(body,baseURL: URL,headers: headers,isUdacity: false) { (data, response, error) in
-            if error == nil {
-                print("data",data)
-                guard let createdAt = data!["createdAt"] as? String else {
-                    completionHandlerForPostStudentLocation(success: nil, error: "No createdAt key in the return data")
-                    return
+        if (upsertMethod == "POST") {
+            request.post(body,url: URL,headers: headers,isUdacity: false) { (data, response, error) in
+                if error == nil {
+                    guard let objectID = data!["objectId"] as? String else {
+                        completionHandlerForUpsertStudentLocation(success: nil, error: "No createdAt key in the return data")
+                        return
+                    }
+                    //could add in logic to check the objectIds match?
+                    completionHandlerForUpsertStudentLocation(success: true, error: nil)
+                } else {
+                    print("error returned", error)
+                    completionHandlerForUpsertStudentLocation(success: nil, error: "There was an error")
                 }
-                completionHandlerForPostStudentLocation(success: true, error: nil)
-            } else {
-                print("error returned", error)
-                completionHandlerForPostStudentLocation(success: nil, error: "There was an error")
+            }
+        } else if (upsertMethod == "PUT") {
+            let url = URL + "/" + objectId
+            request.put(body, url: url, headers: headers, isUdacity: false) { (data, response, error) in
+                if error == nil {
+                    completionHandlerForUpsertStudentLocation(success: true, error: nil)
+                } else {
+                    print("error returned", error)
+                    completionHandlerForUpsertStudentLocation(success: nil, error: "Error upserting student location")
+                }
             }
         }
+    
+
         
     }
     
