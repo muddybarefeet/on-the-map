@@ -29,7 +29,7 @@ class LoginViewController: UIViewController {
         //login into the app
         //authenticate the user and then segue to the next view
         
-        Udacity.login("2muddybarefeet@gmail.com", password: "wc8GoT7WG") { (data, error) in
+        Udacity.login(Constants.User.email, password: Constants.User.pass) { (data, error) in
                 if error == nil {
                 //complete the login to show the user the app
                     let controller = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
