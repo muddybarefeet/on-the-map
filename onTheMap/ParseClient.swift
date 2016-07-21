@@ -85,9 +85,11 @@ class ParseClient {
             Constants.ParseParameterValues.ApplicationID: Constants.ParseParameterKeys.ApplicationID,
             Constants.ParseParameterValues.ApiKey: Constants.ParseParameterKeys.ApplicationKey
         ]
-        let jsonBody = "{\"uniqueKey\": \"\(UdacityClient.sharedInstance().userID)\", \"firstName\": \"\(self.userData["firstName"])\", \"lastName\": \"\(self.userData["lastName"])\",\"mapString\": \"\(self.userData["mapString"])\", \"mediaURL\": \"\(self.userData["mediaURL"])\",\"latitude\": \(self.userData["latitude"]), \"longitude\": \(self.userData["latitude"])}"
         
-        request.post(jsonBody,baseURL: URL,headers: headers,isUdacity: false) { (data, response, error) in
+        var body = userData
+        body["uniqueKey"] = UdacityClient.sharedInstance().userID
+        
+        request.post(body,baseURL: URL,headers: headers,isUdacity: false) { (data, response, error) in
             if error == nil {
                 print("data returned", data)
                 completionHandlerForPostStudentLocation(data: data, error: nil)

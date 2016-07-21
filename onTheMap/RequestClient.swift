@@ -23,19 +23,30 @@ class RequestClient {
         sendRequest(request, isUdacity: isUdacity, completionHandlerForRequest: completionHandlerForGet)
     }
     
-    func post(jsonBody: String, baseURL: String, headers: [String:String], isUdacity: Bool, completionHandlerForPost: (data: AnyObject?, response: NSHTTPURLResponse?, errorString: String?) -> Void) {
+    func post(jsonBody: [String : AnyObject]?, baseURL: String, headers: [String:String], isUdacity: Bool, completionHandlerForPost: (data: AnyObject?, response: NSHTTPURLResponse?, errorString: String?) -> Void) {
         let request = NSMutableURLRequest(URL: NSURL(string: baseURL)!)
         request.HTTPMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
         if headers.count > 0 {
             print("adding headers")
             for (key, value) in headers {
                 request.addValue(key, forHTTPHeaderField: value)
             }
         }
-        request.HTTPBody = jsonBody.dataUsingEncoding(NSUTF8StringEncoding)
-        print("BODY", jsonBody.dataUsingEncoding(NSUTF8StringEncoding))
+        
+        if let requestBodyDictionary = jsonBody {
+            
+            let serealisedBody: NSData?
+            do {
+                serealisedBody = try NSJSONSerialization.dataWithJSONObject(requestBodyDictionary, options: [])
+            } catch let error as NSError {
+                print("error editing body",error)
+                serealisedBody = nil
+            }
+            request.HTTPBody = serealisedBody
+        }
+        
         sendRequest(request, isUdacity: isUdacity, completionHandlerForRequest: completionHandlerForPost)
     }
     
@@ -46,10 +57,11 @@ class RequestClient {
                 completionHandlerForRequest(data: nil, response: nil, errorString: "There was an error in the reqest sent!")
                 return
             }
-            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-                completionHandlerForRequest(data: nil, response: nil, errorString: "The status code returned was not a 2xx")
-                return
-            }
+            
+//            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+//                completionHandlerForRequest(data: nil, response: nil, errorString: "The status code returned was not a 2xx")
+//                return
+//            }
             guard let data = data else {
                 completionHandlerForRequest(data: nil, response: nil, errorString: "There was no data in the response")
                 return
@@ -68,6 +80,7 @@ class RequestClient {
                 print("Could not parse the data as JSON: '\(data)'")
                 return
             }
+            
             completionHandlerForRequest(data: parsedResult, response: (response as! NSHTTPURLResponse), errorString: nil)
         }
         

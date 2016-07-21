@@ -99,7 +99,9 @@ class MapViewController: UIViewController {
                         }
                         alertController.addAction(cancelAction)
                         alertController.addAction(OKAction)
-                        self.presentViewController(alertController, animated: true, completion:nil)
+                        NSOperationQueue.mainQueue().addOperationWithBlock {
+                            self.presentViewController(alertController, animated: true, completion:nil)
+                        }
                     } else {
                         //segue to the editor controller
                         let controller = self.storyboard!.instantiateViewControllerWithIdentifier("LocationEditorView") 

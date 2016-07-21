@@ -23,20 +23,24 @@ class UdacityClient {
         "lastName": ""
     ]
     
-//    let headers = [
-//        Constants.UdacityParameterKeys.JSONField: Constants.UdacityParameterValues.AcceptJSON,
-//        Constants.UdacityParameterKeys.JSONField: Constants.UdacityParameterValues.ContentType
-//    ]
+    let headers = [
+        Constants.UdacityParameterKeys.JSONField: Constants.UdacityParameterValues.AcceptJSON
+    ]
     
     func login (email: String, password: String, completionHandlerForAuth: (data: AnyObject?, error: String?) -> Void) {
         //pass the get method the things to make the url and the request
-        let body = "{\"udacity\": {\"username\": \"\(email)\", \"password\": \"\(password)\"}}"
         let baseURL = Constants.Udacity.baseURL + Constants.Udacity.Session
         
-        print("base url: ", baseURL)
-        print("body",body)
+        let body = [
+            "udacity" : [
+                "username": email,
+                "password": password
+            ]
+        ]
         
-        request.post(body, baseURL: baseURL, headers: [:],isUdacity: true) { (data, response, error) in
+        print("base url: ", baseURL)
+        
+        request.post(body, baseURL: baseURL, headers: headers,isUdacity: true) { (data, response, error) in
             if (error != nil) {
                 //call completion handler to return to function above
                 completionHandlerForAuth(data:nil, error: error?.debugDescription)
