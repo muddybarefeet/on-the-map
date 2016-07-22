@@ -12,61 +12,22 @@ import UIKit
 class RequestClient {
     
     func get (url: String, headers: [String:String], isUdacity: Bool, completionHandlerForGet: (data: AnyObject?, response: NSHTTPURLResponse?, errorString: String?) -> Void) {
-        let request = NSMutableURLRequest(URL: NSURL(string: url)!)
-        //add any headers?
-        if headers.count > 0 {
-            for (key, value) in headers {
-                request.addValue(key, forHTTPHeaderField: value)
-            }
-        }
+        let request = makeRequest(url, headers: headers, method: "GET", jsonBody:[:])
         sendRequest(request, isUdacity: isUdacity, completionHandlerForRequest: completionHandlerForGet)
     }
     
     func post(jsonBody: [String : AnyObject]?, url: String, headers: [String:String], isUdacity: Bool, completionHandlerForPost: (data: AnyObject?, response: NSHTTPURLResponse?, errorString: String?) -> Void) {
-        let request = NSMutableURLRequest(URL: NSURL(string: url)!)
-        request.HTTPMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        if headers.count > 0 {
-            for (key, value) in headers {
-                request.addValue(key, forHTTPHeaderField: value)
-            }
-        }
-        if let requestBodyDictionary = jsonBody {
-            let serealisedBody: NSData?
-            do {
-                serealisedBody = try NSJSONSerialization.dataWithJSONObject(requestBodyDictionary, options: [])
-            } catch let error as NSError {
-                print("error editing body",error)
-                serealisedBody = nil
-            }
-            request.HTTPBody = serealisedBody
-        }
+        let request = makeRequest(url, headers: headers, method: "POST", jsonBody: jsonBody)
         sendRequest(request, isUdacity: isUdacity, completionHandlerForRequest: completionHandlerForPost)
     }
     
     func put(jsonBody: [String : AnyObject]?, url: String, headers: [String:String], isUdacity: Bool, completionHandlerForPut: (data: AnyObject?, response: NSHTTPURLResponse?, errorString: String?) -> Void) {
-        let request = NSMutableURLRequest(URL: NSURL(string: url)!)
-        request.HTTPMethod = "PUT"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        if headers.count > 0 {
-            for (key, value) in headers {
-                request.addValue(key, forHTTPHeaderField: value)
-            }
-        }
-        if let requestBodyDictionary = jsonBody {
-            let serealisedBody: NSData?
-            do {
-                serealisedBody = try NSJSONSerialization.dataWithJSONObject(requestBodyDictionary, options: [])
-            } catch let error as NSError {
-                print("error editing body",error)
-                serealisedBody = nil
-            }
-            request.HTTPBody = serealisedBody
-        }
+        let request = makeRequest(url, headers: headers, method: "PUT", jsonBody: jsonBody)
         sendRequest(request, isUdacity: false, completionHandlerForRequest: completionHandlerForPut)
     }
     
+    //no simplification of this code as it is so different from the other methods
     func delete(url: String, completionHandlerForDelete: (data: AnyObject?, response: NSHTTPURLResponse?, error: String?) -> Void) {
         let request = NSMutableURLRequest(URL: NSURL(string: url)!)
         request.HTTPMethod = "DELETE"
@@ -80,6 +41,35 @@ class RequestClient {
         }
         sendRequest(request, isUdacity: true, completionHandlerForRequest: completionHandlerForDelete)
     }
+    
+    func makeRequest (url: String, headers: [String:String], method: String, jsonBody: [String : AnyObject]?) -> NSURLRequest  {
+        //format the url
+        let request = NSMutableURLRequest(URL: NSURL(string: url)!)
+        //format headers if there are any
+        request.HTTPMethod = method
+        if method == "POST" || method == "PUT" {
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        }
+        if headers.count > 0 {
+            for (key, value) in headers {
+                request.addValue(key, forHTTPHeaderField: value)
+            }
+        }
+        if jsonBody?.count > 0 {
+            if let requestBodyDictionary = jsonBody {
+                let serealisedBody: NSData?
+                do {
+                    serealisedBody = try NSJSONSerialization.dataWithJSONObject(requestBodyDictionary, options: [])
+                } catch let error as NSError {
+                    print("error editing body",error)
+                    serealisedBody = nil
+                }
+                request.HTTPBody = serealisedBody
+            }
+        }
+        return request
+    }
+
     
     func sendRequest (request: NSURLRequest, isUdacity: Bool, completionHandlerForRequest: (data: AnyObject?, response: NSHTTPURLResponse?, errorString: String?) -> Void) {
         
@@ -117,6 +107,7 @@ class RequestClient {
         task.resume()
         
     }
+    
     
     
     class func sharedInstance() -> RequestClient {

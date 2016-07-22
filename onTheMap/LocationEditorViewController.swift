@@ -10,16 +10,16 @@ import Foundation
 import UIKit
 import MapKit
 
-class LocationEditorViewController: UIViewController {
+class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var answerText: UITextField!
     @IBOutlet weak var locationView: MKMapView!
     @IBOutlet weak var submitButton: UIButton!
-
     
     var Parse = ParseClient.sharedInstance()
     var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+    var mapDelegate = MapViewDelegate()
     
     override func viewDidLoad() {
         answerText.textAlignment = .Center
@@ -29,7 +29,27 @@ class LocationEditorViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(LocationEditorViewController.tap(_:)))
         view.addGestureRecognizer(tapGesture)
         //activity spinner
+        locationView.delegate = mapDelegate
         activitySpinner.center = self.view.center
+        
+        let mapDragRecognizer = UIPanGestureRecognizer(target: self, action: #selector(LocationEditorViewController.didDragMap(_:)))
+        mapDragRecognizer.delegate = self
+        self.locationView.addGestureRecognizer(mapDragRecognizer)
+        
+    }
+    
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+    func didDragMap(gestureRecognizer: UIGestureRecognizer) {
+        if (gestureRecognizer.state == UIGestureRecognizerState.Began) {
+            print("Map drag began")
+        }
+        
+        if (gestureRecognizer.state == UIGestureRecognizerState.Ended) {
+            print("Map drag ended")
+        }
     }
     
     func tap(gesture: UITapGestureRecognizer) {
@@ -148,9 +168,11 @@ class LocationEditorViewController: UIViewController {
         
         //drop the pin in the correct location
         let dropPin = MKPointAnnotation()
+        
         dropPin.coordinate = coords
         dropPin.title = self.answerText.text
         self.locationView.addAnnotation(dropPin)
+        
         
         //SAVE THE coords
         Parse.userData["latitude"] = coords.latitude
@@ -160,6 +182,7 @@ class LocationEditorViewController: UIViewController {
         activitySpinner.stopAnimating()
         view.willRemoveSubview(activitySpinner)
     }
+
     
     @IBAction func cancel(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
