@@ -26,8 +26,6 @@ class ParseClient {
     var objectId: String = ""
     var upsertMethod: String = ""
     
-    var locations = [[String:AnyObject]]()
-    
     func getStudentLocation (completionHandlerForCurrentLocation: (data: AnyObject?, error: String?) -> Void) {
         
         let baseURL = Constants.Parse.baseURL + Constants.Parse.StudentLocation
@@ -73,13 +71,35 @@ class ParseClient {
                     completionHandlerForGetAllLocations(data: nil, error: "No results key in the return data")
                     return
                 }
-                self.locations = results
+                
+                //pass the array of dictionaries returned through the StudentLocation Model and into a shared location
+                self.parseUserLocations(results)
+                
                 completionHandlerForGetAllLocations(data: data, error: nil)
             } else {
                 print("not got users locations :(")
                 completionHandlerForGetAllLocations(data: nil, error: "Unable to get all student loactions.")
             }
         }
+    }
+    
+    private func parseUserLocations (data: [NSDictionary]) -> Void {
+        ////loop through results and pass each one to the struct to reconstruct
+        var students = [StudentLocationStruct]()
+        
+        for dictionary in data {
+            //pass the dictionary to the StudentLocationStruct struct
+            let model = StudentLocationStruct(studentDictionary: dictionary)
+            students.append(model)
+        }
+        
+        //then set the students array as the locations in app delegate
+        let app = UIApplication.sharedApplication().delegate
+        let appDelegate = app as! AppDelegate
+        appDelegate.locations = students
+        //then need to trigger the locations to be loaded onto the map
+        
+        
     }
     
     func upsertUserLocation (completionHandlerForUpsertStudentLocation: (success: Bool?, error: String?) -> Void) {

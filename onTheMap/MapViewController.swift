@@ -28,7 +28,7 @@ class MapViewController: UIViewController {
         Parse.getAllStudentLocations() { (data, error) in
             if error == nil {
                 //then the data came back successfully
-                self.makeAnnotationsArray()
+//                self.makeAnnotationsArray()
             } else {
                 //error from request
                 print("THERE WAS AN ERROR GETTING LOCATION DATA FOR ALL")
@@ -45,37 +45,32 @@ class MapViewController: UIViewController {
     
     func makeAnnotationsArray () {
         
-        var annotations = [MKPointAnnotation]()
+//        let app = UIApplication.sharedApplication().delegate
+//        let appDelegate = app as! AppDelegate
         
-        for dictionary in Parse.locations {
-            
-            let studentLocation = StudentLocationStruct(
-                lat: CLLocationDegrees((dictionary["latitude"] as? Double)!),
-                long: CLLocationDegrees((dictionary["longitude"] as? Double)!),
-                first: dictionary["firstName"] as! String,
-                last: dictionary["lastName"] as! String,
-                mediaURL: dictionary["mediaURL"] as? String
-            )
-            
-            // The lat and long are used to create a CLLocationCoordinates2D instance.
-            let coordinate = CLLocationCoordinate2D(latitude: studentLocation.lat, longitude: studentLocation.long)
-            
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = coordinate
-            annotation.title = studentLocation.first + " " + studentLocation.last
-            annotation.subtitle = studentLocation.mediaURL
-            
-            // Finally we place the annotation in an array of annotations.
-            annotations.append(annotation)
-        }
+//        var annotations = [MKPointAnnotation]()
         
+        //loop through our dictionary and extract the data to make an annotation
+        print("plot annotations.....")
+//        for dictionary in appDelegate.locations {
+//            // The lat and long are used to create a CLLocationCoordinates2D instance.
+//            let coordinate = CLLocationCoordinate2D(latitude: dictionary["latitude"], longitude: dictionary["longitude"])
+//            
+//            let annotation = MKPointAnnotation()
+//            annotation.coordinate = coordinate
+//            annotation.title = studentLocation.first + " " + studentLocation.last
+//            annotation.subtitle = studentLocation.mediaURL
+//            
+//            // Finally we place the annotation in an array of annotations.
+//            annotations.append(annotation)
+//        }
         //once the annotations array has been filled then add to the map view
-        dispatch_async(dispatch_get_main_queue()) {
-            self.mapView.addAnnotations(annotations)
-        }
-        
-        
+//        dispatch_async(dispatch_get_main_queue()) {
+//            self.mapView.addAnnotations(annotations)
+//        }
+
     }
+    
     
     @IBAction func addLocation(sender: AnyObject) {
         
