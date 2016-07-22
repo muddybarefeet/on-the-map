@@ -27,8 +27,9 @@ class ParseClient {
     var upsertMethod: String = ""
     
     let headers = [
-        Constants.ParseParameterValues.ApplicationID: Constants.ParseParameterKeys.ApplicationID,
-        Constants.ParseParameterValues.ApiKey: Constants.ParseParameterKeys.ApplicationKey
+        Constants.ParseParameterKeys.ApplicationID: Constants.ParseParameterValues.ApplicationID,
+        Constants.ParseParameterKeys.ApplicationKey: Constants.ParseParameterValues.ApplicationKey
+        
     ]
     
     func getStudentLocation (completionHandlerForCurrentLocation: (data: AnyObject?, error: String?) -> Void) {
