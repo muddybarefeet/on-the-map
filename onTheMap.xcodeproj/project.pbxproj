@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		953D14611D42C5A4009D1B56 /* StudentInformationStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953D14601D42C5A4009D1B56 /* StudentInformationStruct.swift */; };
 		959DAE681D3C5C310017015D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959DAE671D3C5C310017015D /* AppDelegate.swift */; };
 		959DAE6A1D3C5C310017015D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959DAE691D3C5C310017015D /* ViewController.swift */; };
 		959DAE6D1D3C5C310017015D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 959DAE6B1D3C5C310017015D /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		953D14601D42C5A4009D1B56 /* StudentInformationStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInformationStruct.swift; sourceTree = "<group>"; };
 		959DAE641D3C5C310017015D /* onTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = onTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		959DAE671D3C5C310017015D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		959DAE691D3C5C310017015D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				959DAE831D3D15420017015D /* StudentInformation.swift */,
+				953D14601D42C5A4009D1B56 /* StudentInformationStruct.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 				959DAE9A1D3EF6630017015D /* UdacityClient.swift in Sources */,
 				959DAE881D3DCEA10017015D /* LocationEditorViewController.swift in Sources */,
 				959DAE841D3D15420017015D /* StudentInformation.swift in Sources */,
+				953D14611D42C5A4009D1B56 /* StudentInformationStruct.swift in Sources */,
 				959DAE981D3EEB050017015D /* LoginViewController.swift in Sources */,
 				959DAE9C1D3EF66F0017015D /* ParseClient.swift in Sources */,
 			);

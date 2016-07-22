@@ -26,6 +26,11 @@ class ParseClient {
     var objectId: String = ""
     var upsertMethod: String = ""
     
+    let headers = [
+        Constants.ParseParameterValues.ApplicationID: Constants.ParseParameterKeys.ApplicationID,
+        Constants.ParseParameterValues.ApiKey: Constants.ParseParameterKeys.ApplicationKey
+    ]
+    
     func getStudentLocation (completionHandlerForCurrentLocation: (data: AnyObject?, error: String?) -> Void) {
         
         let baseURL = Constants.Parse.baseURL + Constants.Parse.StudentLocation
@@ -33,11 +38,6 @@ class ParseClient {
         let customAllowedSet =  NSCharacterSet(charactersInString:"=\"#%/<>:?@\\^`{|}").invertedSet
         let escapedString = parameterString.stringByAddingPercentEncodingWithAllowedCharacters(customAllowedSet)
         let URL = baseURL + "?" + Constants.ParseParameterKeys.Where + "=" + escapedString!
-        
-        let headers = [
-            Constants.ParseParameterValues.ApplicationID: Constants.ParseParameterKeys.ApplicationID,
-            Constants.ParseParameterValues.ApiKey: Constants.ParseParameterKeys.ApplicationKey
-        ]
         
         request.get(URL, headers: headers, isUdacity: false) { (data, response, error) in
             if error == nil {
@@ -59,10 +59,6 @@ class ParseClient {
         
         let baseURL = Constants.Parse.baseURL + Constants.Parse.StudentLocation
         let parameters = "?" + Constants.ParseParameterKeys.Order + "=" + Constants.ParseParameterValues.UpdatedAt
-        let headers = [
-            Constants.ParseParameterValues.ApplicationID: Constants.ParseParameterKeys.ApplicationID,
-            Constants.ParseParameterValues.ApiKey: Constants.ParseParameterKeys.ApplicationKey
-        ]
         
         let URL = baseURL + parameters
         request.get(URL, headers: headers, isUdacity: false) { (data, response, error) in
@@ -81,13 +77,14 @@ class ParseClient {
         }
     }
     
+    //pass student locations to the StudentLocationStruct 
     func parseUserLocations (data: [NSDictionary]) -> Void {
         ////loop through results and pass each one to the struct to reconstruct
-        var students = [StudentLocationStruct]()
+        var students = [StudentInformation]()
         
         for dictionary in data {
             //pass the dictionary to the StudentLocationStruct struct
-            let model = StudentLocationStruct(studentDictionary: dictionary)
+            let model = StudentInformation(studentDictionary: dictionary)
             students.append(model)
         }
         
@@ -97,13 +94,10 @@ class ParseClient {
         appDelegate.locations = students
     }
     
+    //method to post or upate the users location
     func upsertUserLocation (completionHandlerForUpsertStudentLocation: (success: Bool?, error: String?) -> Void) {
         
         let URL = Constants.Parse.baseURL + Constants.Parse.StudentLocation
-        let headers = [
-            Constants.ParseParameterValues.ApplicationID: Constants.ParseParameterKeys.ApplicationID,
-            Constants.ParseParameterValues.ApiKey: Constants.ParseParameterKeys.ApplicationKey
-        ]
         
         var body = userData
         body["uniqueKey"] = UdacityClient.sharedInstance().userID
@@ -111,11 +105,6 @@ class ParseClient {
         if (upsertMethod == "POST") {
             request.post(body,url: URL,headers: headers,isUdacity: false) { (data, response, error) in
                 if error == nil {
-                    guard let objectID = data!["objectId"] as? String else {
-                        completionHandlerForUpsertStudentLocation(success: nil, error: "No createdAt key in the return data")
-                        return
-                    }
-                    //could add in logic to check the objectIds match?
                     completionHandlerForUpsertStudentLocation(success: true, error: nil)
                 } else {
                     print("error returned", error)
@@ -128,7 +117,6 @@ class ParseClient {
                 if error == nil {
                     completionHandlerForUpsertStudentLocation(success: true, error: nil)
                 } else {
-                    print("error returned", error)
                     completionHandlerForUpsertStudentLocation(success: nil, error: "Error upserting student location")
                 }
             }

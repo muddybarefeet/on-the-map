@@ -15,7 +15,7 @@ class TableViewController: UITableViewController {
 //    cell reuse identifier = infoCell
     var Udacity = UdacityClient.sharedInstance()
     
-    var locations: [StudentLocationStruct] {
+    var locations: [StudentInformation] {
         return (UIApplication.sharedApplication().delegate as! AppDelegate).locations
     }
     

@@ -28,8 +28,8 @@ class UdacityClient {
     ]
     
     func login (email: String, password: String, completionHandlerForAuth: (data: AnyObject?, error: String?) -> Void) {
-        //pass the get method the things to make the url and the request
-        let baseURL = Constants.Udacity.baseURL + Constants.Udacity.Session
+
+        let url = Constants.Udacity.baseURL + Constants.Udacity.Session
         
         let body = [
             "udacity" : [
@@ -38,9 +38,7 @@ class UdacityClient {
             ]
         ]
         
-        print("base url: ", baseURL)
-        
-        request.post(body, url: baseURL, headers: headers,isUdacity: true) { (data, response, error) in
+        request.post(body, url: url, headers: headers,isUdacity: true) { (data, response, error) in
             if (error != nil) {
                 //call completion handler to return to function above
                 completionHandlerForAuth(data:nil, error: error?.debugDescription)
@@ -88,7 +86,6 @@ class UdacityClient {
                 
             } else {
                 print("error getting user data")
-               //throw alert
             }
         }
         
@@ -98,7 +95,7 @@ class UdacityClient {
         let url = Constants.Udacity.baseURL + Constants.Udacity.Session
         request.delete(url) { (data, request, error) in
             if error == nil {
-                print("Logout good", data)
+                print("Logout good")
                 completionHandlerForLogout(success: true, error: nil)
             } else {
                 completionHandlerForLogout(success: nil, error: "Logout unsuccessful")
@@ -107,7 +104,6 @@ class UdacityClient {
         
     }
     
-    //make the class a singleton
     class func sharedInstance() -> UdacityClient {
         struct Singleton {
             static var sharedInstance = UdacityClient()

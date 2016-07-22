@@ -72,7 +72,6 @@ class RequestClient {
 
     
     func sendRequest (request: NSURLRequest, isUdacity: Bool, completionHandlerForRequest: (data: AnyObject?, response: NSHTTPURLResponse?, errorString: String?) -> Void) {
-        
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
             if error != nil {
                 completionHandlerForRequest(data: nil, response: nil, errorString: "There was an error in the reqest sent!")
@@ -100,12 +99,9 @@ class RequestClient {
                 print("Could not parse the data as JSON: '\(data)'")
                 return
             }
-            
             completionHandlerForRequest(data: parsedResult, response: (response as! NSHTTPURLResponse), errorString: nil)
         }
-        
         task.resume()
-        
     }
     
     
@@ -116,9 +112,5 @@ class RequestClient {
         }
         return Singleton.sharedInstance
     }
-    
-
-    
-    
     
 }
