@@ -18,15 +18,19 @@ class LoginViewController: UIViewController {
     var textFieldDelegate = TextFieldDelegate()
     let Udacity = UdacityClient.sharedInstance()
     
+    var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         emailInput.delegate = textFieldDelegate
         passwordInput.delegate = textFieldDelegate
+        activitySpinner.center = self.view.center
     }
     
-    
-    
     @IBAction func login(sender: AnyObject) {
+        
+        activitySpinner.startAnimating()
+        self.view.addSubview(activitySpinner)
         
         //login into the app
         //authenticate the user and then segue to the next view
@@ -37,11 +41,14 @@ class LoginViewController: UIViewController {
                     NSOperationQueue.mainQueue().addOperationWithBlock {
                         self.presentViewController(controller, animated: true, completion: nil)
                     }
+                    //not show but for completness
+                    self.activitySpinner.stopAnimating()
+                    self.view.willRemoveSubview(self.activitySpinner)
                 } else {
                     print("error in login", error)
                     let alertController = UIAlertController(title: "Error", message: "These user credentials are not valid. Please try again or Sign Up.", preferredStyle: UIAlertControllerStyle.Alert)
                     let Action = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
-                        self.dismissViewControllerAnimated(true, completion: nil)
+                        print("Clicked ok")
                     }
                     let SignUpAction = UIAlertAction(title: "Sign Up", style: .Default) { (action:UIAlertAction!) in
                         let app = UIApplication.sharedApplication()
@@ -52,7 +59,8 @@ class LoginViewController: UIViewController {
                     NSOperationQueue.mainQueue().addOperationWithBlock {
                         self.presentViewController(alertController, animated: true, completion:nil)
                     }
-
+                    self.activitySpinner.stopAnimating()
+                    self.view.willRemoveSubview(self.activitySpinner)
                 }
             }
         }

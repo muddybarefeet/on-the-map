@@ -110,7 +110,7 @@ class LocationEditorViewController: UIViewController {
         
         //show loading spinner
         activitySpinner.startAnimating()
-        self.view.addSubview(activitySpinner)
+        view.addSubview(activitySpinner)
         
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address, completionHandler: {(placemarks, error) -> Void in
