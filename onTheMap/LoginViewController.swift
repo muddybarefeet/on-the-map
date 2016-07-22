@@ -24,6 +24,8 @@ class LoginViewController: UIViewController {
         passwordInput.delegate = textFieldDelegate
     }
     
+    
+    
     @IBAction func login(sender: AnyObject) {
         
         //login into the app
@@ -36,7 +38,7 @@ class LoginViewController: UIViewController {
                         self.presentViewController(controller, animated: true, completion: nil)
                     }
                 } else {
-                    print("ERROR IN LOGIN VIEW CONTROLLER", error)
+                    print("error in login", error)
                     let alertController = UIAlertController(title: "Error", message: "These user credentials are not valid. Please try again or Sign Up.", preferredStyle: UIAlertControllerStyle.Alert)
                     let Action = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
                         self.dismissViewControllerAnimated(true, completion: nil)

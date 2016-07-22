@@ -31,7 +31,16 @@ class MapViewController: UIViewController {
                 self.makeAnnotationsArray()
             } else {
                 //error from request
-                print("THERE WAS AN ERROR GETTING LOCATION DATA FOR ALL")
+                print("error", error)
+                let alertController = UIAlertController(title: "Alert", message: "There was an error getting all users locations. Try hitting the refresh button.", preferredStyle: UIAlertControllerStyle.Alert)
+                let Action = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }
+                alertController.addAction(Action)
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                    self.presentViewController(alertController, animated: true, completion:nil)
+                }
+                
             }
         }
         
@@ -79,9 +88,9 @@ class MapViewController: UIViewController {
                         //show the ALERT to see if the user wants to edit the location already posted
                         let alertController = UIAlertController(title: "You already have a location set", message: "Do you want to update this?", preferredStyle: UIAlertControllerStyle.Alert)
                         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in
-                            print("you have pressed the Cancel button");
-                            //TODO
-                            
+                            NSOperationQueue.mainQueue().addOperationWithBlock {
+                                self.dismissViewControllerAnimated(true, completion: nil)
+                            }
                         }
                         let OKAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
                             print("you have pressed OK button");
@@ -107,6 +116,14 @@ class MapViewController: UIViewController {
                 }
             } else {
                 print("error", error)
+                let alertController = UIAlertController(title: "Alert", message: "For some reason this button is not available at the current time. Please try again later.", preferredStyle: UIAlertControllerStyle.Alert)
+                let Action = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }
+                alertController.addAction(Action)
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                    self.presentViewController(alertController, animated: true, completion:nil)
+                }
             }
         }
         
