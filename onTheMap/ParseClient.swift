@@ -32,8 +32,9 @@ class ParseClient {
         
     ]
     
+    
+    //get the user location object to check the student location
     func getStudentLocation (completionHandlerForCurrentLocation: (data: AnyObject?, error: String?) -> Void) {
-        
         let baseURL = Constants.Parse.baseURL + Constants.Parse.StudentLocation
         let parameterString = "{\"uniqueKey\":\"\(UdacityClient.sharedInstance().userID)\"}"
         let customAllowedSet =  NSCharacterSet(charactersInString:"=\"#%/<>:?@\\^`{|}").invertedSet
@@ -47,20 +48,19 @@ class ParseClient {
                     return
                 }
                 self.objectId = result["objectId"]! as! String
+                print("These are the student locations returned for me: ", data, self.objectId)
                 completionHandlerForCurrentLocation(data: result, error: nil)
             } else {
-                print("error :(", error)
+                print("error", error)
                 completionHandlerForCurrentLocation(data: nil, error: "There was an error in the request")
             }
         }
-        
     }
     
+    //the the locations of all the students
     func getAllStudentLocations (completionHandlerForGetAllLocations: (data: AnyObject?, error: String?) -> Void) {
-        
         let baseURL = Constants.Parse.baseURL + Constants.Parse.StudentLocation
         let parameters = "?" + Constants.ParseParameterKeys.Order + "=" + Constants.ParseParameterValues.UpdatedAt
-        
         let URL = baseURL + parameters
         request.get(URL, headers: headers, isUdacity: false) { (data, response, error) in
             if error == nil {
@@ -82,13 +82,11 @@ class ParseClient {
     func parseUserLocations (data: [NSDictionary]) -> Void {
         ////loop through results and pass each one to the struct to reconstruct
         var students = [StudentInformation]()
-        
         for dictionary in data {
             //pass the dictionary to the StudentLocationStruct struct
             let model = StudentInformation(studentDictionary: dictionary)
             students.append(model)
         }
-        
         //then set the students array as the locations in app delegate
         let app = UIApplication.sharedApplication().delegate
         let appDelegate = app as! AppDelegate
@@ -97,12 +95,9 @@ class ParseClient {
     
     //method to post or upate the users location
     func upsertUserLocation (completionHandlerForUpsertStudentLocation: (success: Bool?, error: String?) -> Void) {
-        
         let URL = Constants.Parse.baseURL + Constants.Parse.StudentLocation
-        
         var body = userData
         body["uniqueKey"] = UdacityClient.sharedInstance().userID
-        
         if (upsertMethod == "POST") {
             request.post(body,url: URL,headers: headers,isUdacity: false) { (data, response, error) in
                 if error == nil {
@@ -122,11 +117,9 @@ class ParseClient {
                 }
             }
         }
-    
-
-        
     }
     
+    //create singleton of this class
     class func sharedInstance() -> ParseClient {
         struct Singleton {
             static var sharedInstance = ParseClient()

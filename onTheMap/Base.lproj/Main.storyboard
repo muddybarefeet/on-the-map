@@ -141,7 +141,11 @@
                                     <action selector="logout:" destination="rPJ-Qq-aiF" id="0mY-6y-6RT"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem systemItem="refresh" id="XRm-dg-h94"/>
+                            <barButtonItem systemItem="refresh" id="XRm-dg-h94">
+                                <connections>
+                                    <action selector="refresh:" destination="rPJ-Qq-aiF" id="mQu-dr-SJy"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>

@@ -12,16 +12,16 @@ import MapKit
 
 class TableViewController: UITableViewController {
     
-//    cell reuse identifier = infoCell
     var Udacity = UdacityClient.sharedInstance()
+    var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
     
     var locations: [StudentInformation] {
         return (UIApplication.sharedApplication().delegate as! AppDelegate).locations
     }
     
     override func viewWillAppear(animated: Bool) {
-        print("IN table")
-//        tableView!.reloadData()
+        tableView!.reloadData()
+        activitySpinner.center = self.view.center
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -54,10 +54,14 @@ class TableViewController: UITableViewController {
     
     
     @IBAction func logout(sender: AnyObject) {
+        activitySpinner.startAnimating()
+        view.addSubview(activitySpinner)
         Udacity.logout() { (success, error) in
             if (success != nil) {
                 let controller = self.storyboard!.instantiateViewControllerWithIdentifier("LoginViewController")
                 self.presentViewController(controller, animated: true, completion: nil)
+                self.activitySpinner.stopAnimating()
+                self.view.willRemoveSubview(self.activitySpinner)
             } else {
                 print("Error in logout",error)
             }

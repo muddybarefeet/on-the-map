@@ -19,13 +19,20 @@ class MapViewController: UIViewController {
     var Parse = ParseClient.sharedInstance()
     var Udacity = UdacityClient.sharedInstance()
     
+    var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+    
+    var annotations = [MKPointAnnotation]()
     
     override func viewWillAppear(animated: Bool) {
-        print("IN map")
         super.viewWillAppear(animated)
-        
         //get the user locations
+        updateLocations()
+        activitySpinner.center = self.view.center
+    }
+    
+    func getAllLocations () {
         Parse.getAllStudentLocations() { (data, error) in
+            print("getting the latest student data...")
             if error == nil {
                 //then make the annotations
                 self.makeAnnotationsArray()
@@ -43,9 +50,18 @@ class MapViewController: UIViewController {
                 
             }
         }
-        
-        
     }
+    
+    func updateLocations () {
+        mapView.removeAnnotations(annotations)
+        //get all the latest student locations
+        getAllLocations()
+    }
+    
+    @IBAction func refresh(sender: AnyObject) {
+        updateLocations()
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,8 +72,6 @@ class MapViewController: UIViewController {
         
         let app = UIApplication.sharedApplication().delegate
         let appDelegate = app as! AppDelegate
-        
-        var annotations = [MKPointAnnotation]()
         
         for dictionary in appDelegate.locations {
             // The lat and long are used to create a CLLocationCoordinates2D instance.
@@ -73,7 +87,7 @@ class MapViewController: UIViewController {
         }
         //once the annotations array has been filled then add to the map view
         dispatch_async(dispatch_get_main_queue()) {
-            self.mapView.addAnnotations(annotations)
+            self.mapView.addAnnotations(self.annotations)
         }
 
     }
@@ -131,10 +145,14 @@ class MapViewController: UIViewController {
     }
     
     @IBAction func logout(sender: AnyObject) {
+        activitySpinner.startAnimating()
+        view.addSubview(activitySpinner)
         Udacity.logout() { (success, error) in
             if (success != nil) {
                 let controller = self.storyboard!.instantiateViewControllerWithIdentifier("LoginViewController")
                 self.presentViewController(controller, animated: true, completion: nil)
+                self.activitySpinner.stopAnimating()
+                self.view.willRemoveSubview(self.activitySpinner)
             } else {
                 print("error in logout", error)
             }
