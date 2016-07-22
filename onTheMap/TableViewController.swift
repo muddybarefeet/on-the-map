@@ -48,8 +48,9 @@ class TableViewController: UITableViewController {
         override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             let cellClicked = locations[indexPath.row]
             print("cell", cellClicked, cellClicked.mediaURL)
-            
-            
+            let app = UIApplication.sharedApplication()
+            let mediaURL = cellClicked.mediaURL
+            app.openURL(NSURL(string: mediaURL)!)
         }
     
     
