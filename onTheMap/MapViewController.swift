@@ -27,8 +27,8 @@ class MapViewController: UIViewController {
         //get the user locations
         Parse.getAllStudentLocations() { (data, error) in
             if error == nil {
-                //then the data came back successfully
-//                self.makeAnnotationsArray()
+                //then make the annotations
+                self.makeAnnotationsArray()
             } else {
                 //error from request
                 print("THERE WAS AN ERROR GETTING LOCATION DATA FOR ALL")
@@ -45,29 +45,27 @@ class MapViewController: UIViewController {
     
     func makeAnnotationsArray () {
         
-//        let app = UIApplication.sharedApplication().delegate
-//        let appDelegate = app as! AppDelegate
+        let app = UIApplication.sharedApplication().delegate
+        let appDelegate = app as! AppDelegate
         
-//        var annotations = [MKPointAnnotation]()
+        var annotations = [MKPointAnnotation]()
         
-        //loop through our dictionary and extract the data to make an annotation
-        print("plot annotations.....")
-//        for dictionary in appDelegate.locations {
-//            // The lat and long are used to create a CLLocationCoordinates2D instance.
-//            let coordinate = CLLocationCoordinate2D(latitude: dictionary["latitude"], longitude: dictionary["longitude"])
-//            
-//            let annotation = MKPointAnnotation()
-//            annotation.coordinate = coordinate
-//            annotation.title = studentLocation.first + " " + studentLocation.last
-//            annotation.subtitle = studentLocation.mediaURL
-//            
-//            // Finally we place the annotation in an array of annotations.
-//            annotations.append(annotation)
-//        }
+        for dictionary in appDelegate.locations {
+            // The lat and long are used to create a CLLocationCoordinates2D instance.
+            let coordinate = CLLocationCoordinate2D(latitude: dictionary.latitude, longitude: dictionary.longitude)
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            annotation.title = dictionary.firstName + " " + dictionary.lastName
+            annotation.subtitle = dictionary.mediaURL
+            
+            // Finally we place the annotation in an array of annotations.
+            annotations.append(annotation)
+        }
         //once the annotations array has been filled then add to the map view
-//        dispatch_async(dispatch_get_main_queue()) {
-//            self.mapView.addAnnotations(annotations)
-//        }
+        dispatch_async(dispatch_get_main_queue()) {
+            self.mapView.addAnnotations(annotations)
+        }
 
     }
     
@@ -83,6 +81,7 @@ class MapViewController: UIViewController {
                         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in
                             print("you have pressed the Cancel button");
                             //TODO
+                            
                         }
                         let OKAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
                             print("you have pressed OK button");
