@@ -32,13 +32,16 @@ class TableViewController: UITableViewController {
     
         //    function to tell the cell what it is
         override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCellWithIdentifier("infoCell")
-            let locationInfo = locations[indexPath.row] as? StudentLocationStruct
-            cell?.textLabel?.text = "Things"
-            print("location info", locationInfo)
-            return cell!
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier("infoCell") as UITableViewCell!
+            let locationInfo = locations[indexPath.row]
+            //what is a subscript member?
+//            cell.textLabel?.text = locationInfo["firstName"] + " " + locationInfo["lastName"]
+            return cell
+            
         }
     
+        //MAKE A LINK CLICKABLE
     //    //    function for on selecting a cell what to do
     //    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     //        let detailController = storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
