@@ -36,19 +36,21 @@ class TableViewController: UITableViewController {
             let cell = tableView.dequeueReusableCellWithIdentifier("infoCell") as UITableViewCell!
             let locationInfo = locations[indexPath.row]
             //what is a subscript member?
-//            cell.textLabel?.text = locationInfo["firstName"] + " " + locationInfo["lastName"]
+            print("row", indexPath.row)
+            print(locationInfo.firstName)
+            cell.textLabel?.text = locationInfo.firstName + " " + locationInfo.lastName
             return cell
             
         }
     
         //MAKE A LINK CLICKABLE
-    //    //    function for on selecting a cell what to do
-    //    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    //        let detailController = storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
-    //        detailController.meme = memes[indexPath.row].memedImage
-    //        navigationController?.pushViewController(detailController, animated: true)
-    //        
-    //    }
+        //    function for on selecting a cell what to do
+        override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+            let cellClicked = locations[indexPath.row]
+            print("cell", cellClicked, cellClicked.mediaURL)
+            
+            
+        }
     
     
     @IBAction func logout(sender: AnyObject) {
