@@ -31,25 +31,6 @@ class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegat
         //activity spinner
         locationView.delegate = mapDelegate
         activitySpinner.center = self.view.center
-        
-        let mapDragRecognizer = UIPanGestureRecognizer(target: self, action: #selector(LocationEditorViewController.didDragMap(_:)))
-        mapDragRecognizer.delegate = self
-        self.locationView.addGestureRecognizer(mapDragRecognizer)
-        
-    }
-    
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
-    }
-    
-    func didDragMap(gestureRecognizer: UIGestureRecognizer) {
-        if (gestureRecognizer.state == UIGestureRecognizerState.Began) {
-            print("Map drag began")
-        }
-        
-        if (gestureRecognizer.state == UIGestureRecognizerState.Ended) {
-            print("Map drag ended")
-        }
     }
     
     func tap(gesture: UITapGestureRecognizer) {

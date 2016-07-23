@@ -61,13 +61,10 @@ class TableViewController: UITableViewController {
                 //this clears the alert
             }
             alertController.addAction(Action)
-//            NSOperationQueue.mainQueue().addOperationWithBlock {
-                self.presentViewController(alertController, animated: true, completion:nil)
-//            }
+            presentViewController(alertController, animated: true, completion:nil)
         }
 
     }
-    
     
     
     @IBAction func logout(sender: AnyObject) {
