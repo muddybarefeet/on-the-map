@@ -31,34 +31,13 @@ class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegat
         //activity spinner
         locationView.delegate = mapDelegate
         activitySpinner.center = self.view.center
+        
+        
     }
     
     func tap(gesture: UITapGestureRecognizer) {
         print("tap gesture fn called")
         answerText.resignFirstResponder()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        subscribeToKeyboardNotifications()
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        unsubscribeFromKeyboardNotifications()
-    }
-    
-    func subscribeToKeyboardNotifications () {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LocationEditorViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
-    }
-    
-    func unsubscribeFromKeyboardNotifications() {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name:
-            UIKeyboardWillHideNotification, object: nil)
-    }
-    
-    func keyboardWillHide(notification: NSNotification) {
-        //view.endEditing(true)
     }
     
     
@@ -131,6 +110,7 @@ class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegat
                 let coordinates:CLLocationCoordinate2D = placemark.location!.coordinate
                 //save the addressString
                 self.Parse.userData["mapString"] = address
+                //now we want to move map to right area
                 self.plotLocation(coordinates)
             }
         })
@@ -147,12 +127,12 @@ class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegat
         let region:MKCoordinateRegion = MKCoordinateRegionMake(pointLocation, theSpan)
         locationView.setRegion(region, animated: true)
         
-        //drop the pin in the correct location
-        let dropPin = MKPointAnnotation()
-        
-        dropPin.coordinate = coords
-        dropPin.title = self.answerText.text
-        self.locationView.addAnnotation(dropPin)
+        //drop the pin in the correct location no wanted
+//        let dropPin = MKPointAnnotation()
+//        
+//        dropPin.coordinate = coords
+//        dropPin.title = self.answerText.text
+//        self.locationView.addAnnotation(dropPin)
         
         
         //SAVE THE coords

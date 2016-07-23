@@ -35,24 +35,6 @@ class MapViewDelegate: NSObject, MKMapViewDelegate {
         return pinView
     }
     
-    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, didChangeDragState newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState) {
-        print("dragging")
-        
-        
-//        if newState == MKAnnotationViewDragState.Ending {
-//            let ann = view.annotation
-//            print("annotation dropped at: \(ann!.coordinate.latitude),\(ann!.coordinate.longitude)")
-//        }
-//        switch newState {
-//        case .Starting:
-//            print("start drag")
-//            view.dragState = .Dragging
-//        case .Ending, .Canceling:
-//            print("stop drag")
-//            view.dragState = .None
-//        default: break
-//        }
-    }
     
     //on click of a pin, open the url in the subtitle
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
