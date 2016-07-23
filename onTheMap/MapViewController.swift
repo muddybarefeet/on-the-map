@@ -33,7 +33,6 @@ class MapViewController: UIViewController {
     func getAllLocations () {
         Parse.getAllStudentLocations() { (data, error) in
             if error == nil {
-                //then make the annotations
                 self.makeAnnotationsArray()
             } else {
                 //error from request

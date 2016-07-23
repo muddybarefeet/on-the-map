@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FBSDKLoginKit
 
 class LoginViewController: UIViewController {
     
@@ -22,10 +23,68 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //facebook login
+        
+        
         emailInput.delegate = textFieldDelegate
         passwordInput.delegate = textFieldDelegate
         activitySpinner.center = self.view.center
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        let fbLoginButton: FBSDKLoginButton = FBSDKLoginButton()
+        // Optional: Place the button in the center of your view.
+        fbLoginButton.center = self.view.center
+        fbLoginButton.frame = CGRectMake(fbLoginButton.frame.origin.x, view.frame.maxY - 100,fbLoginButton.frame.size.width,fbLoginButton.frame.size.height)
+        self.view!.addSubview(fbLoginButton)
+        fbLoginButton.addTarget(self, action: #selector(fbLogin), forControlEvents: .TouchUpInside)
+    }
+    
+//    
+//    func fbLogin (sender: AnyObject) {
+//        
+//        print("Clicked fb button")
+//        
+//        fbLoginManager.logInWithReadPermissions(["public_profile"], fromViewController: self) { (FBSDKLoginManagerLoginResult, error) in
+//            if error != nil {
+//                print("Process error", error)
+//            }
+//            else if FBSDKLoginManagerLoginResult.isCancelled {
+//                print("Cancelled")
+//            }
+//            else {
+//                print("Logged in", FBSDKLoginManagerLoginResult.token.tokenString)
+//                self.Udacity.fbAuthToken = FBSDKLoginManagerLoginResult.token.tokenString
+//                //now call login method with the auth token
+//                self.Udacity.fbLogin()
+//            }
+//        }
+//        
+//    }
+//    
+    
+    
+    var login: FBSDKLoginManager = FBSDKLoginManager()
+    
+    func fbLogin (sender: AnyObject){
+//        login.loginBehavior = FBSDKLoginBehaviorWeb
+        login.logInWithReadPermissions(["public_profile"], fromViewController: self) { (FBSDKLoginManagerLoginResult, error) in
+            if error != nil {
+                print(error)
+            }
+            else if FBSDKLoginManagerLoginResult.isCancelled {
+                print("cancelled")
+            }
+            else {
+                print("result is:\(FBSDKLoginManagerLoginResult)")
+                self.login.logOut()
+
+            }
+            
+        }
+    }
+    
+    
     
     @IBAction func login(sender: AnyObject) {
         
@@ -63,7 +122,7 @@ class LoginViewController: UIViewController {
                     self.view.willRemoveSubview(self.activitySpinner)
                 }
             }
-        }
+    }
     
 }
 

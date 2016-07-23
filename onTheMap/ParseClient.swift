@@ -7,7 +7,6 @@
 //
 
 import Foundation
-
 import UIKit
 
 class ParseClient {
@@ -32,7 +31,6 @@ class ParseClient {
         
     ]
     
-    
     //get the user location object to check the student location
     func getStudentLocation (completionHandlerForCurrentLocation: (data: AnyObject?, error: String?) -> Void) {
         let baseURL = Constants.Parse.baseURL + Constants.Parse.StudentLocation
@@ -43,13 +41,13 @@ class ParseClient {
         
         request.get(URL, headers: headers, isUdacity: false) { (data, response, error) in
             if error == nil {
-                guard let result = data!["results"]!![0] as? [String: AnyObject] else {
+                guard let results = data!["results"]! else {
                     completionHandlerForCurrentLocation(data: nil, error: "There was no results key in the response")
                     return
                 }
-                self.objectId = result["objectId"]! as! String
+                self.objectId = results[0]["objectId"]! as! String
                 print("These are the student locations returned for me: ", data, self.objectId)
-                completionHandlerForCurrentLocation(data: result, error: nil)
+                completionHandlerForCurrentLocation(data: results[0], error: nil)
             } else {
                 print("error", error)
                 completionHandlerForCurrentLocation(data: nil, error: "There was an error in the request")

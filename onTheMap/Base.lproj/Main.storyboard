@@ -10,7 +10,6 @@
         <!--Login View Controller-->
         <scene sceneID="0Qg-Xb-MVx">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Xip-UI-1kc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="LoginViewController" id="z3E-rl-wQn" customClass="LoginViewController" customModule="onTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uSq-jl-zTM"/>
@@ -41,13 +40,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iC3-GY-t2A">
-                                <rect key="frame" x="32" y="518" width="256" height="30"/>
-                                <color key="backgroundColor" red="0.1221006261643867" green="0.45113926490630585" blue="0.92569944371727753" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Login with Facebook">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CUq-VO-LPv">
                                 <rect key="frame" x="35" y="319" width="251" height="30"/>
                                 <constraints>
@@ -65,7 +57,6 @@
                             <constraint firstItem="CUq-VO-LPv" firstAttribute="top" secondItem="GjI-GX-noY" secondAttribute="bottom" constant="8" id="4jn-tn-Wec"/>
                             <constraint firstItem="S6C-Y6-DOK" firstAttribute="centerX" secondItem="sWZ-3l-MgA" secondAttribute="centerX" id="Av5-Qv-Dar"/>
                             <constraint firstItem="GjI-GX-noY" firstAttribute="leading" secondItem="CUq-VO-LPv" secondAttribute="leading" id="DZc-Kd-Al3"/>
-                            <constraint firstItem="iC3-GY-t2A" firstAttribute="centerX" secondItem="sWZ-3l-MgA" secondAttribute="centerX" id="IN1-R1-YXd"/>
                             <constraint firstItem="GjI-GX-noY" firstAttribute="centerX" secondItem="sWZ-3l-MgA" secondAttribute="centerX" id="Q2N-hf-AqX"/>
                             <constraint firstItem="5bc-28-zOa" firstAttribute="centerX" secondItem="sWZ-3l-MgA" secondAttribute="centerX" id="QTN-N5-33T"/>
                             <constraint firstItem="CUq-VO-LPv" firstAttribute="centerX" secondItem="sWZ-3l-MgA" secondAttribute="centerX" id="TcG-ZF-TXk"/>
@@ -75,7 +66,6 @@
                             <constraint firstItem="Pz9-uq-JUj" firstAttribute="centerX" secondItem="sWZ-3l-MgA" secondAttribute="centerX" id="e1a-5b-Wmy"/>
                             <constraint firstItem="S6C-Y6-DOK" firstAttribute="top" secondItem="Pz9-uq-JUj" secondAttribute="bottom" constant="20" id="iBF-6U-Ovv"/>
                             <constraint firstItem="Pz9-uq-JUj" firstAttribute="top" secondItem="uSq-jl-zTM" secondAttribute="bottom" constant="48" id="uOK-55-QGq"/>
-                            <constraint firstItem="z4b-HC-1to" firstAttribute="top" secondItem="iC3-GY-t2A" secondAttribute="bottom" constant="20" id="ulu-h2-VWy"/>
                             <constraint firstItem="GjI-GX-noY" firstAttribute="top" secondItem="S6C-Y6-DOK" secondAttribute="bottom" constant="16" id="zAh-wX-FhT"/>
                         </constraints>
                     </view>
@@ -85,6 +75,7 @@
                         <outlet property="passwordInput" destination="CUq-VO-LPv" id="P1j-ia-zQD"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xip-UI-1kc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1032" y="449"/>
         </scene>
@@ -130,20 +121,20 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="On the Map" id="quc-x6-m8A">
-                        <barButtonItem key="leftBarButtonItem" image="Pin" id="YDP-3J-syK">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="U8j-PT-xDW">
                             <connections>
-                                <action selector="addLocation:" destination="rPJ-Qq-aiF" id="exW-2t-cTU"/>
+                                <action selector="logout:" destination="rPJ-Qq-aiF" id="0mY-6y-6RT"/>
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem title="Logout" id="U8j-PT-xDW">
-                                <connections>
-                                    <action selector="logout:" destination="rPJ-Qq-aiF" id="0mY-6y-6RT"/>
-                                </connections>
-                            </barButtonItem>
                             <barButtonItem systemItem="refresh" id="XRm-dg-h94">
                                 <connections>
                                     <action selector="refresh:" destination="rPJ-Qq-aiF" id="mQu-dr-SJy"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="Pin" id="YDP-3J-syK">
+                                <connections>
+                                    <action selector="addLocation:" destination="rPJ-Qq-aiF" id="exW-2t-cTU"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -287,11 +278,15 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="On the Map" id="0zK-6F-fbV">
-                        <barButtonItem key="rightBarButtonItem" title="Logout" id="cVs-OG-c0z">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="cVs-OG-c0z">
                             <connections>
                                 <action selector="logout:" destination="pMc-fu-H5s" id="wZI-5u-jd9"/>
                             </connections>
                         </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="refresh" id="h2h-H2-Rhc"/>
+                            <barButtonItem image="Pin" id="vgV-kA-MFJ"/>
+                        </rightBarButtonItems>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y6T-eF-Vx7" userLabel="First Responder" sceneMemberID="firstResponder"/>

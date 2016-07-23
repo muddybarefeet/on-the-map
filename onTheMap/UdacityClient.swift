@@ -23,6 +23,8 @@ class UdacityClient {
         "lastName": ""
     ]
     
+    var fbAuthToken = ""
+    
     let headers = [
         Constants.UdacityParameterKeys.JSONField: Constants.UdacityParameterValues.AcceptJSON
     ]
@@ -62,6 +64,23 @@ class UdacityClient {
                 self.getUserData()
             }
         }
+    }
+    
+    func fbLogin () {
+        let url = Constants.Udacity.baseURL + Constants.Udacity.Session
+        let jsonBody = [
+            "facebook_mobile": [
+                "access_token": fbAuthToken
+            ]
+        ]
+        request.post(jsonBody, url: url, headers: headers, isUdacity: true) { (data, response, error) in
+            if (error != nil) {
+                print("error: ",error)
+            } else {
+               print("data: ", data)
+            }
+        }
+        
     }
     
     //get the users data after login
