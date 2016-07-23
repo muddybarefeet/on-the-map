@@ -40,48 +40,26 @@ class LoginViewController: UIViewController {
         fbLoginButton.addTarget(self, action: #selector(fbLogin), forControlEvents: .TouchUpInside)
     }
     
-//    
-//    func fbLogin (sender: AnyObject) {
-//        
-//        print("Clicked fb button")
-//        
-//        fbLoginManager.logInWithReadPermissions(["public_profile"], fromViewController: self) { (FBSDKLoginManagerLoginResult, error) in
-//            if error != nil {
-//                print("Process error", error)
-//            }
-//            else if FBSDKLoginManagerLoginResult.isCancelled {
-//                print("Cancelled")
-//            }
-//            else {
-//                print("Logged in", FBSDKLoginManagerLoginResult.token.tokenString)
-//                self.Udacity.fbAuthToken = FBSDKLoginManagerLoginResult.token.tokenString
-//                //now call login method with the auth token
-//                self.Udacity.fbLogin()
-//            }
-//        }
-//        
-//    }
-//    
     
-    
-    var login: FBSDKLoginManager = FBSDKLoginManager()
-    
-    func fbLogin (sender: AnyObject){
-//        login.loginBehavior = FBSDKLoginBehaviorWeb
+    func fbLogin (sender: AnyObject) {
+        
+        print("Clicked fb button")
+        let login: FBSDKLoginManager = FBSDKLoginManager()
         login.logInWithReadPermissions(["public_profile"], fromViewController: self) { (FBSDKLoginManagerLoginResult, error) in
             if error != nil {
-                print(error)
+                print("Process error", error)
             }
             else if FBSDKLoginManagerLoginResult.isCancelled {
-                print("cancelled")
+                print("Cancelled")
             }
             else {
-                print("result is:\(FBSDKLoginManagerLoginResult)")
-                self.login.logOut()
-
+                print("Logged in", FBSDKLoginManagerLoginResult.token.tokenString)
+                self.Udacity.fbAuthToken = FBSDKLoginManagerLoginResult.token.tokenString
+                //now call login method with the auth token
+                self.Udacity.fbLogin()
             }
-            
         }
+        
     }
     
     
