@@ -13,6 +13,7 @@ import MapKit
 class TableViewController: UITableViewController {
     
     var Udacity = UdacityClient.sharedInstance()
+    var Parse = ParseClient.sharedInstance()
     var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
     
     var locations: [StudentInformation] {
@@ -82,4 +83,72 @@ class TableViewController: UITableViewController {
         }
     }
     
+    @IBAction func editLocation(sender: AnyObject) {
+        Parse.getStudentLocation() { (data, error) in
+            if error == nil {
+                if let data = data {
+                    if data.count > 0 {
+                        let alertController = UIAlertController(title: "You already have a location set.", message: "Do you want to update this?", preferredStyle: UIAlertControllerStyle.Alert)
+                        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in
+                            NSOperationQueue.mainQueue().addOperationWithBlock {
+                                //this clears the alert
+                            }
+                        }
+                        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+                            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("LocationEditorView")
+                            NSOperationQueue.mainQueue().addOperationWithBlock {
+                                self.Parse.upsertMethod = "PUT"
+                                self.presentViewController(controller, animated: true, completion: nil)
+                            }
+                        }
+                        alertController.addAction(cancelAction)
+                        alertController.addAction(OKAction)
+                        NSOperationQueue.mainQueue().addOperationWithBlock {
+                            self.presentViewController(alertController, animated: true, completion:nil)
+                        }
+                    } else {
+                        //segue to the editor controller
+                        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("LocationEditorView")
+                        NSOperationQueue.mainQueue().addOperationWithBlock {
+                            self.Parse.upsertMethod = "POST"
+                            self.presentViewController(controller, animated: true, completion: nil)
+                        }
+                    }
+                }
+            } else {
+                print("error", error)
+                let alertController = UIAlertController(title: "Alert", message: "For some reason this button is not available at the current time. Please try again later.", preferredStyle: UIAlertControllerStyle.Alert)
+                let Action = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+                    //this clears the alert
+                }
+                alertController.addAction(Action)
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                    self.presentViewController(alertController, animated: true, completion:nil)
+                }
+            }
+        }
+    }
+    
+    @IBAction func refresh(sender: AnyObject) {
+        //update the locations array and then reload the data
+        Parse.getAllStudentLocations() { (data, error) in
+            if error == nil {
+                self.tableView!.reloadData()
+            } else {
+                //error from request
+                print("error", error)
+                let alertController = UIAlertController(title: "Alert", message: "There was an error getting all users locations. Try hitting the refresh button.", preferredStyle: UIAlertControllerStyle.Alert)
+                let Action = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+                    print("okay button")
+                }
+                alertController.addAction(Action)
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                    self.presentViewController(alertController, animated: true, completion:nil)
+                }
+                
+            }
+        }
+    }
+    
 }
+

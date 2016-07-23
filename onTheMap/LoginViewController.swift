@@ -19,7 +19,7 @@ class LoginViewController: UIViewController {
     var textFieldDelegate = TextFieldDelegate()
     let Udacity = UdacityClient.sharedInstance()
     
-    var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+    var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
     
     override func viewDidLoad() {
         super.viewDidLoad()

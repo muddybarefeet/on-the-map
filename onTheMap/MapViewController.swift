@@ -30,6 +30,21 @@ class MapViewController: UIViewController {
         activitySpinner.center = self.view.center
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        mapView.delegate = MapDelegate
+    }
+    
+    @IBAction func refresh(sender: AnyObject) {
+        updateLocations()
+    }
+    
+    func updateLocations () {
+        mapView.removeAnnotations(annotations)
+        //get all the latest student locations
+        getAllLocations()
+    }
+    
     func getAllLocations () {
         Parse.getAllStudentLocations() { (data, error) in
             if error == nil {
@@ -48,22 +63,6 @@ class MapViewController: UIViewController {
                 
             }
         }
-    }
-    
-    func updateLocations () {
-        mapView.removeAnnotations(annotations)
-        //get all the latest student locations
-        getAllLocations()
-    }
-    
-    @IBAction func refresh(sender: AnyObject) {
-        updateLocations()
-    }
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        mapView.delegate = MapDelegate
     }
     
     func makeAnnotationsArray () {
@@ -92,20 +91,17 @@ class MapViewController: UIViewController {
     
     
     @IBAction func addLocation(sender: AnyObject) {
-        
         Parse.getStudentLocation() { (data, error) in
             if error == nil {
                 if let data = data {
                     if data.count > 0 {
-                        //show the ALERT to see if the user wants to edit the location already posted
-                        let alertController = UIAlertController(title: "You already have a location set", message: "Do you want to update this?", preferredStyle: UIAlertControllerStyle.Alert)
+                        let alertController = UIAlertController(title: "You already have a location set.", message: "Do you want to update this?", preferredStyle: UIAlertControllerStyle.Alert)
                         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in
                             NSOperationQueue.mainQueue().addOperationWithBlock {
                                 //this clears the alert
                             }
                         }
                         let OKAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
-                            print("you have pressed OK button");
                             let controller = self.storyboard!.instantiateViewControllerWithIdentifier("LocationEditorView")
                             NSOperationQueue.mainQueue().addOperationWithBlock {
                                 self.Parse.upsertMethod = "PUT"
@@ -138,8 +134,6 @@ class MapViewController: UIViewController {
                 }
             }
         }
-        
-        
     }
     
     @IBAction func logout(sender: AnyObject) {

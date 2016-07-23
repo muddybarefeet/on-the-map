@@ -284,8 +284,16 @@
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="refresh" id="h2h-H2-Rhc"/>
-                            <barButtonItem image="Pin" id="vgV-kA-MFJ"/>
+                            <barButtonItem systemItem="refresh" id="h2h-H2-Rhc">
+                                <connections>
+                                    <action selector="refresh:" destination="pMc-fu-H5s" id="QY2-FB-Ydu"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="Pin" id="vgV-kA-MFJ">
+                                <connections>
+                                    <action selector="editLocation:" destination="pMc-fu-H5s" id="WBm-De-Rtx"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                 </tableViewController>
