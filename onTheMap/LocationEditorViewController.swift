@@ -16,6 +16,7 @@ class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegat
     @IBOutlet weak var answerText: UITextField!
     @IBOutlet weak var locationView: MKMapView!
     @IBOutlet weak var submitButton: UIButton!
+
     
     var Parse = ParseClient.sharedInstance()
     var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
@@ -32,7 +33,29 @@ class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegat
         locationView.delegate = mapDelegate
         activitySpinner.center = self.view.center
         
+        let mapDragRecognizer = UIPanGestureRecognizer(target: self, action: #selector(LocationEditorViewController.didDragMap(_:)))
+        mapDragRecognizer.delegate = self
+        self.locationView.addGestureRecognizer(mapDragRecognizer)
         
+    }
+    
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+    func didDragMap(gestureRecognizer: UIGestureRecognizer) {
+        if (gestureRecognizer.state == UIGestureRecognizerState.Began) {
+            print("Map drag began")
+        }
+        
+        if (gestureRecognizer.state == UIGestureRecognizerState.Ended) {
+            print("Map drag ended")
+            //here we get the coords of the current location and update the user object
+            let newCoords = locationView.centerCoordinate
+            print("center", newCoords)
+            Parse.userData["latitude"] = newCoords.latitude
+            Parse.userData["longitude"] = newCoords.longitude
+        }
     }
     
     func tap(gesture: UITapGestureRecognizer) {
@@ -51,7 +74,7 @@ class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegat
             submitButton.setTitle("Submit", forState: .Normal)
         } else if submitButton.titleLabel?.text == "Submit" {
             //make sure there is text in the media URL
-            if (questionLabel.text != "") {
+            if (answerText.text != "") {
                 Parse.userData["mediaURL"] = answerText.text
                 Parse.upsertUserLocation() { (success, error) in
                     if (success != nil) {
@@ -110,7 +133,7 @@ class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegat
                 let coordinates:CLLocationCoordinate2D = placemark.location!.coordinate
                 //save the addressString
                 self.Parse.userData["mapString"] = address
-                //now we want to move map to right area
+                print("coordinates1: ", coordinates)
                 self.plotLocation(coordinates)
             }
         })
@@ -127,13 +150,11 @@ class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegat
         let region:MKCoordinateRegion = MKCoordinateRegionMake(pointLocation, theSpan)
         locationView.setRegion(region, animated: true)
         
-        //drop the pin in the correct location no wanted
+        //drop the pin in the correct location no wanted removed method to try using static pin
 //        let dropPin = MKPointAnnotation()
-//        
 //        dropPin.coordinate = coords
 //        dropPin.title = self.answerText.text
 //        self.locationView.addAnnotation(dropPin)
-        
         
         //SAVE THE coords
         Parse.userData["latitude"] = coords.latitude
