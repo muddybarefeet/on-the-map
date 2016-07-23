@@ -27,21 +27,15 @@ class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegat
         answerText.delegate = self
         submitButton.layer.cornerRadius = 10
         submitButton.titleEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(LocationEditorViewController.tap(_:)))
-        view.addGestureRecognizer(tapGesture)
+        
         //activity spinner
         locationView.delegate = mapDelegate
         activitySpinner.center = self.view.center
     }
     
-    func tap(gesture: UITapGestureRecognizer) {
-        print("tap gesture fn called")
-        answerText.resignFirstResponder()
-    }
-    
-    
     @IBAction func selectLocation(sender: AnyObject) {
         if submitButton.titleLabel?.text == "Plot" {
+            answerText.resignFirstResponder()
             self.getLocation(answerText.text!)
         } else if submitButton.titleLabel?.text == "Confirm Location" {
             //change the question and empty the answer box
@@ -89,7 +83,6 @@ class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegat
     }
     
     
-    //want these to be moved back to the view controller at some point
     func getLocation (address: String) {
         //show loading spinner
         activitySpinner.startAnimating()
@@ -118,8 +111,6 @@ class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegat
             }
         })
     }
-    
-    func geocodeAddressString(addressString: String, completionHandler: CLGeocodeCompletionHandler) {}
     
     func plotLocation(coords: CLLocationCoordinate2D) {
         //move the map view to the right place

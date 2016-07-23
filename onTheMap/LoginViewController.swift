@@ -25,7 +25,6 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         //facebook login
         
-        
         emailInput.delegate = textFieldDelegate
         passwordInput.delegate = textFieldDelegate
         activitySpinner.center = self.view.center
