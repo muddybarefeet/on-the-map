@@ -16,6 +16,7 @@ class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegat
     @IBOutlet weak var answerText: UITextField!
     @IBOutlet weak var locationView: MKMapView!
     @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var questionView: UIView!
 
     
     var Parse = ParseClient.sharedInstance()
@@ -23,14 +24,21 @@ class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegat
     var mapDelegate = MapViewDelegate()
     
     override func viewDidLoad() {
+        styleView()
+        //activity spinner
+        locationView.delegate = mapDelegate
+        activitySpinner.center = self.view.center
+    }
+    
+    func styleView () {
         answerText.textAlignment = .Center
         answerText.delegate = self
         submitButton.layer.cornerRadius = 10
         submitButton.titleEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
-        
-        //activity spinner
-        locationView.delegate = mapDelegate
-        activitySpinner.center = self.view.center
+        questionLabel.font = UIFont (name: "HelveticaNeue-Light", size: 18)
+        let gradient: CAGradientLayer = CAGradientLayer().turquoiseColor()
+        gradient.frame = questionView.bounds
+        questionView.layer.insertSublayer(gradient, atIndex: 0)
     }
     
     @IBAction func selectLocation(sender: AnyObject) {

@@ -33,6 +33,7 @@ class LoginViewController: UIViewController {
     }
     
     func initAppearance() -> Void {
+
         let background = CAGradientLayer().turquoiseColor()
         background.frame = self.view.bounds
         self.view.layer.insertSublayer(background, atIndex: 0)

@@ -13,7 +13,7 @@ extension CAGradientLayer {
     func turquoiseColor() -> CAGradientLayer {
         
         let topColor = UIColor(red: (38/255.0), green: (195/255.0), blue: (185/255.0), alpha: 1)
-        let bottomColor = UIColor(red: (26/255.0), green: (144/255.0), blue: (136/255.0), alpha: 1)
+        let bottomColor = UIColor(red: (34/255.0), green: (175/255.0), blue: (166/255.0), alpha: 1)
         
         let gradientColors: Array <AnyObject> = [topColor.CGColor, bottomColor.CGColor]
         let gradientLocations: [Float] = [0.0, 1.0]
