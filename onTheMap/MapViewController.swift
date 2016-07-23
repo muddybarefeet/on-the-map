@@ -32,7 +32,6 @@ class MapViewController: UIViewController {
     
     func getAllLocations () {
         Parse.getAllStudentLocations() { (data, error) in
-            print("getting the latest student data...")
             if error == nil {
                 //then make the annotations
                 self.makeAnnotationsArray()
@@ -41,7 +40,7 @@ class MapViewController: UIViewController {
                 print("error", error)
                 let alertController = UIAlertController(title: "Alert", message: "There was an error getting all users locations. Try hitting the refresh button.", preferredStyle: UIAlertControllerStyle.Alert)
                 let Action = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
-                    self.dismissViewControllerAnimated(true, completion: nil)
+                    print("okay button")
                 }
                 alertController.addAction(Action)
                 NSOperationQueue.mainQueue().addOperationWithBlock {
@@ -103,7 +102,7 @@ class MapViewController: UIViewController {
                         let alertController = UIAlertController(title: "You already have a location set", message: "Do you want to update this?", preferredStyle: UIAlertControllerStyle.Alert)
                         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in
                             NSOperationQueue.mainQueue().addOperationWithBlock {
-                                self.dismissViewControllerAnimated(true, completion: nil)
+                                //this clears the alert
                             }
                         }
                         let OKAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
@@ -132,7 +131,7 @@ class MapViewController: UIViewController {
                 print("error", error)
                 let alertController = UIAlertController(title: "Alert", message: "For some reason this button is not available at the current time. Please try again later.", preferredStyle: UIAlertControllerStyle.Alert)
                 let Action = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
-                    self.dismissViewControllerAnimated(true, completion: nil)
+                    //this clears the alert
                 }
                 alertController.addAction(Action)
                 NSOperationQueue.mainQueue().addOperationWithBlock {

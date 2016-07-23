@@ -25,32 +25,49 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(locations.count)
         return locations.count
     }
     
     
-        //    function to tell the cell what it is
-        override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-            
-            let cell = tableView.dequeueReusableCellWithIdentifier("infoCell") as UITableViewCell!
-            let locationInfo = locations[indexPath.row]
-            //what is a subscript member?
-            print("row", indexPath.row)
-            print(locationInfo.firstName)
-            cell.textLabel?.text = locationInfo.firstName + " " + locationInfo.lastName
-            return cell
-            
+    // function to tell the cell what it is
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("infoCell") as UITableViewCell!
+        let locationInfo = locations[indexPath.row]
+        cell.textLabel?.text = locationInfo.firstName + " " + locationInfo.lastName
+        return cell
+        
+    }
+
+    //function for on selecting a cell what to do
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cellClicked = locations[indexPath.row]
+        let app = UIApplication.sharedApplication()
+        var mediaURL = cellClicked.mediaURL
+        if (mediaURL.hasPrefix("www")) {
+            //add https:// to the front if they do not have this
+            let urlPrefix = mediaURL.startIndex.advancedBy(0)..<mediaURL.endIndex.advancedBy(-8)
+            mediaURL.replaceRange(urlPrefix, with: "https://")
         }
+        let nsURL = NSURL(string: mediaURL)!
+        let isOpenable = app.canOpenURL(nsURL)
+        print("IS Openable", isOpenable, mediaURL)
+        if isOpenable {
+            app.openURL(nsURL)
+        } else {
+            //throw an alert!
+            let alertController = UIAlertController(title: "Alert", message: "This URL was not openable.", preferredStyle: UIAlertControllerStyle.Alert)
+            let Action = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+                //this clears the alert
+            }
+            alertController.addAction(Action)
+//            NSOperationQueue.mainQueue().addOperationWithBlock {
+                self.presentViewController(alertController, animated: true, completion:nil)
+//            }
+        }
+
+    }
     
-        //MAKE A LINK CLICKABLE
-        //    function for on selecting a cell what to do
-        override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-            let cellClicked = locations[indexPath.row]
-            let app = UIApplication.sharedApplication()
-            let mediaURL = cellClicked.mediaURL
-            app.openURL(NSURL(string: mediaURL)!)
-        }
     
     
     @IBAction func logout(sender: AnyObject) {

@@ -103,7 +103,7 @@ class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegat
                         print("Error", error)
                         let alertController = UIAlertController(title: "Alert", message: "There was an error updating your details.", preferredStyle: UIAlertControllerStyle.Alert)
                         let Action = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
-                            self.dismissViewControllerAnimated(true, completion: nil)
+                            //this clears the alert
                         }
                         alertController.addAction(Action)
                         NSOperationQueue.mainQueue().addOperationWithBlock {
@@ -114,7 +114,7 @@ class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegat
             } else {
                 let alertController = UIAlertController(title: "Alert", message: "There was no site address entered. Please add a site URL of your choice.", preferredStyle: UIAlertControllerStyle.Alert)
                 let Action = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
-                    self.dismissViewControllerAnimated(true, completion: nil)
+                    //this clears the alert
                 }
                 alertController.addAction(Action)
                 NSOperationQueue.mainQueue().addOperationWithBlock {
