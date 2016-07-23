@@ -19,7 +19,7 @@ class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegat
 
     
     var Parse = ParseClient.sharedInstance()
-    var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+    var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
     var mapDelegate = MapViewDelegate()
     
     override func viewDidLoad() {

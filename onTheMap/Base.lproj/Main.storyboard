@@ -19,8 +19,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Login to Udacity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S6C-Y6-DOK">
+                                <rect key="frame" x="98" y="244" width="125" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" misplaced="YES" image="UdacityLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Pz9-uq-JUj">
+                                <rect key="frame" x="32" y="68" width="256" height="156"/>
+                            </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GjI-GX-noY">
-                                <rect key="frame" x="35" y="281" width="251" height="30"/>
+                                <rect key="frame" x="31" y="291" width="259" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="JIy-d9-5XZ"/>
                                 </constraints>
@@ -28,45 +37,61 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5bc-28-zOa">
-                                <rect key="frame" x="133" y="362" width="54" height="30"/>
-                                <state key="normal" title="Login"/>
+                                <rect key="frame" x="31" y="372" width="259" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.94302138069999997" blue="0.6224071471" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Login">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="login:" destination="z3E-rl-wQn" eventType="touchUpInside" id="uJl-JG-HaD"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Login to Udacity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S6C-Y6-DOK">
-                                <rect key="frame" x="98" y="244" width="125" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CUq-VO-LPv">
-                                <rect key="frame" x="35" y="319" width="251" height="30"/>
+                                <rect key="frame" x="31" y="329" width="259" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="sao-uT-rAp"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" misplaced="YES" image="UdacityLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Pz9-uq-JUj">
-                                <rect key="frame" x="32" y="68" width="256" height="156"/>
-                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFC-4E-USi">
+                                <rect key="frame" x="133" y="439" width="55" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" title="Sign Up"/>
+                                <connections>
+                                    <action selector="signUp:" destination="z3E-rl-wQn" eventType="touchUpInside" id="uxT-aR-h3g"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Don't have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kKj-de-m7g">
+                                <rect key="frame" x="79" y="415" width="163" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.14921095749999999" green="0.76621809549999997" blue="0.72552637880000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="kKj-de-m7g" firstAttribute="centerX" secondItem="sWZ-3l-MgA" secondAttribute="centerX" id="1gF-GH-xls"/>
+                            <constraint firstItem="KFC-4E-USi" firstAttribute="top" secondItem="kKj-de-m7g" secondAttribute="bottom" constant="3" id="42k-3o-SyF"/>
                             <constraint firstItem="CUq-VO-LPv" firstAttribute="top" secondItem="GjI-GX-noY" secondAttribute="bottom" constant="8" id="4jn-tn-Wec"/>
+                            <constraint firstItem="kKj-de-m7g" firstAttribute="top" secondItem="5bc-28-zOa" secondAttribute="bottom" constant="13" id="6ph-G9-Nfa"/>
+                            <constraint firstItem="CUq-VO-LPv" firstAttribute="height" secondItem="GjI-GX-noY" secondAttribute="height" id="Asc-4E-ZMf"/>
                             <constraint firstItem="S6C-Y6-DOK" firstAttribute="centerX" secondItem="sWZ-3l-MgA" secondAttribute="centerX" id="Av5-Qv-Dar"/>
                             <constraint firstItem="GjI-GX-noY" firstAttribute="leading" secondItem="CUq-VO-LPv" secondAttribute="leading" id="DZc-Kd-Al3"/>
+                            <constraint firstItem="CUq-VO-LPv" firstAttribute="width" secondItem="GjI-GX-noY" secondAttribute="width" id="GmA-w8-e8b"/>
                             <constraint firstItem="GjI-GX-noY" firstAttribute="centerX" secondItem="sWZ-3l-MgA" secondAttribute="centerX" id="Q2N-hf-AqX"/>
                             <constraint firstItem="5bc-28-zOa" firstAttribute="centerX" secondItem="sWZ-3l-MgA" secondAttribute="centerX" id="QTN-N5-33T"/>
                             <constraint firstItem="CUq-VO-LPv" firstAttribute="centerX" secondItem="sWZ-3l-MgA" secondAttribute="centerX" id="TcG-ZF-TXk"/>
-                            <constraint firstItem="GjI-GX-noY" firstAttribute="top" secondItem="S6C-Y6-DOK" secondAttribute="bottom" constant="16" id="TyG-A2-4tT"/>
+                            <constraint firstItem="GjI-GX-noY" firstAttribute="top" secondItem="S6C-Y6-DOK" secondAttribute="bottom" constant="26" id="TyG-A2-4tT"/>
                             <constraint firstItem="5bc-28-zOa" firstAttribute="top" secondItem="CUq-VO-LPv" secondAttribute="bottom" constant="13" id="azs-Kt-Bqc"/>
-                            <constraint firstItem="GjI-GX-noY" firstAttribute="leading" secondItem="sWZ-3l-MgA" secondAttribute="leadingMargin" constant="19" id="bUx-67-ZUQ"/>
+                            <constraint firstItem="GjI-GX-noY" firstAttribute="leading" secondItem="sWZ-3l-MgA" secondAttribute="leadingMargin" constant="11" id="bUx-67-ZUQ"/>
                             <constraint firstItem="Pz9-uq-JUj" firstAttribute="centerX" secondItem="sWZ-3l-MgA" secondAttribute="centerX" id="e1a-5b-Wmy"/>
+                            <constraint firstItem="KFC-4E-USi" firstAttribute="centerX" secondItem="sWZ-3l-MgA" secondAttribute="centerX" id="gdd-j3-StR"/>
                             <constraint firstItem="S6C-Y6-DOK" firstAttribute="top" secondItem="Pz9-uq-JUj" secondAttribute="bottom" constant="20" id="iBF-6U-Ovv"/>
+                            <constraint firstItem="5bc-28-zOa" firstAttribute="width" secondItem="GjI-GX-noY" secondAttribute="width" id="rov-kt-VZv"/>
                             <constraint firstItem="Pz9-uq-JUj" firstAttribute="top" secondItem="uSq-jl-zTM" secondAttribute="bottom" constant="48" id="uOK-55-QGq"/>
-                            <constraint firstItem="GjI-GX-noY" firstAttribute="top" secondItem="S6C-Y6-DOK" secondAttribute="bottom" constant="16" id="zAh-wX-FhT"/>
+                            <constraint firstItem="5bc-28-zOa" firstAttribute="height" secondItem="GjI-GX-noY" secondAttribute="height" id="xAu-ML-qjb"/>
+                            <constraint firstItem="GjI-GX-noY" firstAttribute="top" secondItem="S6C-Y6-DOK" secondAttribute="bottom" constant="26" id="zAh-wX-FhT"/>
                         </constraints>
                     </view>
                     <connections>
@@ -196,7 +221,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vjk-ee-HWx">
                                 <rect key="frame" x="-4" y="64" width="328" height="255"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where are you?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CCe-gr-JRq">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where are you studying today?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CCe-gr-JRq">
                                         <rect key="frame" x="-20" y="0.0" width="368" height="133"/>
                                         <color key="backgroundColor" red="1" green="0.94302138069999997" blue="0.6224071471" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>

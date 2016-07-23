@@ -24,7 +24,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //facebook login
-        
+        loginButton.layer.cornerRadius = 5
         emailInput.delegate = textFieldDelegate
         passwordInput.delegate = textFieldDelegate
         activitySpinner.center = self.view.center
@@ -34,14 +34,17 @@ class LoginViewController: UIViewController {
         let fbLoginButton: FBSDKLoginButton = FBSDKLoginButton()
         // Optional: Place the button in the center of your view.
         fbLoginButton.center = self.view.center
-        fbLoginButton.frame = CGRectMake(fbLoginButton.frame.origin.x, view.frame.maxY - 100,fbLoginButton.frame.size.width,fbLoginButton.frame.size.height)
+        
+        fbLoginButton.frame = CGRectMake(view.frame.origin.x, view.frame.maxY - 50,loginButton.frame.size.width,fbLoginButton.frame.size.height)
+        
+        fbLoginButton.center.x = self.view.center.x
         self.view!.addSubview(fbLoginButton)
+        
         fbLoginButton.addTarget(self, action: #selector(fbLogin), forControlEvents: .TouchUpInside)
     }
     
     
     func fbLogin (sender: AnyObject) {
-        
         print("Clicked fb button")
         let login: FBSDKLoginManager = FBSDKLoginManager()
         login.logInWithReadPermissions(["public_profile"], fromViewController: self) { (FBSDKLoginManagerLoginResult, error) in
@@ -58,7 +61,6 @@ class LoginViewController: UIViewController {
                 self.Udacity.fbLogin()
             }
         }
-        
     }
     
     
@@ -99,6 +101,12 @@ class LoginViewController: UIViewController {
                     self.view.willRemoveSubview(self.activitySpinner)
                 }
             }
+    }
+    
+    
+    @IBAction func signUp(sender: AnyObject) {
+        let app = UIApplication.sharedApplication()
+        app.openURL(NSURL(string: Constants.Udacity.UdacitySignUp)!)
     }
     
 }
