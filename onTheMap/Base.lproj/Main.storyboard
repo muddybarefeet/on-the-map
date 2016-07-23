@@ -57,7 +57,9 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFC-4E-USi">
                                 <rect key="frame" x="133" y="439" width="55" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title="Sign Up"/>
+                                <state key="normal" title="Sign Up">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="signUp:" destination="z3E-rl-wQn" eventType="touchUpInside" id="uxT-aR-h3g"/>
                                 </connections>
@@ -69,7 +71,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.14921095749999999" green="0.76621809549999997" blue="0.72552637880000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="kKj-de-m7g" firstAttribute="centerX" secondItem="sWZ-3l-MgA" secondAttribute="centerX" id="1gF-GH-xls"/>
                             <constraint firstItem="KFC-4E-USi" firstAttribute="top" secondItem="kKj-de-m7g" secondAttribute="bottom" constant="3" id="42k-3o-SyF"/>

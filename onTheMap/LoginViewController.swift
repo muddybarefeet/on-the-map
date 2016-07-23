@@ -28,6 +28,14 @@ class LoginViewController: UIViewController {
         emailInput.delegate = textFieldDelegate
         passwordInput.delegate = textFieldDelegate
         activitySpinner.center = self.view.center
+        
+        initAppearance()
+    }
+    
+    func initAppearance() -> Void {
+        let background = CAGradientLayer().turquoiseColor()
+        background.frame = self.view.bounds
+        self.view.layer.insertSublayer(background, atIndex: 0)
     }
     
     override func viewDidAppear(animated: Bool) {
