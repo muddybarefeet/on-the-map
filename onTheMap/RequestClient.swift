@@ -60,7 +60,7 @@ class RequestClient {
                 let serealisedBody: NSData?
                 do {
                     serealisedBody = try NSJSONSerialization.dataWithJSONObject(requestBodyDictionary, options: [])
-                } catch let error as NSError {
+                } catch {
                     serealisedBody = nil
                 }
                 request.HTTPBody = serealisedBody
