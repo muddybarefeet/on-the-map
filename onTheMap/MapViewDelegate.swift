@@ -41,7 +41,6 @@ class MapViewDelegate: NSObject, MKMapViewDelegate {
                 }
                 let nsURL = NSURL(string: mediaURL)!
                 let isOpenable = app.canOpenURL(nsURL)
-                print("IS Openable", isOpenable, mediaURL)
                 if isOpenable {
                     app.openURL(nsURL)
                 } else {

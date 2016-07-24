@@ -15,7 +15,7 @@ class MapViewController: UIViewController {
     @IBOutlet weak var refreshBtn: UIBarButtonItem!
     @IBOutlet weak var pinBtn: UIBarButtonItem!
     
-    let MapDelegate = MapViewDelegate()
+//    let MapDelegate = MapViewDelegate()
     var Parse = ParseClient.sharedInstance()
     var Udacity = UdacityClient.sharedInstance()
     
@@ -32,7 +32,7 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mapView.delegate = MapDelegate
+        mapView.delegate = self
     }
     
     @IBAction func refresh(sender: AnyObject) {
@@ -155,4 +155,51 @@ class MapViewController: UIViewController {
             }
         }
     }
+}
+
+extension MapViewController: MKMapViewDelegate {
+    
+    // method to place the pin on the map and how it is styled
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        let reuseId = "pin"
+        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            //tell the pin if extra information can be show about the pin boolean
+            pinView!.canShowCallout = true
+            pinView!.pinTintColor = UIColor.redColor()
+            //view to display on the right side of the standard callout bubble
+            pinView!.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+        }
+        else {
+            pinView!.annotation = annotation
+        }
+        return pinView
+    }
+    
+    //on click of a pin, open the url in the subtitle
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView {
+            let app = UIApplication.sharedApplication()
+            if var mediaURL = (view.annotation?.subtitle!)! as String? {
+                if (mediaURL.hasPrefix("www")) {
+                    //add https:// to the front if they do not have this
+                    mediaURL = "https://" + mediaURL
+                }
+                let nsURL = NSURL(string: mediaURL)!
+                let isOpenable = app.canOpenURL(nsURL)
+                if isOpenable {
+                    app.openURL(nsURL)
+                } else {
+                    let alertController = UIAlertController(title: "Alert", message: "This URL was not openable", preferredStyle: UIAlertControllerStyle.Alert)
+                    let Action = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+                        //this clears the alert
+                    }
+                    alertController.addAction(Action)
+                    presentViewController(alertController, animated: true, completion:nil)
+                }
+            }
+        }
+    }
+    
 }

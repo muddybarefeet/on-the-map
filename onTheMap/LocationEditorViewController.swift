@@ -28,11 +28,11 @@ class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegat
         //activity spinner
         locationView.delegate = mapDelegate
         activitySpinner.center = self.view.center
+        answerText.delegate = self
     }
     
     func styleView () {
         answerText.textAlignment = .Center
-        answerText.delegate = self
         submitButton.layer.cornerRadius = 10
         submitButton.titleEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
         questionLabel.font = UIFont (name: "HelveticaNeue-Light", size: 18)
@@ -143,7 +143,7 @@ class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegat
     
 }
 
-extension LocationEditorViewController: UITextFieldDelegate {
+extension LocationEditorViewController: UITextFieldDelegate, MKMapViewDelegate {
 
     //here instead of in a delagate because need to access view outlets
     func textFieldDidBeginEditing(textField: UITextField) {
@@ -165,6 +165,23 @@ extension LocationEditorViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
-
-
+    
+    // method to place the pin on the map and how it is styled
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        let reuseId = "pin"
+        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            //tell the pin if extra information can be show about the pin boolean
+            pinView!.canShowCallout = true
+            pinView!.pinTintColor = UIColor.redColor()
+            //view to display on the right side of the standard callout bubble
+            pinView!.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+        }
+        else {
+            pinView!.annotation = annotation
+        }
+        return pinView
+    }
+    
 }

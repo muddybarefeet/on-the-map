@@ -51,12 +51,10 @@ class TableViewController: UITableViewController {
         }
         let nsURL = NSURL(string: mediaURL)!
         let isOpenable = app.canOpenURL(nsURL)
-        print("IS Openable", isOpenable, mediaURL)
         if isOpenable {
             app.openURL(nsURL)
         } else {
-            //throw an alert!
-            let alertController = UIAlertController(title: "Alert", message: "This URL was not openable.", preferredStyle: UIAlertControllerStyle.Alert)
+            let alertController = UIAlertController(title: "Alert", message: "This URL was not openable", preferredStyle: UIAlertControllerStyle.Alert)
             let Action = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
                 //this clears the alert
             }
