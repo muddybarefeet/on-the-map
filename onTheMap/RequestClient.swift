@@ -11,6 +11,9 @@ import UIKit
 
 class RequestClient {
     
+    static let sharedInstance = RequestClient()
+    private init() {}
+    
     func get (url: String, headers: [String:String], isUdacity: Bool, completionHandlerForGet: (data: AnyObject?, response: NSHTTPURLResponse?, errorString: String?) -> Void) {
         let request = makeRequest(url, headers: headers, method: "GET", jsonBody:[:])
         sendRequest(request, isUdacity: isUdacity, completionHandlerForRequest: completionHandlerForGet)
@@ -114,11 +117,11 @@ class RequestClient {
     
     
     
-    class func sharedInstance() -> RequestClient {
-        struct Singleton {
-            static var sharedInstance = RequestClient()
-        }
-        return Singleton.sharedInstance
-    }
+//    class func sharedInstance() -> RequestClient {
+//        struct Singleton {
+//            static var sharedInstance = RequestClient()
+//        }
+//        return Singleton.sharedInstance
+//    }
     
 }

@@ -11,7 +11,7 @@ import UIKit
 
 class ParseClient {
     
-    let request = RequestClient.sharedInstance()
+    let request = RequestClient.sharedInstance
     
     var userData = [
         "firstName": "",

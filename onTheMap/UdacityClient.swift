@@ -11,7 +11,7 @@ import UIKit
 
 class UdacityClient {
     
-    var request = RequestClient.sharedInstance()
+    var request = RequestClient.sharedInstance
     var Parse = ParseClient.sharedInstance()
     
     var userID: String = ""
