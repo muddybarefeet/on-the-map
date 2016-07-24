@@ -13,6 +13,9 @@ class ParseClient {
     
     let request = RequestClient.sharedInstance
     
+    static let sharedInstance = ParseClient()
+    private init() {}
+    
     var userData = [
         "firstName": "",
         "lastName": "",
@@ -116,12 +119,12 @@ class ParseClient {
         }
     }
     
-    //create singleton of this class
-    class func sharedInstance() -> ParseClient {
-        struct Singleton {
-            static var sharedInstance = ParseClient()
-        }
-        return Singleton.sharedInstance
-    }
+//    //create singleton of this class
+//    class func sharedInstance() -> ParseClient {
+//        struct Singleton {
+//            static var sharedInstance = ParseClient()
+//        }
+//        return Singleton.sharedInstance
+//    }
     
 }

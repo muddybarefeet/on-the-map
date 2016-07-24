@@ -19,7 +19,7 @@ class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegat
     @IBOutlet weak var questionView: UIView!
 
     
-    var Parse = ParseClient.sharedInstance()
+    var Parse = ParseClient.sharedInstance
     var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
     var mapDelegate = MapViewDelegate()
     

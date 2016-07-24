@@ -16,7 +16,7 @@ class MapViewController: UIViewController {
     @IBOutlet weak var pinBtn: UIBarButtonItem!
     
 //    let MapDelegate = MapViewDelegate()
-    var Parse = ParseClient.sharedInstance()
+    var Parse = ParseClient.sharedInstance
     var Udacity = UdacityClient.sharedInstance()
     
     var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
@@ -95,7 +95,7 @@ class MapViewController: UIViewController {
             if error == nil {
                 if let data = data {
                     if data.count > 0 {
-                        let alertController = UIAlertController(title: "Warning", message: "You already have a set location. Would you like to update this?", preferredStyle: UIAlertControllerStyle.Alert)
+                        let alertController = UIAlertController(title: "Notice", message: "You already have a set location. Would you like to update this?", preferredStyle: UIAlertControllerStyle.Alert)
                         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in
                             NSOperationQueue.mainQueue().addOperationWithBlock {
                                 //this clears the alert
