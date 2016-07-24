@@ -91,7 +91,7 @@ class TableViewController: UITableViewController {
             if error == nil {
                 if let data = data {
                     if data.count > 0 {
-                        let alertController = UIAlertController(title: "You already have a location set.", message: error, preferredStyle: UIAlertControllerStyle.Alert)
+                        let alertController = UIAlertController(title: "Warning", message: "You already have a set location. Would you like to update this?", preferredStyle: UIAlertControllerStyle.Alert)
                         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in
                             NSOperationQueue.mainQueue().addOperationWithBlock {
                                 //this clears the alert

@@ -35,11 +35,13 @@ class ParseClient {
     func getStudentLocation (completionHandlerForCurrentLocation: (data: AnyObject?, error: String?) -> Void) {
         let baseURL = Constants.Parse.baseURL + Constants.Parse.StudentLocation
         let parameterString = "{\"uniqueKey\":\"\(UdacityClient.sharedInstance().userID)\"}"
-        let customAllowedSet =  NSCharacterSet(charactersInString:"=\"#%/<>:?@\\^`{|}").invertedSet
-        let escapedString = parameterString.stringByAddingPercentEncodingWithAllowedCharacters(customAllowedSet)
-        let URL = baseURL + "?" + Constants.ParseParameterKeys.Where + "=" + escapedString!
         
-        request.get(URL, headers: headers, isUdacity: false) { (data, response, error) in
+        print("encoding the USER ID......")
+        let allowedSet =  NSCharacterSet.URLPathAllowedCharacterSet()
+        let escapedString = parameterString.stringByAddingPercentEncodingWithAllowedCharacters(allowedSet)
+        let url = baseURL + "?" + Constants.ParseParameterKeys.Where + "=" + escapedString!
+        print("encoded------------------>", url)
+        request.get(url, headers: headers, isUdacity: false) { (data, response, error) in
             if error == nil {
                 guard let results = data!["results"]! else {
                     completionHandlerForCurrentLocation(data: nil, error: "There was no results key in the response")

@@ -82,17 +82,14 @@ class LoginViewController: UIViewController {
         //login into the app
         //authenticate the user and then segue to the next view
         Udacity.login(emailInput.text!, password: passwordInput.text!) { (data, error) in
-            self.activitySpinner.stopAnimating()
-            self.view.willRemoveSubview(self.activitySpinner)
             if error == nil {
                 //complete the login to show the user the app
                 let controller = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
                 NSOperationQueue.mainQueue().addOperationWithBlock {
+                    self.activitySpinner.stopAnimating()
+                    self.view.willRemoveSubview(self.activitySpinner)
                     self.presentViewController(controller, animated: true, completion: nil)
                 }
-                //not show but for completness
-//                self.activitySpinner.stopAnimating()
-//                self.view.willRemoveSubview(self.activitySpinner)
             } else {
                 print("error in login", error)
                 let alertController = UIAlertController(title: "Error", message: error, preferredStyle: UIAlertControllerStyle.Alert)
@@ -106,6 +103,8 @@ class LoginViewController: UIViewController {
                 alertController.addAction(Action)
                 alertController.addAction(SignUpAction)
                 NSOperationQueue.mainQueue().addOperationWithBlock {
+                    self.activitySpinner.stopAnimating()
+                    self.view.willRemoveSubview(self.activitySpinner)
                     self.presentViewController(alertController, animated: true, completion:nil)
                 }
             }
