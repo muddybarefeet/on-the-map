@@ -81,7 +81,7 @@ class LoginViewController: UIViewController {
         
         //login into the app
         //authenticate the user and then segue to the next view
-        Udacity.login(Constants.User.email, password: Constants.User.password) { (data, error) in
+        Udacity.login(emailInput.text!, password: passwordInput.text!) { (data, error) in
             self.activitySpinner.stopAnimating()
             self.view.willRemoveSubview(self.activitySpinner)
             if error == nil {
