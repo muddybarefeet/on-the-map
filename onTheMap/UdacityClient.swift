@@ -42,12 +42,8 @@ class UdacityClient {
         request.post(body, url: url, headers: headers,isUdacity: true) { (data, response, error) in
             if (error != nil) {
                 //call completion handler to return to function above
-                completionHandlerForAuth(data:nil, error: error?.debugDescription)
+                completionHandlerForAuth(data:nil, error: error)
             } else {
-                guard let statusCode = response?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-                    completionHandlerForAuth(data: nil, error: "There was a response code other than 2xx returned!")
-                    return
-                }
                 //get the data from the response needed
                 guard let decodeJsonAccount = data!["account"] as? NSDictionary else {
                     completionHandlerForAuth(data: nil, error: "There was no account key in the response")
@@ -110,7 +106,7 @@ class UdacityClient {
                 print("Logout good")
                 completionHandlerForLogout(success: true, error: nil)
             } else {
-                completionHandlerForLogout(success: nil, error: "Logout unsuccessful")
+                completionHandlerForLogout(success: nil, error: error)
             }
         }
     }

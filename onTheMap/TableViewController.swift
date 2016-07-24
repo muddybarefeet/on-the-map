@@ -47,8 +47,7 @@ class TableViewController: UITableViewController {
         var mediaURL = cellClicked.mediaURL
         if (mediaURL.hasPrefix("www")) {
             //add https:// to the front if they do not have this
-            let urlPrefix = mediaURL.startIndex.advancedBy(0)..<mediaURL.endIndex.advancedBy(-8)
-            mediaURL.replaceRange(urlPrefix, with: "https://")
+            mediaURL = "https://" + mediaURL
         }
         let nsURL = NSURL(string: mediaURL)!
         let isOpenable = app.canOpenURL(nsURL)
@@ -78,7 +77,13 @@ class TableViewController: UITableViewController {
                 self.activitySpinner.stopAnimating()
                 self.view.willRemoveSubview(self.activitySpinner)
             } else {
-                print("Error in logout",error)
+                let alertController = UIAlertController(title: "Alert", message: error, preferredStyle: UIAlertControllerStyle.Alert)
+                let Action = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+                }
+                alertController.addAction(Action)
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                    self.presentViewController(alertController, animated: true, completion:nil)
+                }
             }
         }
     }
@@ -88,7 +93,7 @@ class TableViewController: UITableViewController {
             if error == nil {
                 if let data = data {
                     if data.count > 0 {
-                        let alertController = UIAlertController(title: "You already have a location set.", message: "Do you want to update this?", preferredStyle: UIAlertControllerStyle.Alert)
+                        let alertController = UIAlertController(title: "You already have a location set.", message: error, preferredStyle: UIAlertControllerStyle.Alert)
                         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in
                             NSOperationQueue.mainQueue().addOperationWithBlock {
                                 //this clears the alert
@@ -117,7 +122,7 @@ class TableViewController: UITableViewController {
                 }
             } else {
                 print("error", error)
-                let alertController = UIAlertController(title: "Alert", message: "For some reason this button is not available at the current time. Please try again later.", preferredStyle: UIAlertControllerStyle.Alert)
+                let alertController = UIAlertController(title: "Alert", message: error, preferredStyle: UIAlertControllerStyle.Alert)
                 let Action = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
                     //this clears the alert
                 }
@@ -137,7 +142,7 @@ class TableViewController: UITableViewController {
             } else {
                 //error from request
                 print("error", error)
-                let alertController = UIAlertController(title: "Alert", message: "There was an error getting all users locations. Try hitting the refresh button.", preferredStyle: UIAlertControllerStyle.Alert)
+                let alertController = UIAlertController(title: "Alert", message: error, preferredStyle: UIAlertControllerStyle.Alert)
                 let Action = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
                     print("okay button")
                 }

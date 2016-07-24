@@ -61,7 +61,6 @@ class RequestClient {
                 do {
                     serealisedBody = try NSJSONSerialization.dataWithJSONObject(requestBodyDictionary, options: [])
                 } catch let error as NSError {
-                    print("error editing body",error)
                     serealisedBody = nil
                 }
                 request.HTTPBody = serealisedBody
@@ -72,37 +71,45 @@ class RequestClient {
 
     
     func sendRequest (request: NSURLRequest, isUdacity: Bool, completionHandlerForRequest: (data: AnyObject?, response: NSHTTPURLResponse?, errorString: String?) -> Void) {
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
-            if error != nil {
-                completionHandlerForRequest(data: nil, response: nil, errorString: "There was an error in the reqest sent!")
-                return
+        
+        //check that there is a netwotrk connection
+        if Reachability.isConnectedToNetwork() == true {
+            print("Internet connection OK")
+            let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+                if error != nil {
+                    completionHandlerForRequest(data: nil, response: nil, errorString: "There was an error sending the request to the server.")
+                    return
+                }
+                guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+                    completionHandlerForRequest(data: nil, response: nil, errorString: "The status code returned was not a OK")
+                    return
+                }
+                guard let data = data else {
+                    completionHandlerForRequest(data: nil, response: nil, errorString: "There was no data in the response")
+                    return
+                }
+                let newData:NSData
+                //see if need to remove the first few characters or not
+                if isUdacity {
+                    newData = data.subdataWithRange(NSMakeRange(5, data.length - 5))
+                } else {
+                    newData = data
+                }
+                var parsedResult: AnyObject?
+                do {
+                    parsedResult = try NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments)
+                } catch {
+                    print("Could not parse the response to a readable format")
+                    return
+                }
+                completionHandlerForRequest(data: parsedResult, response: (response as! NSHTTPURLResponse), errorString: nil)
             }
-//            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-//                completionHandlerForRequest(data: nil, response: nil, errorString: "The status code returned was not a 2xx")
-//                return
-//            }
-            guard let data = data else {
-                completionHandlerForRequest(data: nil, response: nil, errorString: "There was no data in the response")
-                return
-            }
-            let newData:NSData
-            //see if need to remove the first few characters or not
-            if isUdacity {
-                newData = data.subdataWithRange(NSMakeRange(5, data.length - 5))
-            } else {
-                newData = data
-            }
-            var parsedResult: AnyObject?
-            do {
-                parsedResult = try NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments)
-            } catch {
-                print("Could not parse the data as JSON: '\(data)'")
-                return
-            }
-            print("ERROR_____>", error, parsedResult)
-            completionHandlerForRequest(data: parsedResult, response: (response as! NSHTTPURLResponse), errorString: nil)
+            task.resume()
+        } else {
+            print("No internet connection")
+            completionHandlerForRequest(data: nil, response: nil, errorString: "There was no internet connection found")
         }
-        task.resume()
+        
     }
     
     

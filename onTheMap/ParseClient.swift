@@ -46,11 +46,9 @@ class ParseClient {
                     return
                 }
                 self.objectId = results[0]["objectId"]! as! String
-                print("These are the student locations returned for me: ", data, self.objectId)
                 completionHandlerForCurrentLocation(data: results[0], error: nil)
             } else {
-                print("error", error)
-                completionHandlerForCurrentLocation(data: nil, error: "There was an error in the request")
+                completionHandlerForCurrentLocation(data: nil, error: error)
             }
         }
     }
@@ -70,8 +68,7 @@ class ParseClient {
                 completionHandlerForGetAllLocations(data: data, error: nil)
                 
             } else {
-                print("not got users locations :(")
-                completionHandlerForGetAllLocations(data: nil, error: "Unable to get all student loactions.")
+                completionHandlerForGetAllLocations(data: nil, error: error)
             }
         }
     }
@@ -102,7 +99,7 @@ class ParseClient {
                     completionHandlerForUpsertStudentLocation(success: true, error: nil)
                 } else {
                     print("error returned", error)
-                    completionHandlerForUpsertStudentLocation(success: nil, error: "There was an error")
+                    completionHandlerForUpsertStudentLocation(success: nil, error: error)
                 }
             }
         } else if (upsertMethod == "PUT") {
@@ -111,7 +108,7 @@ class ParseClient {
                 if error == nil {
                     completionHandlerForUpsertStudentLocation(success: true, error: nil)
                 } else {
-                    completionHandlerForUpsertStudentLocation(success: nil, error: "Error upserting student location")
+                    completionHandlerForUpsertStudentLocation(success: nil, error: error)
                 }
             }
         }

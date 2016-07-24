@@ -52,7 +52,7 @@ class MapViewController: UIViewController {
             } else {
                 //error from request
                 print("error", error)
-                let alertController = UIAlertController(title: "Alert", message: "There was an error getting all users locations. Try hitting the refresh button.", preferredStyle: UIAlertControllerStyle.Alert)
+                let alertController = UIAlertController(title: "Alert", message: error, preferredStyle: UIAlertControllerStyle.Alert)
                 let Action = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
                     print("okay button")
                 }
@@ -95,7 +95,7 @@ class MapViewController: UIViewController {
             if error == nil {
                 if let data = data {
                     if data.count > 0 {
-                        let alertController = UIAlertController(title: "You already have a location set.", message: "Do you want to update this?", preferredStyle: UIAlertControllerStyle.Alert)
+                        let alertController = UIAlertController(title: "You already have a location set.", message: error, preferredStyle: UIAlertControllerStyle.Alert)
                         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in
                             NSOperationQueue.mainQueue().addOperationWithBlock {
                                 //this clears the alert
@@ -124,9 +124,8 @@ class MapViewController: UIViewController {
                 }
             } else {
                 print("error", error)
-                let alertController = UIAlertController(title: "Alert", message: "For some reason this button is not available at the current time. Please try again later.", preferredStyle: UIAlertControllerStyle.Alert)
+                let alertController = UIAlertController(title: "Alert", message: error, preferredStyle: UIAlertControllerStyle.Alert)
                 let Action = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
-                    //this clears the alert
                 }
                 alertController.addAction(Action)
                 NSOperationQueue.mainQueue().addOperationWithBlock {
@@ -146,7 +145,13 @@ class MapViewController: UIViewController {
                 self.activitySpinner.stopAnimating()
                 self.view.willRemoveSubview(self.activitySpinner)
             } else {
-                print("error in logout", error)
+                let alertController = UIAlertController(title: "Alert", message: error, preferredStyle: UIAlertControllerStyle.Alert)
+                let Action = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+                }
+                alertController.addAction(Action)
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                    self.presentViewController(alertController, animated: true, completion:nil)
+                }
             }
         }
     }

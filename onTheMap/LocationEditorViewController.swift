@@ -53,7 +53,6 @@ class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegat
         } else if submitButton.titleLabel?.text == "Submit" {
             //save the center of the maps coords
             let newCoords = locationView.centerCoordinate
-            print("center", newCoords)
             Parse.userData["latitude"] = newCoords.latitude
             Parse.userData["longitude"] = newCoords.longitude
             //make sure there is text in the media URL
@@ -61,13 +60,11 @@ class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegat
                 Parse.userData["mediaURL"] = answerText.text
                 Parse.upsertUserLocation() { (success, error) in
                     if (success != nil) {
-                        print("Upseted student location", success)
                         NSOperationQueue.mainQueue().addOperationWithBlock {
                             self.dismissViewControllerAnimated(true, completion: nil)
                         }
                     } else {
-                        print("Error", error)
-                        let alertController = UIAlertController(title: "Alert", message: "There was an error updating your details.", preferredStyle: UIAlertControllerStyle.Alert)
+                        let alertController = UIAlertController(title: "Alert", message: error, preferredStyle: UIAlertControllerStyle.Alert)
                         let Action = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
                             //this clears the alert
                         }
@@ -99,10 +96,8 @@ class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegat
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address, completionHandler: {(placemarks, error) -> Void in
             if((error) != nil) {
-                let alertController = UIAlertController(title: "Alert", message: "There was an reading your address. Please try a different address.", preferredStyle: UIAlertControllerStyle.Alert)
+                let alertController = UIAlertController(title: "Alert", message: "Unable to find this location", preferredStyle: UIAlertControllerStyle.Alert)
                 let Action = UIAlertAction(title: "Try again", style: .Default) { (action:UIAlertAction!) in
-                    //just want the alert to go does this automatically
-                    print("try again button clicked")
                 }
                 alertController.addAction(Action)
                 NSOperationQueue.mainQueue().addOperationWithBlock {
@@ -114,7 +109,6 @@ class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegat
                 let coordinates:CLLocationCoordinate2D = placemark.location!.coordinate
                 //save the addressString
                 self.Parse.userData["mapString"] = address
-                print("coordinates1: ", coordinates)
                 self.plotLocation(coordinates)
             }
         })
@@ -153,7 +147,6 @@ extension LocationEditorViewController: UITextFieldDelegate {
 
     //here instead of in a delagate because need to access view outlets
     func textFieldDidBeginEditing(textField: UITextField) {
-        print("called function to edit")
         textField.text = ""
         if submitButton.titleLabel?.text == "Confirm Location" {
             //if the button label confirm and the user tries to edit the button then reset the button label to plot so the location can be reset

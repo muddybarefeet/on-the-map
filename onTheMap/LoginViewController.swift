@@ -82,34 +82,34 @@ class LoginViewController: UIViewController {
         //login into the app
         //authenticate the user and then segue to the next view
         Udacity.login(Constants.User.email, password: Constants.User.password) { (data, error) in
-                if error == nil {
-                    //complete the login to show the user the app
-                    let controller = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
-                    NSOperationQueue.mainQueue().addOperationWithBlock {
-                        self.presentViewController(controller, animated: true, completion: nil)
-                    }
-                    //not show but for completness
-                    self.activitySpinner.stopAnimating()
-                    self.view.willRemoveSubview(self.activitySpinner)
-                } else {
-                    print("error in login", error)
-                    let alertController = UIAlertController(title: "Error", message: "These user credentials are not valid. Please try again or Sign Up.", preferredStyle: UIAlertControllerStyle.Alert)
-                    let Action = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
-                        print("Clicked ok")
-                    }
-                    let SignUpAction = UIAlertAction(title: "Sign Up", style: .Default) { (action:UIAlertAction!) in
-                        let app = UIApplication.sharedApplication()
-                        app.openURL(NSURL(string: Constants.Udacity.UdacitySignUp)!)
-                    }
-                    alertController.addAction(Action)
-                    alertController.addAction(SignUpAction)
-                    NSOperationQueue.mainQueue().addOperationWithBlock {
-                        self.presentViewController(alertController, animated: true, completion:nil)
-                    }
-                    self.activitySpinner.stopAnimating()
-                    self.view.willRemoveSubview(self.activitySpinner)
+            self.activitySpinner.stopAnimating()
+            self.view.willRemoveSubview(self.activitySpinner)
+            if error == nil {
+                //complete the login to show the user the app
+                let controller = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                    self.presentViewController(controller, animated: true, completion: nil)
+                }
+                //not show but for completness
+//                self.activitySpinner.stopAnimating()
+//                self.view.willRemoveSubview(self.activitySpinner)
+            } else {
+                print("error in login", error)
+                let alertController = UIAlertController(title: "Error", message: error, preferredStyle: UIAlertControllerStyle.Alert)
+                let Action = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+                    print("Clicked ok")
+                }
+                let SignUpAction = UIAlertAction(title: "Sign Up", style: .Default) { (action:UIAlertAction!) in
+                    let app = UIApplication.sharedApplication()
+                    app.openURL(NSURL(string: Constants.Udacity.UdacitySignUp)!)
+                }
+                alertController.addAction(Action)
+                alertController.addAction(SignUpAction)
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                    self.presentViewController(alertController, animated: true, completion:nil)
                 }
             }
+        }
     }
     
     
