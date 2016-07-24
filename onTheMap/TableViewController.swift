@@ -12,7 +12,7 @@ import MapKit
 
 class TableViewController: UITableViewController {
     
-    var Udacity = UdacityClient.sharedInstance()
+    var Udacity = UdacityClient.sharedInstance
     var Parse = ParseClient.sharedInstance
     var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
     

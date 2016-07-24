@@ -11,6 +11,9 @@ import UIKit
 
 class UdacityClient {
     
+    static let sharedInstance = UdacityClient()
+    private init() {}
+    
     var request = RequestClient.sharedInstance
     var Parse = ParseClient.sharedInstance
     
@@ -110,13 +113,5 @@ class UdacityClient {
             }
         }
     }
-    
-    //create singleton instance of class
-    class func sharedInstance() -> UdacityClient {
-        struct Singleton {
-            static var sharedInstance = UdacityClient()
-        }
-        return Singleton.sharedInstance
-    }
-    
+       
 }

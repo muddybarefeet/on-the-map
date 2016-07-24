@@ -17,7 +17,7 @@ class MapViewController: UIViewController {
     
 //    let MapDelegate = MapViewDelegate()
     var Parse = ParseClient.sharedInstance
-    var Udacity = UdacityClient.sharedInstance()
+    var Udacity = UdacityClient.sharedInstance
     
     var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
     

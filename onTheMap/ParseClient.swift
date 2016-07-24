@@ -37,7 +37,7 @@ class ParseClient {
     //get the user location object to check the student location
     func getStudentLocation (completionHandlerForCurrentLocation: (data: AnyObject?, error: String?) -> Void) {
         let baseURL = Constants.Parse.baseURL + Constants.Parse.StudentLocation
-        let parameterString = "{\"uniqueKey\":\"\(UdacityClient.sharedInstance().userID)\"}"
+        let parameterString = "{\"uniqueKey\":\"\(UdacityClient.sharedInstance.userID)\"}"
         
         print("encoding the USER ID......")
         let allowedSet =  NSCharacterSet.URLPathAllowedCharacterSet()
@@ -97,7 +97,7 @@ class ParseClient {
     func upsertUserLocation (completionHandlerForUpsertStudentLocation: (success: Bool?, error: String?) -> Void) {
         let URL = Constants.Parse.baseURL + Constants.Parse.StudentLocation
         var body = userData
-        body["uniqueKey"] = UdacityClient.sharedInstance().userID
+        body["uniqueKey"] = UdacityClient.sharedInstance.userID
         if (upsertMethod == "POST") {
             request.post(body,url: URL,headers: headers,isUdacity: false) { (data, response, error) in
                 if error == nil {

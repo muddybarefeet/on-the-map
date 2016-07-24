@@ -17,7 +17,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     
     var textFieldDelegate = TextFieldDelegate()
-    let Udacity = UdacityClient.sharedInstance()
+    let Udacity = UdacityClient.sharedInstance
     
     var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
     
