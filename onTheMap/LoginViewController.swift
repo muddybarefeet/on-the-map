@@ -10,11 +10,12 @@ import Foundation
 import UIKit
 import FBSDKLoginKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     @IBOutlet weak var emailInput: UITextField!
     @IBOutlet weak var passwordInput: UITextField!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var fbLoginButton: FBSDKLoginButton!
     
     var textFieldDelegate = TextFieldDelegate()
     let Udacity = UdacityClient.sharedInstance
@@ -28,7 +29,9 @@ class LoginViewController: UIViewController {
         emailInput.delegate = textFieldDelegate
         passwordInput.delegate = textFieldDelegate
         activitySpinner.center = self.view.center
-        
+        fbLoginButton.delegate = self
+        //add property to button
+        FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
         initAppearance()
     }
     
@@ -39,19 +42,20 @@ class LoginViewController: UIViewController {
         self.view.layer.insertSublayer(background, atIndex: 0)
     }
     
-    override func viewDidAppear(animated: Bool) {
-        let fbLoginButton: FBSDKLoginButton = FBSDKLoginButton()
-        // Optional: Place the button in the center of your view.
-        fbLoginButton.center = self.view.center
-        
-        fbLoginButton.frame = CGRectMake(view.frame.origin.x, view.frame.maxY - 50,loginButton.frame.size.width,fbLoginButton.frame.size.height)
-        
-        fbLoginButton.center.x = self.view.center.x
-        self.view!.addSubview(fbLoginButton)
-        
-        fbLoginButton.addTarget(self, action: #selector(fbLogin), forControlEvents: .TouchUpInside)
+    //functions for fb login
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+        if (result.token != nil) {
+            print("token", result.token)
+            self.Udacity.fbAuthToken = result.token
+            self.Udacity.fbLogin()
+        } else {
+            print("no token :(")
+        }
     }
     
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+        print("User Logged Out")
+    }
     
     func fbLogin (sender: AnyObject) {
         print("Clicked fb button")
@@ -72,8 +76,6 @@ class LoginViewController: UIViewController {
         }
     }
     
-    
-    
     @IBAction func login(sender: AnyObject) {
         
         activitySpinner.startAnimating()
@@ -81,7 +83,7 @@ class LoginViewController: UIViewController {
         
         //login into the app
         //authenticate the user and then segue to the next view
-        Udacity.login(emailInput.text!, password: passwordInput.text!) { (data, error) in
+        Udacity.login("2muddybarefeet@gmail.com", password: "BjeUNBdcQxTYc42Xij") { (data, error) in
             if error == nil {
                 //complete the login to show the user the app
                 let controller = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
@@ -118,6 +120,19 @@ class LoginViewController: UIViewController {
     }
     
 }
+
+//    override func viewDidAppear(animated: Bool) {
+//        let fbLoginButton: FBSDKLoginButton = FBSDKLoginButton()
+//        // Optional: Place the button in the center of your view.
+//        fbLoginButton.center = self.view.center
+//
+//        fbLoginButton.frame = CGRectMake(view.frame.origin.x, view.frame.maxY - 50,loginButton.frame.size.width,fbLoginButton.frame.size.height)
+//
+//        fbLoginButton.center.x = self.view.center.x
+//        self.view!.addSubview(fbLoginButton)
+//
+//        fbLoginButton.addTarget(self, action: #selector(fbLogin), forControlEvents: .TouchUpInside)
+//    }
 
 extension LoginViewController {
     

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FBSDKLoginKit
 
 class UdacityClient {
     
@@ -26,7 +27,7 @@ class UdacityClient {
         "lastName": ""
     ]
     
-    var fbAuthToken = ""
+    var fbAuthToken: FBSDKAccessToken!
     
     let headers = [
         Constants.UdacityParameterKeys.JSONField: Constants.UdacityParameterValues.AcceptJSON

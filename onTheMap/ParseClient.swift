@@ -11,10 +11,10 @@ import UIKit
 
 class ParseClient {
     
-    let request = RequestClient.sharedInstance
-    
     static let sharedInstance = ParseClient()
     private init() {}
+    
+    let request = RequestClient.sharedInstance
     
     var userData = [
         "firstName": "",
@@ -118,13 +118,5 @@ class ParseClient {
             }
         }
     }
-    
-//    //create singleton of this class
-//    class func sharedInstance() -> ParseClient {
-//        struct Singleton {
-//            static var sharedInstance = ParseClient()
-//        }
-//        return Singleton.sharedInstance
-//    }
     
 }
