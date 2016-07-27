@@ -27,7 +27,7 @@ class UdacityClient {
         "lastName": ""
     ]
     
-    var fbAuthToken: FBSDKAccessToken!
+    var fbAuthToken: String!
     
     let headers = [
         Constants.UdacityParameterKeys.JSONField: Constants.UdacityParameterValues.AcceptJSON
@@ -66,18 +66,23 @@ class UdacityClient {
         }
     }
     
-    func fbLogin () {
+    func fbLogin (completionHandlerForFBLogin: (success: Bool?, error: String?) -> Void) {
+        print("in fb login function client send to udacity")
         let url = Constants.Udacity.baseURL + Constants.Udacity.Session
+//        let token = "\(fbAuthToken)"
         let jsonBody = [
             "facebook_mobile": [
                 "access_token": fbAuthToken
             ]
         ]
+        print("ready to post", jsonBody)
         request.post(jsonBody, url: url, headers: headers, isUdacity: true) { (data, response, error) in
             if (error != nil) {
                 print("error: ",error)
+                completionHandlerForFBLogin(success: nil, error: error)
             } else {
-               print("data: ", data)
+                print("data: ", data)
+                completionHandlerForFBLogin(success: true, error: nil)
             }
         }
         

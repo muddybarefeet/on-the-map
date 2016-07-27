@@ -24,8 +24,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //facebook login
-        loginButton.layer.cornerRadius = 5
         emailInput.delegate = textFieldDelegate
         passwordInput.delegate = textFieldDelegate
         activitySpinner.center = self.view.center
@@ -36,7 +34,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     
     func initAppearance() -> Void {
-
+        loginButton.layer.cornerRadius = 5
+        fbLoginButton.layer.cornerRadius = 10
         let background = CAGradientLayer().turquoiseColor()
         background.frame = self.view.bounds
         self.view.layer.insertSublayer(background, atIndex: 0)
@@ -46,8 +45,16 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         if (result.token != nil) {
             print("token", result.token)
-            self.Udacity.fbAuthToken = result.token
-            self.Udacity.fbLogin()
+            self.Udacity.fbAuthToken = String(result.token)
+            self.Udacity.fbLogin() { (success, error) in
+                if ((success) != nil) {
+                    //segue to app
+                    self.segueToApp()
+                } else {
+                    //throw alert
+                    self.loginError(error!)
+                }
+            }
         } else {
             print("no token :(")
         }
@@ -55,42 +62,50 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
         print("User Logged Out")
+        //remove FB access token from app
+        self.Udacity.fbAuthToken = nil
     }
     
     @IBAction func login(sender: AnyObject) {
-        
         activitySpinner.startAnimating()
         self.view.addSubview(activitySpinner)
-        
         //login into the app
         //authenticate the user and then segue to the next view
-        Udacity.login("2muddybarefeet@gmail.com", password: "BjeUNBdcQxTYc42Xij") { (data, error) in
+        Udacity.login(emailInput.text!, password: passwordInput.text!) { (data, error) in
             if error == nil {
                 //complete the login to show the user the app
-                let controller = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
-                NSOperationQueue.mainQueue().addOperationWithBlock {
-                    self.activitySpinner.stopAnimating()
-                    self.view.willRemoveSubview(self.activitySpinner)
-                    self.presentViewController(controller, animated: true, completion: nil)
-                }
+                self.segueToApp()
             } else {
                 print("error in login", error)
-                let alertController = UIAlertController(title: "Error", message: error, preferredStyle: UIAlertControllerStyle.Alert)
-                let Action = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
-                    print("Clicked ok")
-                }
-                let SignUpAction = UIAlertAction(title: "Sign Up", style: .Default) { (action:UIAlertAction!) in
-                    let app = UIApplication.sharedApplication()
-                    app.openURL(NSURL(string: Constants.Udacity.UdacitySignUp)!)
-                }
-                alertController.addAction(Action)
-                alertController.addAction(SignUpAction)
-                NSOperationQueue.mainQueue().addOperationWithBlock {
-                    self.activitySpinner.stopAnimating()
-                    self.view.willRemoveSubview(self.activitySpinner)
-                    self.presentViewController(alertController, animated: true, completion:nil)
-                }
+                self.loginError(error!)
             }
+        }
+    }
+    
+    private func segueToApp () {
+        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
+        NSOperationQueue.mainQueue().addOperationWithBlock {
+            self.activitySpinner.stopAnimating()
+            self.view.willRemoveSubview(self.activitySpinner)
+            self.presentViewController(controller, animated: true, completion: nil)
+        }
+    }
+    
+    private func loginError (error: String) {
+        let alertController = UIAlertController(title: "Error", message: error, preferredStyle: UIAlertControllerStyle.Alert)
+        let Action = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+            print("Clicked ok")
+        }
+        let SignUpAction = UIAlertAction(title: "Sign Up", style: .Default) { (action:UIAlertAction!) in
+            let app = UIApplication.sharedApplication()
+            app.openURL(NSURL(string: Constants.Udacity.UdacitySignUp)!)
+        }
+        alertController.addAction(Action)
+        alertController.addAction(SignUpAction)
+        NSOperationQueue.mainQueue().addOperationWithBlock {
+            self.activitySpinner.stopAnimating()
+            self.view.willRemoveSubview(self.activitySpinner)
+            self.presentViewController(alertController, animated: true, completion:nil)
         }
     }
     

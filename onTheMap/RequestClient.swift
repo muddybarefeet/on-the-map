@@ -83,10 +83,11 @@ class RequestClient {
                     completionHandlerForRequest(data: nil, response: nil, errorString: "There was an error sending the request to the server.")
                     return
                 }
-                guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-                    completionHandlerForRequest(data: nil, response: nil, errorString: "The status code returned was not a OK")
-                    return
-                }
+                //print("error", error, data)
+//                guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+//                    completionHandlerForRequest(data: nil, response: nil, errorString: "The status code returned was not a OK")
+//                    return
+//                }
                 guard let data = data else {
                     completionHandlerForRequest(data: nil, response: nil, errorString: "There was no data in the response")
                     return
@@ -105,6 +106,11 @@ class RequestClient {
                     print("Could not parse the response to a readable format")
                     return
                 }
+                print("json", parsedResult)
+                guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+                    completionHandlerForRequest(data: nil, response: nil, errorString: "The status code returned was not a OK")
+                    return
+                }
                 completionHandlerForRequest(data: parsedResult, response: (response as! NSHTTPURLResponse), errorString: nil)
             }
             task.resume()
@@ -114,14 +120,5 @@ class RequestClient {
         }
         
     }
-    
-    
-    
-//    class func sharedInstance() -> RequestClient {
-//        struct Singleton {
-//            static var sharedInstance = RequestClient()
-//        }
-//        return Singleton.sharedInstance
-//    }
     
 }
