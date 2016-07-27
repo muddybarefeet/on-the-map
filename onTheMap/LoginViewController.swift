@@ -57,25 +57,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         print("User Logged Out")
     }
     
-    func fbLogin (sender: AnyObject) {
-        print("Clicked fb button")
-        let login: FBSDKLoginManager = FBSDKLoginManager()
-        login.logInWithReadPermissions(["public_profile"], fromViewController: self) { (FBSDKLoginManagerLoginResult, error) in
-            if error != nil {
-                print("Process error", error)
-            }
-            else if FBSDKLoginManagerLoginResult.isCancelled {
-                print("Cancelled")
-            }
-            else {
-                print("Logged in", FBSDKLoginManagerLoginResult.token.tokenString)
-                self.Udacity.fbAuthToken = FBSDKLoginManagerLoginResult.token.tokenString
-                //now call login method with the auth token
-                self.Udacity.fbLogin()
-            }
-        }
-    }
-    
     @IBAction func login(sender: AnyObject) {
         
         activitySpinner.startAnimating()
@@ -120,19 +101,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     
 }
-
-//    override func viewDidAppear(animated: Bool) {
-//        let fbLoginButton: FBSDKLoginButton = FBSDKLoginButton()
-//        // Optional: Place the button in the center of your view.
-//        fbLoginButton.center = self.view.center
-//
-//        fbLoginButton.frame = CGRectMake(view.frame.origin.x, view.frame.maxY - 50,loginButton.frame.size.width,fbLoginButton.frame.size.height)
-//
-//        fbLoginButton.center.x = self.view.center.x
-//        self.view!.addSubview(fbLoginButton)
-//
-//        fbLoginButton.addTarget(self, action: #selector(fbLogin), forControlEvents: .TouchUpInside)
-//    }
 
 extension LoginViewController {
     
