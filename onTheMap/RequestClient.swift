@@ -80,7 +80,7 @@ class RequestClient {
             print("Internet connection OK")
             let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
                 if error != nil {
-                    completionHandlerForRequest(data: nil, response: nil, errorString: "There was an error sending the request to the server.")
+                    completionHandlerForRequest(data: nil, response: nil, errorString: "There was an error in the request response")
                     return
                 }
                 //print("error", error, data)
@@ -89,7 +89,7 @@ class RequestClient {
 //                    return
 //                }
                 guard let data = data else {
-                    completionHandlerForRequest(data: nil, response: nil, errorString: "There was no data in the response")
+                    completionHandlerForRequest(data: nil, response: (response as! NSHTTPURLResponse), errorString: "There was no data in the response")
                     return
                 }
                 let newData:NSData
@@ -104,11 +104,12 @@ class RequestClient {
                     parsedResult = try NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments)
                 } catch {
                     print("Could not parse the response to a readable format")
+                    completionHandlerForRequest(data: nil, response: (response as! NSHTTPURLResponse), errorString: "Could not parse the response to a readable format")
                     return
                 }
                 print("json", parsedResult)
                 guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-                    completionHandlerForRequest(data: nil, response: nil, errorString: "The status code returned was not a OK")
+                    completionHandlerForRequest(data: nil, response: (response as! NSHTTPURLResponse), errorString: "The status code returned was not a OK")
                     return
                 }
                 completionHandlerForRequest(data: parsedResult, response: (response as! NSHTTPURLResponse), errorString: nil)

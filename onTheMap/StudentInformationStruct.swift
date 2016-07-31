@@ -20,25 +20,7 @@ struct StudentInformation {
     var objectId: String
     var uniqueKey: String
     
-    var updatedAt: NSDate?
-    var createdAt: NSDate?
-    
     init (studentDictionary: NSDictionary) {
-        
-//        let dateFormatter = NSDateFormatter()
-//        dateFormatter.dateFormat = "MMM dd, yyyy, HH:mm"
-//
-//        let updated = studentDictionary["updatedAt"]
-//        let created = studentDictionary["createdAt"]
-        
-//        print( "String(updated.dynamicType) -> \(updated.dynamicType)")
-
-//        if let update = updated {
-//            updatedAt = dateFormatter.dateFromString(update as! String)!
-//        }
-//        if let create = created {
-//            createdAt = dateFormatter.dateFromString(create as! String)!
-//        }
         
         firstName = (studentDictionary["firstName"] as? String)!
         lastName = (studentDictionary["lastName"] as? String)!
