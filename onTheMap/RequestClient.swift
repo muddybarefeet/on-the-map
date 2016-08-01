@@ -83,9 +83,13 @@ class RequestClient {
                     completionHandlerForRequest(data: nil, response: nil, errorString: "There was an error in the request response")
                     return
                 }
-                guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-                    completionHandlerForRequest(data: nil, response: nil, errorString: "The status code returned was not a OK")
-                    return
+                let statusCode = (response as? NSHTTPURLResponse)?.statusCode
+                print("Status code", statusCode)
+                if statusCode >= 400 && statusCode <= 499 {
+                    completionHandlerForRequest(data: nil, response: nil, errorString: "There was an error in the inforamtion sent to the server. Please check your credentials.")
+                }
+                if statusCode >= 500 && statusCode <= 599 {
+                    completionHandlerForRequest(data: nil, response: nil, errorString: "This service is unavailable. Please try again later.")
                 }
                 guard let data = data else {
                     completionHandlerForRequest(data: nil, response: (response as! NSHTTPURLResponse), errorString: "There was no data in the response")
