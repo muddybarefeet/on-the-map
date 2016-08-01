@@ -75,6 +75,11 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             if error == nil {
                 //complete the login to show the user the app
                 self.segueToApp()
+                //empty the email and password field so on logout no there
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                    self.emailInput.text = ""
+                    self.passwordInput.text = ""
+                }
             } else {
                 print("error in login", error)
                 self.loginError(error!)
