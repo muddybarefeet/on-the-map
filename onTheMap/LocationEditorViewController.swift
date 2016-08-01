@@ -24,21 +24,14 @@ class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegat
     var mapDelegate = MapViewDelegate()
     
     override func viewDidLoad() {
-        styleView()
         //activity spinner
         locationView.delegate = mapDelegate
         activitySpinner.center = self.view.center
         answerText.delegate = self
-    }
-    
-    func styleView () {
         answerText.textAlignment = .Center
         submitButton.layer.cornerRadius = 10
         submitButton.titleEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
         questionLabel.font = UIFont (name: "HelveticaNeue-Light", size: 18)
-        let gradient: CAGradientLayer = CAGradientLayer().turquoiseColor()
-        gradient.frame = questionView.bounds
-        questionView.layer.insertSublayer(gradient, atIndex: 0)
     }
     
     @IBAction func selectLocation(sender: AnyObject) {
@@ -96,6 +89,8 @@ class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegat
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address, completionHandler: {(placemarks, error) -> Void in
             if((error) != nil) {
+                self.activitySpinner.stopAnimating()
+                self.view.willRemoveSubview(self.activitySpinner)
                 let alertController = UIAlertController(title: "Alert", message: "Unable to find this location", preferredStyle: UIAlertControllerStyle.Alert)
                 let Action = UIAlertAction(title: "Try again", style: .Default) { (action:UIAlertAction!) in
                 }
@@ -123,12 +118,6 @@ class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegat
         let region:MKCoordinateRegion = MKCoordinateRegionMake(pointLocation, theSpan)
         locationView.setRegion(region, animated: true)
         
-        //drop the pin in the correct location no wanted removed method to try using static pin
-        //let dropPin = MKPointAnnotation()
-        //dropPin.coordinate = coords
-        //dropPin.title = self.answerText.text
-        //self.locationView.addAnnotation(dropPin)
-        
         //SAVE THE coords in the click of the final submit button
         submitButton.setTitle("Confirm Location", forState: .Normal)
         //stop activity spinner
@@ -143,7 +132,8 @@ class LocationEditorViewController: UIViewController, UIGestureRecognizerDelegat
     
 }
 
-extension LocationEditorViewController: UITextFieldDelegate, MKMapViewDelegate {
+//delegate for text fields
+extension LocationEditorViewController: UITextFieldDelegate {
 
     //here instead of in a delagate because need to access view outlets
     func textFieldDidBeginEditing(textField: UITextField) {
@@ -165,6 +155,11 @@ extension LocationEditorViewController: UITextFieldDelegate, MKMapViewDelegate {
         textField.resignFirstResponder()
         return true
     }
+    
+}
+
+//delegate for map view
+extension LocationEditorViewController: MKMapViewDelegate {
     
     // method to place the pin on the map and how it is styled
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {

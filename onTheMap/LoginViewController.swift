@@ -71,7 +71,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         self.view.addSubview(activitySpinner)
         //login into the app
         //authenticate the user and then segue to the next view
-        Udacity.login(emailInput.text!, password: passwordInput.text!) { (data, error) in
+        Udacity.login("2muddybarefeet@gmail.com", password: "fiscal-shingle-caption-tighten") { (data, error) in
             if error == nil {
                 //complete the login to show the user the app
                 self.segueToApp()
