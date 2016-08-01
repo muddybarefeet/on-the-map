@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		28654DB66610192E8990ACE5 /* Pods_onTheMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF98C57E62637426F893BDC /* Pods_onTheMap.framework */; };
+		9516138C1D4F83C2002D7DA1 /* StudentLocationsStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9516138B1D4F83C2002D7DA1 /* StudentLocationsStruct.swift */; };
 		953D14611D42C5A4009D1B56 /* StudentInformationStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953D14601D42C5A4009D1B56 /* StudentInformationStruct.swift */; };
 		955E3CCC1D442C0A00AF07D0 /* CAGradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955E3CCB1D442C0900AF07D0 /* CAGradientLayer.swift */; };
 		955E3CCE1D4433DB00AF07D0 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955E3CCD1D4433DB00AF07D0 /* Reachability.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9516138B1D4F83C2002D7DA1 /* StudentLocationsStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLocationsStruct.swift; sourceTree = "<group>"; };
 		953D14601D42C5A4009D1B56 /* StudentInformationStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInformationStruct.swift; sourceTree = "<group>"; };
 		955E3CCB1D442C0900AF07D0 /* CAGradientLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAGradientLayer.swift; sourceTree = "<group>"; };
 		955E3CCD1D4433DB00AF07D0 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				953D14601D42C5A4009D1B56 /* StudentInformationStruct.swift */,
+				9516138B1D4F83C2002D7DA1 /* StudentLocationsStruct.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 				959DAE7F1D3C60140017015D /* TableViewController.swift in Sources */,
 				959DAE9A1D3EF6630017015D /* UdacityClient.swift in Sources */,
 				959DAE881D3DCEA10017015D /* LocationEditorViewController.swift in Sources */,
+				9516138C1D4F83C2002D7DA1 /* StudentLocationsStruct.swift in Sources */,
 				953D14611D42C5A4009D1B56 /* StudentInformationStruct.swift in Sources */,
 				959DAE981D3EEB050017015D /* LoginViewController.swift in Sources */,
 				959DAE9C1D3EF66F0017015D /* ParseClient.swift in Sources */,
