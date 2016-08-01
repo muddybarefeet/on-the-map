@@ -60,9 +60,13 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vyf-Mf-ajL" customClass="FBSDKLoginButton">
-                                <rect key="frame" x="160" y="553" width="0.0" height="0.0"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vyf-Mf-ajL" customClass="FBSDKLoginButton">
+                                <rect key="frame" x="23" y="523" width="275" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="275" id="L22-3z-POb"/>
+                                    <constraint firstAttribute="height" constant="30" id="qDC-zu-ba4"/>
+                                </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFC-4E-USi">
                                 <rect key="frame" x="136" y="524" width="48" height="28"/>
