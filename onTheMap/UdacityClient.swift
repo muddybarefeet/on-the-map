@@ -35,7 +35,6 @@ class UdacityClient {
     
     //login to the app
     func login (email: String, password: String, completionHandlerForAuth: (data: AnyObject?, error: String?) -> Void) {
-
         let url = Constants.Udacity.baseURL + Constants.Udacity.Session
         let body = [
             "udacity" : [
