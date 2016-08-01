@@ -69,7 +69,6 @@ class UdacityClient {
     func fbLogin (completionHandlerForFBLogin: (success: Bool?, error: String?) -> Void) {
         print("in fb login function client send to udacity")
         let url = Constants.Udacity.baseURL + Constants.Udacity.Session
-//        let token = "\(fbAuthToken)"
         let jsonBody = [
             "facebook_mobile": [
                 "access_token": fbAuthToken
