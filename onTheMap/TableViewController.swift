@@ -134,7 +134,7 @@ class TableViewController: UITableViewController {
     
     @IBAction func refresh(sender: AnyObject) {
         //update the locations array and then reload the data
-        Parse.getAllStudentLocations() { (data, error) in
+        Parse.getAllStudentLocations() { (success, error) in
             if error == nil {
                 self.tableView!.reloadData()
             } else {

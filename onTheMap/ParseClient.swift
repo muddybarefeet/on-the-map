@@ -57,38 +57,34 @@ class ParseClient {
     }
     
     //the the locations of all the students
-    func getAllStudentLocations (completionHandlerForGetAllLocations: (data: AnyObject?, error: String?) -> Void) {
+    func getAllStudentLocations (completionHandlerForGetAllLocations: (success: Bool?, error: String?) -> Void) {
         let baseURL = Constants.Parse.baseURL + Constants.Parse.StudentLocation
         let parameters = "?" + Constants.ParseParameterKeys.Order + "=" + Constants.ParseParameterValues.UpdatedAt + "&" + Constants.ParseParameterKeys.Limit + "=" + Constants.ParseParameterValues.OneHundred
         let URL = baseURL + parameters
         request.get(URL, headers: headers, isUdacity: false) { (data, response, error) in
             if error == nil {
                 guard let results = data!["results"] as? [[String: AnyObject]] else {
-                    completionHandlerForGetAllLocations(data: nil, error: "No results key in the return data")
+                    completionHandlerForGetAllLocations(success: nil, error: "No results key in the return data")
                     return
                 }
-                self.parseUserLocations(results) { (success) in
-                    if (success != nil) {
-                        completionHandlerForGetAllLocations(data: data, error: nil)
-                    } else {
-                        completionHandlerForGetAllLocations(data: nil, error: "Unable to pass the student data to its store")
-                    }
-                }
+                self.parseUserLocations(results)
+                completionHandlerForGetAllLocations(success: true, error: nil)
             } else {
-                completionHandlerForGetAllLocations(data: nil, error: error)
+                completionHandlerForGetAllLocations(success: nil, error: error)
             }
         }
     }
     
     //pass student locations to the StudentLocationStruct 
-    func parseUserLocations (data: [NSDictionary], completionHandlerForParse: (success: Bool?) -> Void) -> Void {
+    func parseUserLocations (data: [NSDictionary]) -> Void {
         ////loop through results and pass each one to the struct to reconstruct
+        //empty any previous user locations from the array
+        StudentLocations.sharedInstance.locations.removeAll()
         for dictionary in data {
             //pass the dictionary to the StudentLocationStruct struct andd save to the locations array
             let model = StudentInformation(studentDictionary: dictionary)
             StudentLocations.sharedInstance.locations.append(model)
         }
-        completionHandlerForParse(success: true)
     }
     
     //method to post or upate the users location

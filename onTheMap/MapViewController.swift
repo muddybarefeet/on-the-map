@@ -45,7 +45,7 @@ class MapViewController: UIViewController {
     }
     
     func getAllLocations () {
-        Parse.getAllStudentLocations () { (data, error) in
+        Parse.getAllStudentLocations () { (success, error) in
             if error == nil {
                 self.makeAnnotationsArray()
             } else {
