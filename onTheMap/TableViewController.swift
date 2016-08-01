@@ -16,7 +16,8 @@ class TableViewController: UITableViewController {
     var Parse = ParseClient.sharedInstance
     var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
     
-    var locations = StudentLocations.sharedInstance.locations
+    let students = StudentLocations.sharedInstance
+    //var locations = StudentLocations.sharedInstance.locations
     
     override func viewWillAppear(animated: Bool) {
         tableView!.reloadData()
@@ -24,7 +25,7 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return locations.count
+        return students.locations.count
     }
     
     
@@ -32,7 +33,7 @@ class TableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("infoCell") as UITableViewCell!
-        let locationInfo = locations[indexPath.row]
+        let locationInfo = students.locations[indexPath.row]
         cell.textLabel?.text = locationInfo.firstName + " " + locationInfo.lastName
         return cell
         
@@ -40,7 +41,7 @@ class TableViewController: UITableViewController {
 
     //function for on selecting a cell what to do
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cellClicked = locations[indexPath.row]
+        let cellClicked = students.locations[indexPath.row]
         let app = UIApplication.sharedApplication()
         var mediaURL = cellClicked.mediaURL
         if (mediaURL.hasPrefix("www")) {
