@@ -42,7 +42,6 @@ class ParseClient {
         let allowedSet =  NSCharacterSet.URLPathAllowedCharacterSet()
         let escapedString = parameterString.stringByAddingPercentEncodingWithAllowedCharacters(allowedSet)
         let url = baseURL + "?" + Constants.ParseParameterKeys.Where + "=" + escapedString!
-        print("encoded------------------>", url)
         request.get(url, headers: headers, isUdacity: false) { (data, response, error) in
             if error == nil {
                 guard let results = data!["results"]! else {
@@ -60,7 +59,7 @@ class ParseClient {
     //the the locations of all the students
     func getAllStudentLocations (completionHandlerForGetAllLocations: (data: AnyObject?, error: String?) -> Void) {
         let baseURL = Constants.Parse.baseURL + Constants.Parse.StudentLocation
-        let parameters = "?" + Constants.ParseParameterKeys.Order + "=" + Constants.ParseParameterValues.UpdatedAt
+        let parameters = "?" + Constants.ParseParameterKeys.Order + "=" + Constants.ParseParameterValues.UpdatedAt + "&" + Constants.ParseParameterKeys.Limit + "=" + Constants.ParseParameterValues.OneHundred
         let URL = baseURL + parameters
         request.get(URL, headers: headers, isUdacity: false) { (data, response, error) in
             if error == nil {

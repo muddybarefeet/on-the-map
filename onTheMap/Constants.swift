@@ -29,6 +29,7 @@ class Constants {
         static let ApplicationID = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
         static let ApplicationKey = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
         static let Where = "where"
+        static let Limit = "limit"
     }
 
     
@@ -42,14 +43,13 @@ class Constants {
         static let ContentType = "Content-Type"
     }
     
-    // MARK: TMDB Parameter Values
     struct ParseParameterValues {
         static let ApplicationID = "X-Parse-Application-Id"
         static let ApplicationKey = "X-Parse-REST-API-Key"
         static let UpdatedAt = "-updatedAt"
+        static let OneHundred = "100"
     }
     
-    // MARK: TMDB Response Keys
     struct ParseResponseKeys {
         static let Title = "title"
         static let ID = "id"
