@@ -138,10 +138,11 @@ class MapViewController: UIViewController {
         view.addSubview(activitySpinner)
         Udacity.logout() { (success, error) in
             if (success != nil) {
-                let controller = self.storyboard!.instantiateViewControllerWithIdentifier("LoginViewController")
-                self.presentViewController(controller, animated: true, completion: nil)
-                self.activitySpinner.stopAnimating()
-                self.view.willRemoveSubview(self.activitySpinner)
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                    self.activitySpinner.stopAnimating()
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                    self.view.willRemoveSubview(self.activitySpinner)
+                }
             } else {
                 let alertController = UIAlertController(title: "Alert", message: error, preferredStyle: UIAlertControllerStyle.Alert)
                 let Action = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
