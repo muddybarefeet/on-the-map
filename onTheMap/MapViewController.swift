@@ -15,7 +15,6 @@ class MapViewController: UIViewController {
     @IBOutlet weak var refreshBtn: UIBarButtonItem!
     @IBOutlet weak var pinBtn: UIBarButtonItem!
     
-//    let MapDelegate = MapViewDelegate()
     var Parse = ParseClient.sharedInstance
     var Udacity = UdacityClient.sharedInstance
     

@@ -70,8 +70,9 @@ class TableViewController: UITableViewController {
         view.addSubview(activitySpinner)
         Udacity.logout() { (success, error) in
             if (success != nil) {
-                let controller = self.storyboard!.instantiateViewControllerWithIdentifier("LoginViewController")
-                self.presentViewController(controller, animated: true, completion: nil)
+                //let controller = self.storyboard!.instantiateViewControllerWithIdentifier("LoginViewController")
+                //self.presentViewController(controller, animated: true, completion: nil)
+                self.dismissViewControllerAnimated(true, completion: nil)
                 self.activitySpinner.stopAnimating()
                 self.view.willRemoveSubview(self.activitySpinner)
             } else {

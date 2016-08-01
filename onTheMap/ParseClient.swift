@@ -39,7 +39,6 @@ class ParseClient {
         let baseURL = Constants.Parse.baseURL + Constants.Parse.StudentLocation
         let parameterString = "{\"uniqueKey\":\"\(UdacityClient.sharedInstance.userID)\"}"
         
-        print("encoding the USER ID......")
         let allowedSet =  NSCharacterSet.URLPathAllowedCharacterSet()
         let escapedString = parameterString.stringByAddingPercentEncodingWithAllowedCharacters(allowedSet)
         let url = baseURL + "?" + Constants.ParseParameterKeys.Where + "=" + escapedString!

@@ -81,7 +81,6 @@ class UdacityClient {
                 print("error: ",error)
                 completionHandlerForFBLogin(success: nil, error: error)
             } else {
-                print("data: ", data)
                 completionHandlerForFBLogin(success: true, error: nil)
             }
         }

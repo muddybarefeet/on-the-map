@@ -157,26 +157,3 @@ extension LocationEditorViewController: UITextFieldDelegate {
     }
     
 }
-
-//delegate for map view
-extension LocationEditorViewController: MKMapViewDelegate {
-    
-    // method to place the pin on the map and how it is styled
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        let reuseId = "pin"
-        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
-        if pinView == nil {
-            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            //tell the pin if extra information can be show about the pin boolean
-            pinView!.canShowCallout = true
-            pinView!.pinTintColor = UIColor.redColor()
-            //view to display on the right side of the standard callout bubble
-            pinView!.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
-        }
-        else {
-            pinView!.annotation = annotation
-        }
-        return pinView
-    }
-    
-}
