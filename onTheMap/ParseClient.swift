@@ -68,9 +68,13 @@ class ParseClient {
                     completionHandlerForGetAllLocations(data: nil, error: "No results key in the return data")
                     return
                 }
-                self.parseUserLocations(results)
-                completionHandlerForGetAllLocations(data: data, error: nil)
-                
+                self.parseUserLocations(results) { (success) in
+                    if (success != nil) {
+                        completionHandlerForGetAllLocations(data: data, error: nil)
+                    } else {
+                        completionHandlerForGetAllLocations(data: nil, error: "Unable to pass the student data to its store")
+                    }
+                }
             } else {
                 completionHandlerForGetAllLocations(data: nil, error: error)
             }
@@ -78,18 +82,14 @@ class ParseClient {
     }
     
     //pass student locations to the StudentLocationStruct 
-    func parseUserLocations (data: [NSDictionary]) -> Void {
+    func parseUserLocations (data: [NSDictionary], completionHandlerForParse: (success: Bool?) -> Void) -> Void {
         ////loop through results and pass each one to the struct to reconstruct
-        var students = [StudentInformation]()
         for dictionary in data {
-            //pass the dictionary to the StudentLocationStruct struct
+            //pass the dictionary to the StudentLocationStruct struct andd save to the locations array
             let model = StudentInformation(studentDictionary: dictionary)
-            students.append(model)
+            StudentLocations.sharedInstance.locations.append(model)
         }
-        //then set the students array as the locations in app delegate
-        let app = UIApplication.sharedApplication().delegate
-        let appDelegate = app as! AppDelegate
-        appDelegate.locations = students
+        completionHandlerForParse(success: true)
     }
     
     //method to post or upate the users location

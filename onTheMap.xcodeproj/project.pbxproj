@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		28654DB66610192E8990ACE5 /* Pods_onTheMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF98C57E62637426F893BDC /* Pods_onTheMap.framework */; };
-		9516138C1D4F83C2002D7DA1 /* StudentLocationsStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9516138B1D4F83C2002D7DA1 /* StudentLocationsStruct.swift */; };
+		9516138E1D4F8CB6002D7DA1 /* StudentLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9516138D1D4F8CB6002D7DA1 /* StudentLocations.swift */; };
 		953D14611D42C5A4009D1B56 /* StudentInformationStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953D14601D42C5A4009D1B56 /* StudentInformationStruct.swift */; };
 		955E3CCC1D442C0A00AF07D0 /* CAGradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955E3CCB1D442C0900AF07D0 /* CAGradientLayer.swift */; };
 		955E3CCE1D4433DB00AF07D0 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955E3CCD1D4433DB00AF07D0 /* Reachability.swift */; };
@@ -29,7 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9516138B1D4F83C2002D7DA1 /* StudentLocationsStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLocationsStruct.swift; sourceTree = "<group>"; };
+		9516138D1D4F8CB6002D7DA1 /* StudentLocations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLocations.swift; sourceTree = "<group>"; };
 		953D14601D42C5A4009D1B56 /* StudentInformationStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInformationStruct.swift; sourceTree = "<group>"; };
 		955E3CCB1D442C0900AF07D0 /* CAGradientLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAGradientLayer.swift; sourceTree = "<group>"; };
 		955E3CCD1D4433DB00AF07D0 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
@@ -123,7 +123,6 @@
 			isa = PBXGroup;
 			children = (
 				953D14601D42C5A4009D1B56 /* StudentInformationStruct.swift */,
-				9516138B1D4F83C2002D7DA1 /* StudentLocationsStruct.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -137,6 +136,7 @@
 				959DAE871D3DCEA10017015D /* LocationEditorViewController.swift */,
 				959DAE8D1D3E5C3C0017015D /* TextFieldDelegate.swift */,
 				959DAE971D3EEB050017015D /* LoginViewController.swift */,
+				9516138D1D4F8CB6002D7DA1 /* StudentLocations.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -279,13 +279,13 @@
 				959DAE8E1D3E5C3C0017015D /* TextFieldDelegate.swift in Sources */,
 				959DAE7D1D3C5FD60017015D /* MapViewController.swift in Sources */,
 				959DAE681D3C5C310017015D /* AppDelegate.swift in Sources */,
+				9516138E1D4F8CB6002D7DA1 /* StudentLocations.swift in Sources */,
 				959DAE941D3EB17B0017015D /* Constants.swift in Sources */,
 				955E3CCC1D442C0A00AF07D0 /* CAGradientLayer.swift in Sources */,
 				959DAE921D3E74B80017015D /* RequestClient.swift in Sources */,
 				959DAE7F1D3C60140017015D /* TableViewController.swift in Sources */,
 				959DAE9A1D3EF6630017015D /* UdacityClient.swift in Sources */,
 				959DAE881D3DCEA10017015D /* LocationEditorViewController.swift in Sources */,
-				9516138C1D4F83C2002D7DA1 /* StudentLocationsStruct.swift in Sources */,
 				953D14611D42C5A4009D1B56 /* StudentInformationStruct.swift in Sources */,
 				959DAE981D3EEB050017015D /* LoginViewController.swift in Sources */,
 				959DAE9C1D3EF66F0017015D /* ParseClient.swift in Sources */,

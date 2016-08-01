@@ -1,5 +1,5 @@
 //
-//  StudentLocationsStruct.swift
+//  StudentLocations.swift
 //  onTheMap
 //
 //  Created by Anna Rogers on 8/1/16.
@@ -8,10 +8,10 @@
 
 import UIKit
 
-struct StudentLocationsStruct {
+class StudentLocations {
     
     //singleton
-    static let sharedInstance = StudentLocationsStruct()
+    static let sharedInstance = StudentLocations()
     private init() {}
     
     //place to store all the student locations

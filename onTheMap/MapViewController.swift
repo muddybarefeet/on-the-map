@@ -45,7 +45,7 @@ class MapViewController: UIViewController {
     }
     
     func getAllLocations () {
-        Parse.getAllStudentLocations() { (data, error) in
+        Parse.getAllStudentLocations () { (data, error) in
             if error == nil {
                 self.makeAnnotationsArray()
             } else {
@@ -66,10 +66,8 @@ class MapViewController: UIViewController {
     
     func makeAnnotationsArray () {
         
-        let app = UIApplication.sharedApplication().delegate
-        let appDelegate = app as! AppDelegate
-        
-        for dictionary in appDelegate.locations {
+        let students = StudentLocations.sharedInstance
+        for dictionary in students.locations {
             // The lat and long are used to create a CLLocationCoordinates2D instance.
             let coordinate = CLLocationCoordinate2D(latitude: dictionary.latitude, longitude: dictionary.longitude)
             
@@ -81,6 +79,7 @@ class MapViewController: UIViewController {
             // Finally we place the annotation in an array of annotations.
             annotations.append(annotation)
         }
+        
         //once the annotations array has been filled then add to the map view
         dispatch_async(dispatch_get_main_queue()) {
             self.mapView.addAnnotations(self.annotations)

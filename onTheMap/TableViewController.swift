@@ -16,9 +16,7 @@ class TableViewController: UITableViewController {
     var Parse = ParseClient.sharedInstance
     var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
     
-    var locations: [StudentInformation] {
-        return (UIApplication.sharedApplication().delegate as! AppDelegate).locations
-    }
+    var locations = StudentLocations.sharedInstance.locations
     
     override func viewWillAppear(animated: Bool) {
         tableView!.reloadData()
